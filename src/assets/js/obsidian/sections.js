@@ -20,6 +20,14 @@ export function pool(v){
   return out;
 }
 const imgFor = (v, i) => asset(`${VERTICALS[v] ? v : 'beauty'}-${MODES[i % 3]}`);
+/* a routine step / kit word → the bundled photo that shows that very thing (demo items only) */
+const KW_IMG = [[/سيروم|serum/i, 'skincare-featured'], [/واقي حرار/i, 'devices-bundle'], [/واقي|spf|sunscreen/i, 'skincare-spf'], [/غسول|منظف|cleanser/i, 'skincare-cleanser'], [/تونر|اسنس|essence|toner/i, 'kbeauty-featured'],
+  [/شيت ماسك|sheet mask|ماسك|mask/i, 'kbeauty-bestsellers'], [/مرطب|كريم|cream|moistur/i, 'kbeauty-bundle'], [/زيت شعر|hair oil/i, 'haircare-featured'], [/شامبو|بلسم|shampoo|conditioner/i, 'haircare-bundle'],
+  [/لحي|beard/i, 'mens-bundle'], [/حلاق|شفر|shav|razor/i, 'mens-featured'], [/بخور|مبخر|bakhoor/i, 'perfume-bundle'], [/عطر|perfume|parfum|معطر/i, 'perfume-featured'],
+  [/فاونديشن|foundation|بودر|powder|برايمر|primer|كونسيلر|concealer/i, 'makeup-bundle'], [/ظلال|eyeshadow|ماسكارا|mascara/i, 'makeup-featured'], [/احمر شفاه|روج|lipstick|بلسم شفاه|تنت/i, 'makeup-bestsellers'],
+  [/طلاء|nail|بيس|توب|مناكير|جل/i, 'nails-featured'], [/لوشن|زبد|lotion|butter/i, 'bodycare-bundle'], [/مقشر|scrub|شاور|ليف/i, 'bodycare-bestsellers'],
+  [/سشوار|مجفف|dryer/i, 'devices-featured'], [/مكو|straightener|واقي حرار/i, 'devices-bundle'], [/رول|roller|قوا شا|gua/i, 'devices-bestsellers'], [/هدي|تغليف|gift|wrap|بطاق/i, 'gifts-bundle']];
+const imgForWord = w => { const m = KW_IMG.find(([rx]) => rx.test(String(w || ''))); return m ? asset(m[1]) : null; };
 
 /* ---------- reveal + count-up (infographic motion) ---------- */
 let io;
@@ -198,7 +206,8 @@ function setup(sec, st){
   const kit = [], seen = new Set(), add = (l, kw) => { if (l && !seen.has(kw)) { seen.add(kw); kit.push({ l, kw }); } };
   (D.kit || []).forEach(k => add(isAr ? k.ar : k.en, k.kw)); (D.bundle || []).forEach(b => b.kw.forEach(w => add(w, w)));
   (st?.cats || []).forEach(c => add(c.name, c.name));
-  sec.querySelectorAll('.oc-setup__item[data-oc-demo]').forEach((it, k) => { const x = kit[k]; if (!x) return it.remove(); it.dataset.kw = x.kw; it.querySelector('b').textContent = x.l; });
+  sec.querySelectorAll('.oc-setup__item[data-oc-demo]').forEach((it, k) => { const x = kit[k]; if (!x) return it.remove(); it.dataset.kw = x.kw; it.querySelector('b').textContent = x.l;
+    const im = it.querySelector('img'), src = imgForWord(x.kw + ' ' + x.l); if (im && src) im.src = src; }); // the step's photo shows that very step
   const out = sec.querySelector('[data-oc-setup-out]'), sum = sec.querySelector('[data-oc-setup-sum]'), chosen = new Map();
   const total = () => { const s = [...chosen.values()].reduce((n, p) => n + (p.price || 0), 0);
     sum.innerHTML = chosen.size ? `<span>${t('روتينك', 'Your routine')} · ${chosen.size}</span><b class="oc-metal">${esc(money(s, cur))}</b>` : `<span>${t('اختاري خطوة لتبني روتينك من منتجات المتجر', 'Pick a step to build your routine from the store’s products')}</span>`; };

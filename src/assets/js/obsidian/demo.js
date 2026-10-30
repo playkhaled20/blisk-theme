@@ -18,6 +18,8 @@ const CAT = {
   'beauty-bundle': 'سيروم وكريم مرطب بعبوات الخيزران|Serum & moisturizer in bamboo jars|259|0|ثنائي ترطيب: سيروم بالنياسيناميد وكريم مرطب بالسيراميد. 30 مل و50 مل.',
   'skincare-featured': 'سيروم فيتامين C بقطارة زجاجية 30 مل|Vitamin C serum, glass dropper, 30 ml|149|179|سيروم مضيء بفيتامين C 15% وحمض الهيالورونيك لإشراقة وتجانس اللون. 30 مل.',
   'skincare-bestsellers': 'سيروم ريتينول ليلي 30 مل|Night retinol serum, 30 ml|169|0|سيروم ليلي بريتينول 0.3% مع نياسيناميد وسيراميد لتجديد البشرة. 30 مل.',
+  'skincare-spf': 'واقي شمس SPF50 خفيف 50 مل|Light SPF50 sunscreen, 50 ml|119|139|واقي شمس خفيف SPF50 بالنياسيناميد، لا يترك أثراً أبيض. 50 مل.',
+  'skincare-cleanser': 'غسول رغوي لطيف للوجه 150 مل|Gentle foaming face cleanser, 150 ml|79|0|غسول رغوي لطيف بالسيراميد ينظّف دون جفاف. 150 مل.',
   'skincare-bundle': 'سيروم نياسيناميد مع ماسك طين|Niacinamide serum with clay mask|119|0|سيروم بالنياسيناميد 10% لتقليل المسام، مع ماسك طين منقٍّ. 30 مل.',
   'kbeauty-featured': 'إسنس كوري بخلاصة الأرز 150 مل|Korean rice essence, 150 ml|129|149|إسنس كوري مرطب بخلاصة الأرز وحمض الهيالورونيك للبشرة الزجاجية. 150 مل.',
   'kbeauty-bestsellers': 'ماسك ورقي مرطب|Hydrating sheet mask|25|0|ماسك ورقي كوري بحمض الهيالورونيك والسنتيلا. استخدام واحد.',
@@ -49,7 +51,7 @@ const CAT = {
 };
 const P = { // each store type lists the photos (products) it shows, each photo once
   beauty: 'beauty-featured;beauty-bestsellers;beauty-bundle;skincare-featured;makeup-featured;perfume-bestsellers;haircare-featured;gifts-featured',
-  skincare: 'skincare-featured;skincare-bestsellers;skincare-bundle;kbeauty-bundle;beauty-bundle;devices-bestsellers',
+  skincare: 'skincare-featured;skincare-bestsellers;skincare-cleanser;skincare-spf;skincare-bundle;kbeauty-bundle;beauty-bundle;devices-bestsellers',
   makeup: 'makeup-featured;makeup-bestsellers;makeup-bundle;beauty-bestsellers;nails-featured',
   perfume: 'perfume-featured;perfume-bestsellers;perfume-bundle;gifts-bestsellers;bodycare-bundle',
   haircare: 'haircare-featured;haircare-bestsellers;haircare-bundle;devices-bundle;devices-featured',
