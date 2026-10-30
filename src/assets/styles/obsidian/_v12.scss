@@ -31,7 +31,7 @@ body.oc{transition:background-color .4s}
  .oc-ai__body{margin-top:.8rem;display:flex;flex-wrap:wrap;gap:.4rem;b,p,small{width:100%}a{color:var(--oc-acc);width:100%}}}
 .oc-ai.is-open .oc-ai__p{display:block}
 .oc-ai__ruler{border:2px dashed var(--oc-acc);border-radius:.8rem;background:rgba(255,255,255,.05);margin:.4rem 0}
-.oc-ai__q{flex:1;min-width:0;padding:.4rem .7rem;border-radius:99px;border:1px solid var(--oc-line);background:var(--oc-glass);color:var(--oc-txt);font-size:.85rem}
+.oc-ai__q{flex:1 1 60%;min-width:9rem;padding:.4rem .7rem;border-radius:99px;border:1px solid var(--oc-line);background:var(--oc-glass);color:var(--oc-txt);font-size:.85rem}
 .oc-pk__list{margin-top:.6rem;width:auto;box-shadow:none !important;background:#fff;border-radius:1rem;padding:.8rem;border:1px solid #ececf0;display:none;gap:.4rem;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.35);
  label{font-size:.75rem;color:#666}select{border:1px solid #ddd;border-radius:.5rem;padding:.4rem;color:#111}}
 .oc-pk.is-open .oc-pk__list{display:flex}
