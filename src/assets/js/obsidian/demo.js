@@ -202,7 +202,7 @@ function skinCartTotal() {
 }
 function skinFooter() {
   document.querySelectorAll('footer salla-menu').forEach(m => { if (m.querySelector('a') || m.parentElement.querySelector('.oc-demo-links')) return;
-    const L = ar() ? ['الشحن والتوصيل', 'الاستبدال والاسترجاع', 'الضمان', 'تواصل معنا'] : ['Shipping & delivery', 'Returns & exchanges', 'Warranty', 'Contact us'];
+    const L = ar() ? ['الشحن والتوصيل', 'الاستبدال والاسترجاع', 'أصالة المنتجات', 'تواصل معنا'] : ['Shipping & delivery', 'Returns & exchanges', 'Authenticity', 'Contact us'];
     m.insertAdjacentHTML('afterend', `<ul class="oc-demo-links">${L.map(t => `<li><a href="#">${t}</a></li>`).join('')}</ul>`); });
 }
 export function initDemo() {

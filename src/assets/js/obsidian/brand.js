@@ -5,7 +5,7 @@ export function storeName(){
   let n=''; try{ n=window.salla?.config?.get?.('store.name')||''; }catch(e){}
   n=n||B.dataset.ocStore||document.querySelector('.navbar-brand img,.logo img')?.alt||'';
   const ar=(document.documentElement.lang||'ar').startsWith('ar');
-  return String(n).trim() || (ar?'هانغول':'Hangul'); // default brand only when the store has no name
+  return String(n).trim() || (ar?'بليسك':'Blisk'); // default brand only when the store has no name
 }
 export function bindBrand(){
   const n=storeName();

@@ -90,7 +90,18 @@ function homeReminder() {
   (document.querySelector('#main-content') || B).prepend(el);
 }
 
+/* a men's grooming store: the theme's own words speak to a man (only theme-owned blocks; the merchant's text is untouched) */
+const MASC = [['خبيرات يساعدنك تختارين الأنسب', 'خبراء يساعدونك تختار الأنسب'], ['قبل ما تشترين', 'قبل ما تشتري'], ['اكتشفي', 'اكتشف'], ['تصفحي', 'تصفح'], ['قارني', 'قارن'],
+  ['ابني روتينك', 'ابنِ روتينك'], ['اختاري', 'اختر'], ['أكملي', 'أكمل'], ['اجمعي', 'اجمع'], ['ووفّري', 'ووفّر'], ['احجزي', 'احجز'], ['اضغطي', 'اضغط'], ['تأكدي', 'تأكد'],
+  ['تواصلي', 'تواصل'], ['جرّبي', 'جرّب'], ['وشوفي', 'وشوف'], ['اطلبيه', 'اطلبه'], ['العميلات', 'العملاء'], ['عميلة', 'عميل'], ['يكفيك', 'يكفيك']];
+const OWN = '[data-oc-sec], .oc-hero, .oc-cats, .oc-trust, .oc-intel, .oc-pk, .oc-cc, .bk-ing, .bk-remind, .oc-demo-links, .oc-bd, .oc-hud';
+function masculine() {
+  if (B.dataset.ocV !== 'mens') return;
+  document.querySelectorAll(OWN).forEach(root => { const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) { let x = n.nodeValue, y = x; for (const [f, m] of MASC) if (y.includes(f)) y = y.split(f).join(m); if (y !== x) n.nodeValue = y; } });
+}
 export function initBeauty() {
-  const run = () => { try { productCard(); } catch (e) { } try { homeReminder(); } catch (e) { } };
+  const run = () => { try { productCard(); } catch (e) { } try { homeReminder(); } catch (e) { } try { masculine(); } catch (e) { } };
+  let tm = 0; new MutationObserver(() => { clearTimeout(tm); tm = setTimeout(() => { try { masculine(); } catch (e) { } }, 300); }).observe(B, { childList: true, subtree: true });
   run(); setTimeout(run, 1500); setTimeout(run, 4000);
 }

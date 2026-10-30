@@ -66,9 +66,15 @@ export function mountAddons(st, isAr) {
 
   const render = () => {
     const D = adaptFor(v), V = VERTICALS[v] || VERTICALS.beauty;
+    /* wording follows the store type: men's grooming speaks to a man; the «shade» tools name what the type really offers */
+    const male = v === 'mens', g = (f, m) => male ? m : f;
+    const W = ({ perfume: ['الرائحة', 'الروائح', 'scent'], mens: ['الرائحة', 'الروائح', 'scent'], bodycare: ['الرائحة', 'الروائح', 'scent'], gifts: ['الرائحة', 'الروائح', 'scent'],
+      haircare: ['اللون', 'الألوان', 'colour'], devices: ['اللون', 'الألوان', 'colour'], nails: ['اللون', 'الألوان', 'colour'] })[v] || ['الدرجة', 'الدرجات', 'shade'];
+    const NAME = { ...A, stylist: [g('مستشارة الجمال', 'مستشار العناية'), A.stylist[1]], listen: [g('اسمعي طريقة الاستخدام', 'اسمع طريقة الاستخدام'), A.listen[1]],
+      recolour: [`${g('اختاري', 'اختر')} ${W[0]}`, `Pick a ${W[2]}`], colorbook: [`دليل ${W[1]}`, `${W[2][0].toUpperCase() + W[2].slice(1)} guide`], look: [g('أكملي الروتين', 'أكمل الروتين'), A.look[1]] };
     const ids = IDS.filter(k => !off.includes(k) && !D.skip.includes(k));
     el.innerHTML = `<button type="button" class="oc-ai__fab">✦ ${t('إضافاتي الذكية', 'Smart add-ons')}</button><div class="oc-ai__p" role="dialog" aria-label="${t('الإضافات الذكية', 'Smart add-ons')}"><header><b>${t('مساعد', 'Assistant')} ${esc(L(V))}${st?.cats?.length ? `<small>${t(`قرأ متجرك: ${st.cats.length} قسم${st.brands?.length ? ` · ${st.brands.length} ماركة` : ''}`, `Read your store: ${st.cats.length} departments${st.brands?.length ? ` · ${st.brands.length} brands` : ''}`)}</small>` : ''}</b>${types.length > 1 ? `<select aria-label="${t('نوع المنتجات', 'Product type')}">${types.map(x => `<option value="${esc(x)}"${x === v ? ' selected' : ''}>${esc(L(VERTICALS[x] || VERTICALS.beauty))}</option>`).join('')}</select>` : ''}</header>
-    <nav>${ids.map(k => `<button type="button" data-a="${k}">${t(...A[k])}</button>`).join('')}</nav><div class="oc-ai__body" aria-live="polite">${t('اختاري أداة — المحتوى مخصص لقسم', 'Pick a tool — tailored to')} ${esc(L(V))}</div></div>`;
+    <nav>${ids.map(k => `<button type="button" data-a="${k}">${t(...NAME[k])}</button>`).join('')}</nav><div class="oc-ai__body" aria-live="polite">${t(g('اختاري أداة — المحتوى مخصص لقسم', 'اختر أداة — المحتوى مخصص لقسم'), 'Pick a tool — tailored to')} ${esc(L(V))}</div></div>`;
     const body = el.querySelector('.oc-ai__body');
     el.querySelector('.oc-ai__fab').onclick = () => el.classList.toggle('is-open');
     el.querySelector('select')?.addEventListener('change', e => { v = e.target.value; render(); el.classList.add('is-open'); });
@@ -88,7 +94,7 @@ export function mountAddons(st, isAr) {
 
     const F = {
       stylist: () => {
-        body.innerHTML = `<b>${t('اسألي عن منتج أو نوع بشرة أو ميزانية أو سياسة', 'Ask about a product, skin type, budget or policy')}</b><input type="search" class="oc-ai__q" maxlength="80" placeholder="${t('مثال: سيروم للبشرة الجافة', 'e.g. serum for dry skin')}" aria-label="${t('اسألي المستشارة', 'Ask the advisor')}"><button type="button" data-go>${t('ابحث', 'Search')}</button>` +
+        body.innerHTML = `<b>${t(g('اسألي عن منتج أو نوع بشرة أو ميزانية أو سياسة', 'اسأل عن منتج أو نوع بشرة أو ميزانية أو سياسة'), 'Ask about a product, skin type, budget or policy')}</b><input type="search" class="oc-ai__q" maxlength="80" placeholder="${t('مثال: سيروم للبشرة الجافة', 'e.g. serum for dry skin')}" aria-label="${t(g('اسألي المستشارة', 'اسأل المستشار'), 'Ask the advisor')}"><button type="button" data-go>${t('ابحث', 'Search')}</button>` +
           FAQ.map((f, i) => `<button type="button" data-f="${i}">${t(f[0], f[1])}</button>`).join('');
         const go = () => { const q = body.querySelector('.oc-ai__q').value.trim(); if (q) show(q); };
         body.querySelector('[data-go]').onclick = go;
@@ -110,9 +116,9 @@ export function mountAddons(st, isAr) {
         const R = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!R) { body.textContent = t('المتصفح لا يدعم البحث الصوتي', 'Voice search is not supported in this browser'); return; }
         const r = new R(); r.lang = isAr ? 'ar-SA' : 'en-US';
-        body.textContent = t('تكلّمي الحين…', 'Speak now…');
+        body.textContent = t(g('تكلّمي الحين…', 'تكلّم الحين…'), 'Speak now…');
         r.onresult = e => show(e.results[0][0].transcript);
-        r.onerror = () => { body.textContent = t('ما قدرنا نسمعك — جرّبي الكتابة', 'Could not hear you — try typing'); };
+        r.onerror = () => { body.textContent = t(g('ما قدرنا نسمعك — جرّبي الكتابة', 'ما قدرنا نسمعك — جرّب الكتابة'), 'Could not hear you — try typing'); };
         try { r.start(); } catch (e) { body.textContent = t('تعذّر تشغيل الميكروفون', 'Microphone unavailable'); }
       },
       listen: () => {
@@ -127,14 +133,14 @@ export function mountAddons(st, isAr) {
         const [w, h] = D.mm;
         body.innerHTML = `<b>${esc(L(D.sizeLabel))}</b><div class="oc-ai__ruler" style="width:${w}mm;height:${h}mm;max-width:100%" aria-hidden="true"></div><small>${t(`حجم العبوة التقريبي ≈ ${w}×${h} ملم. قارنيها بيدك — تقريبي ويختلف حسب الشاشة.`, `Bottle ≈ ${w}×${h} mm. Compare with your hand — approximate, varies by screen.`)}</small>`;
       },
-      recolour: () => chips(t('اختاري الدرجة', 'Pick a shade'), D.finish.map(f => ({ label: L(f), kw: L(f) })), x => show(x.kw + ' ' + L(V))),
+      recolour: () => chips(t(`${g('اختاري', 'اختر')} ${W[0]}`, `Pick a ${W[2]}`), D.finish.map(f => ({ label: L(f), kw: L(f) })), x => show(x.kw + ' ' + L(V))),
       colorbook: () => {
         const all = []; types.forEach(k => (DATA[k]?.finish || []).forEach(f => { if (!all.find(a => a.ar === f.ar)) all.push(f); }));
-        body.innerHTML = `<b>${t('دليل الدرجات المتوفرة', 'Shade guide')}</b>` + all.map((f, i) => `<button type="button" data-i="${i}"><i style="display:inline-block;width:.8em;height:.8em;border-radius:50%;margin-inline-end:.35em;border:1px solid rgba(255,255,255,.4);background:${safeColor(f.hex)}"></i>${esc(L(f))}</button>`).join('');
+        body.innerHTML = `<b>${t(`دليل ${W[1]} المتوفرة`, `${W[2]} guide`)}</b>` + all.map((f, i) => `<button type="button" data-i="${i}"><i style="display:inline-block;width:.8em;height:.8em;border-radius:50%;margin-inline-end:.35em;border:1px solid rgba(255,255,255,.4);background:${safeColor(f.hex)}"></i>${esc(L(f))}</button>`).join('');
         body.querySelectorAll('[data-i]').forEach(b => b.onclick = () => show(L(all[+b.dataset.i])));
       },
-      photocoach: () => { body.innerHTML = `<b>${t('استخدميه صح واحفظيه صح', 'Use it right, store it right')}</b>` + D.photo.map(x => `<p>• ${esc(L(x))}</p>`).join(''); },
-      look: () => chips(t('أكملي روتينك', 'Complete your routine'), D.kit.map(k => ({ label: '+ ' + L(k), kw: k.kw })), x => show(x.kw)),
+      photocoach: () => { body.innerHTML = `<b>${t(g('استخدميه صح واحفظيه صح', 'استخدمه صح واحفظه صح'), 'Use it right, store it right')}</b>` + D.photo.map(x => `<p>• ${esc(L(x))}</p>`).join(''); },
+      look: () => chips(t(g('أكملي روتينك', 'أكمل روتينك'), 'Complete your routine'), D.kit.map(k => ({ label: '+ ' + L(k), kw: k.kw })), x => show(x.kw)),
       presets: () => chips(t('روتينات جاهزة', 'Ready routines'), D.bundle.map(b => ({ label: L(b), kw: b.kw[0] })), x => show(x.kw)),
       undertone: () => chips(t('وش نوع بشرتك؟', 'Your skin type?'), D.compat.map(c => ({ label: L(c), kw: c.kw })), x => show(x.kw + ' ' + L(V))),
       giftfinder: () => chips(t('ميزانية الهدية', 'Gift budget'), budgets(st, D).map(n => ({ label: '≤ ' + money(n, cur), n })), x => show(L(V), x.n))
