@@ -181,3 +181,8 @@ body.oc{
     .bk-x{width:2rem;height:2rem;border-radius:50%;color:var(--oc-mut);font-size:1.2rem;line-height:1}}
   @media (max-width:640px){.bk-row{grid-template-columns:1fr}.bk-remind{flex-wrap:wrap}}
 }
+
+/* Card photos keep one height across a row: the stock flex-1 let a card with a
+   short title stretch its photo taller than its neighbour. */
+body.oc .s-product-card-vertical .s-product-card-image{flex:none!important;aspect-ratio:4/3;height:auto!important;max-height:none!important}
+body.oc .s-product-card-vertical .s-product-card-image>a,body.oc .s-product-card-vertical .s-product-card-image img{width:100%;height:100%}
