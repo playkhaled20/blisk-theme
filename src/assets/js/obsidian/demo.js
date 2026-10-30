@@ -11,62 +11,63 @@ export const isPreview = () => { const h = location.hostname, q = new URLSearchP
   const on = q.has('oc_preview') || q.has('oc_p') || B.dataset.ocMode === 'preview' || /(^|\.)salla\.design$/.test(h) || h === 'localhost' || !!window.salla?.config?.get?.('store.preview');
   try { if (on && demoHost(h)) sessionStorage.setItem('oc_preview', '1'); return on || (demoHost(h) && sessionStorage.getItem('oc_preview') === '1'); } catch (e) { return on; } };
 
-/* one product per photo: the same photo is the same product (name, price, old price) in every store type */
+/* one product per photo: the same photo is the same product (name, price, old price, description) in every store type */
 const CAT = {
-  'beauty-bestsellers': 'شاشة OLED ذكية ‏65 بوصة|65" smart OLED TV|6499|7299',
-  'beauty-bundle': 'تابلت مع سماعة وكيبورد وقلم|Tablet with headphones, keyboard & pen|2899|3199',
-  'beauty-featured': 'باقة جوال وساعة وسماعات وتابلت|Phone, watch, earbuds & tablet set|6199|0',
-  'bodycare-featured': 'سماعة رأس فاخرة بعزل الضوضاء|Premium noise-cancelling headphones|1499|1699',
-  'bodycare-bestsellers': 'إيربودز ومكبر صوت محمول|Earbuds & portable speaker|999|0',
-  'bodycare-bundle': 'نظام مسرح منزلي 5.1|5.1 home theatre|4299|4799',
-  'makeup-featured': 'لابتوب احترافي 14 بوصة|14" pro laptop|5799|0',
-  'makeup-bestsellers': 'كمبيوتر قيمنق مع شاشة|Gaming PC with monitor|7999|8799',
-  'makeup-bundle': 'طقم مكتبي: لابتوب وماوس وكيبورد وموزع|Desk set: laptop, mouse, keyboard & hub|5999|6499',
-  'skincare-featured': 'آيفون 17 برو ماكس 256GB|iPhone 17 Pro Max 256GB|5399|5899',
-  'skincare-bestsellers': 'آيفون 17 برو — أربعة ألوان|iPhone 17 Pro — four finishes|4699|0',
-  'skincare-bundle': 'جوال برو مع سماعة لاسلكية|Pro phone with wireless earbuds|5199|5599',
-  'kbeauty-bestsellers': 'كفرات حماية وحماية شاشة|Cases & screen protectors|129|159',
-  'kbeauty-bundle': 'شاحن سريع جداري وسيارة مع حقيبة|Wall & car fast charger with pouch|179|0',
-  'kbeauty-featured': 'باور بانك وشاحن لاسلكي وكيابل مضفرة|Power bank, wireless charger & braided cables|249|299',
-  'perfume-bestsellers': 'ساعات ذكية رياضية — ثلاثة ألوان|Sport smartwatches — three finishes|1399|1599',
-  'perfume-featured': 'ساعة كلاسيكية بإطار ذهبي وردي وسوار جلد أسود|Classic watch, rose-gold case & black leather strap|2499|0',
-  'perfume-bundle': 'ساعة مع أحزمة جلد ومعدن إضافية|Watch with spare leather & metal straps|1899|2199',
-  'haircare-featured': 'جهاز ألعاب منزلي مع يدي تحكم|Home console with two controllers|2999|3299',
-  'haircare-bundle': 'جهاز ألعاب محمول مع قاعدة وحقيبة|Handheld console with dock & case|1899|0',
-  'haircare-bestsellers': 'طقم قيمنق: سماعة وكيبورد RGB وماوس|Gaming set: headset, RGB keyboard & mouse|899|999',
-  'gifts-featured': 'بطاقات هدايا رقمية مسبقة الدفع|Prepaid digital gift cards|100|0',
-  'gifts-bestsellers': 'بطاقة هدية رقمية على الجوال مع علبة إهداء|Digital gift card on phone with gift box|150|0',
-  'gifts-bundle': 'بطاقة شحن ألعاب رقمية 50$ على الجوال|Digital game top-up card $50 on phone|189|0',
-  'devices-bestsellers': 'طقم كاميرا مراقبة وجرس ومقبس ذكي|Security camera, doorbell & smart plug kit|899|999',
-  'devices-bundle': 'منظم حرارة ذكي مع حساسات|Smart thermostat with sensors|749|0',
-  'devices-featured': 'مكبر صوت ذكي مع لمبة|Smart speaker with bulb|349|0',
-  'nails-featured': 'كاميرا احترافية مع عدسة زووم|Pro camera with zoom lens|9999|10999',
-  'nails-bundle': 'طقم ميرورليس: عدستان وبطاقات ذاكرة وحقيبة|Mirrorless kit: two lenses, memory cards & bag|8499|0',
-  'nails-bestsellers': 'كاميرا أكشن وكومباكت ودرون ميني|Action cam, compact camera & mini drone|2899|3199',
-  'mens-featured': 'لابتوب مبرمجين مع بيئة تطوير مثبّتة|Developer laptop with dev suite installed|6499|6999',
-  'mens-bundle': 'تراخيص برامج بعلب أصلية مع ذاكرة USB|Boxed mens licenses with USB drive|299|399',
-  'mens-bestsellers': 'برنامج لوحات تحليل بيانات للتابلت والجوال|Analytics dashboards for tablet & phone|599|0'
+  'beauty-featured': 'مجموعة عناية فاخرة: كريم ومقشر وسيروم|Luxury care set: cream, scrub & serum|690|790|مجموعة عناية متكاملة بكريم مرطب بالسيراميد ومقشر لطيف وسيروم بحمض الهيالورونيك.',
+  'beauty-bestsellers': 'أحمر شفاه وردي مع بلاشر مضغوط|Pink lipstick with pressed blush|189|229|',
+  'beauty-bundle': 'سيروم وكريم مرطب بعبوات الخيزران|Serum & moisturizer in bamboo jars|259|0|ثنائي ترطيب: سيروم بالنياسيناميد وكريم مرطب بالسيراميد. 30 مل و50 مل.',
+  'skincare-featured': 'سيروم فيتامين C بقطارة زجاجية 30 مل|Vitamin C serum, glass dropper, 30 ml|149|179|سيروم مضيء بفيتامين C 15% وحمض الهيالورونيك لإشراقة وتجانس اللون. 30 مل.',
+  'skincare-bestsellers': 'سيروم ريتينول ليلي 30 مل|Night retinol serum, 30 ml|169|0|سيروم ليلي بريتينول 0.3% مع نياسيناميد وسيراميد لتجديد البشرة. 30 مل.',
+  'skincare-bundle': 'سيروم نياسيناميد مع ماسك طين|Niacinamide serum with clay mask|119|0|سيروم بالنياسيناميد 10% لتقليل المسام، مع ماسك طين منقٍّ. 30 مل.',
+  'kbeauty-featured': 'إسنس كوري بخلاصة الأرز 150 مل|Korean rice essence, 150 ml|129|149|إسنس كوري مرطب بخلاصة الأرز وحمض الهيالورونيك للبشرة الزجاجية. 150 مل.',
+  'kbeauty-bestsellers': 'ماسك ورقي مرطب|Hydrating sheet mask|25|0|ماسك ورقي كوري بحمض الهيالورونيك والسنتيلا. استخدام واحد.',
+  'kbeauty-bundle': 'كريم حاجز الرطوبة المهدئ 50 مل|Calming moisture barrier cream, 50 ml|99|0|كريم مهدئ بالسيراميد والسنتيلا يقوّي حاجز البشرة. 50 مل.',
+  'makeup-featured': 'باليت ظلال عيون نود — 12 لون|Nude eyeshadow palette — 12 shades|189|219|',
+  'makeup-bestsellers': 'أحمر شفاه مطفي — 4 درجات|Matte lipstick — 4 shades|79|0|',
+  'makeup-bundle': 'طقم مكياج: بودرة وبلاشر وفرش|Makeup set: powder, blush & brushes|349|399|',
+  'perfume-featured': 'عطر بعبوة زجاجية كلاسيكية 100 مل|Classic glass-bottle perfume, 100 ml|450|0|عطر بنوتات خشبية ومسكية بثبات طويل. 100 مل.',
+  'perfume-bestsellers': 'عطر ذهبي فاخر 50 مل|Luxury golden perfume, 50 ml|690|790|عطر شرقي فاخر بالعود والعنبر. 50 مل.',
+  'perfume-bundle': 'مبخرة مع بخور عود|Incense burner with oud bakhoor|220|0|',
+  'haircare-featured': 'زيت شعر طبيعي 100 مل|Natural hair oil, 100 ml|89|0|زيت شعر طبيعي يغذي ويقوي الأطراف ويمنح لمعاناً. 100 مل.',
+  'haircare-bestsellers': 'طقم تصفيف: موس وسبراي حماية وسيروم|Styling set: mousse, protect spray & serum|199|239|',
+  'haircare-bundle': 'منتجات عناية بالشعر بعبوات بيضاء|Haircare essentials in white bottles|159|0|',
+  'bodycare-featured': 'زبدة ومقشر جسم طبيعي مع فرشاة|Natural body butter & scrub with brush|139|159|زبدة جسم مرطبة ومقشر طبيعي لنعومة تدوم. 200 جم.',
+  'bodycare-bestsellers': 'طقم استحمام: ليفة وفرشاة وملح|Bath set: loofah, brush & salt|99|0|',
+  'bodycare-bundle': 'لوشن جسم مرطب 250 مل|Moisturizing body lotion, 250 ml|69|0|لوشن جسم خفيف بالسيراميد للترطيب اليومي. 250 مل.',
+  'gifts-featured': 'صندوق هدية مع سيروم وكريم|Gift box with serum & cream|299|349|',
+  'gifts-bestsellers': 'هدية مغلّفة بالورد المجفف|Gift wrapped with dried flowers|199|0|',
+  'gifts-bundle': 'تغليف هدية فاخر بشريطة سوداء|Luxury gift wrapping, black ribbon|35|0|',
+  'devices-featured': 'مجفف شعر احترافي|Professional hair dryer|590|690|',
+  'devices-bestsellers': 'رول وحجر قوا شا من الكوارتز الوردي|Rose quartz roller & gua sha|129|0|',
+  'devices-bundle': 'مكواة شعر مع مشط وزيوت|Hair straightener with comb & oils|349|399|',
+  'nails-featured': 'طلاء أظافر فوشي|Fuchsia nail polish|39|0|',
+  'nails-bestsellers': 'مجموعة طلاء أظافر ملوّنة|Colourful nail polish set|149|179|',
+  'nails-bundle': 'مجموعة ألوان جل للأظافر|Nail gel colour collection|249|0|',
+  'mens-featured': 'طقم حلاقة كلاسيكي: موس وفرشاة|Classic shaving kit: razor & brush|189|229|',
+  'mens-bestsellers': 'فرشاة حلاقة مع كريم|Shaving brush with cream|99|0|',
+  'mens-bundle': 'زيت لحية بقطارة 30 مل|Beard oil with dropper, 30 ml|79|0|زيت لحية مغذٍّ ينعّم الشعر ويخفف الحكة. 30 مل.'
 };
 const P = { // each store type lists the photos (products) it shows, each photo once
-  beauty: 'beauty-bestsellers;bodycare-bundle;beauty-bundle;beauty-featured;bodycare-featured;makeup-featured;devices-bestsellers;perfume-bestsellers',
-  skincare: 'skincare-featured;skincare-bestsellers;skincare-bundle;kbeauty-bestsellers;kbeauty-bundle;kbeauty-featured;bodycare-bestsellers;beauty-featured',
-  perfume: 'perfume-bestsellers;perfume-featured;perfume-bundle;beauty-featured;kbeauty-featured;bodycare-bestsellers',
-  makeup: 'makeup-featured;makeup-bestsellers;makeup-bundle;haircare-bestsellers;beauty-bundle;mens-featured;mens-bundle',
-  haircare: 'haircare-featured;haircare-bundle;haircare-bestsellers;gifts-bundle;makeup-bestsellers;bodycare-featured',
-  bodycare: 'bodycare-featured;bodycare-bestsellers;bodycare-bundle;skincare-bundle;devices-featured;haircare-bestsellers',
-  gifts: 'gifts-featured;gifts-bundle;gifts-bestsellers;mens-bundle',
-  devices: 'devices-bestsellers;devices-bundle;devices-featured;beauty-bestsellers',
-  nails: 'nails-featured;nails-bundle;nails-bestsellers;devices-bestsellers',
-  kbeauty: 'kbeauty-bestsellers;kbeauty-bundle;kbeauty-featured;bodycare-bestsellers;skincare-bundle',
-  mens: 'mens-bundle;mens-featured;mens-bestsellers;gifts-featured'
+  beauty: 'beauty-featured;beauty-bestsellers;beauty-bundle;skincare-featured;makeup-featured;perfume-bestsellers;haircare-featured;gifts-featured',
+  skincare: 'skincare-featured;skincare-bestsellers;skincare-bundle;kbeauty-bundle;beauty-bundle;devices-bestsellers',
+  makeup: 'makeup-featured;makeup-bestsellers;makeup-bundle;beauty-bestsellers;nails-featured',
+  perfume: 'perfume-featured;perfume-bestsellers;perfume-bundle;gifts-bestsellers;bodycare-bundle',
+  haircare: 'haircare-featured;haircare-bestsellers;haircare-bundle;devices-bundle;devices-featured',
+  bodycare: 'bodycare-featured;bodycare-bestsellers;bodycare-bundle;beauty-featured',
+  gifts: 'gifts-featured;gifts-bestsellers;gifts-bundle;perfume-bestsellers;beauty-featured',
+  devices: 'devices-featured;devices-bestsellers;devices-bundle',
+  nails: 'nails-featured;nails-bestsellers;nails-bundle;beauty-bestsellers',
+  kbeauty: 'kbeauty-featured;kbeauty-bestsellers;kbeauty-bundle;skincare-bestsellers',
+  mens: 'mens-featured;mens-bestsellers;mens-bundle;perfume-featured'
 };
 const MODES = ['featured', 'bestsellers', 'bundle'];
+const esc = x => String(x == null ? '' : x).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const asset = name => (B.dataset.ocImg || '').replace(/[^/]*\.webp(\?.*)?$/, `${name}.webp$1`);
 
 export function demoPack(v) {
   const V = VERTICALS[v] ? v : 'beauty';
-  const ps = (P[V] || P.beauty).split(';').map((k, i) => { const [a, e, p, w] = CAT[k].split('|'); const price = +p, was = +w || null;
-    return { id: 9000 + i, name: ar() ? a : e, slug: e.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), url: '#', img: asset(k), price, was, sale: !!was, out: false, stars: [4.8, 4.6, 4.7, 4.5, 4.9, 4.4, 4.6, 4.7][i], reviews: [214, 162, 88, 301, 120, 64, 45, 140][i], sold: [320, 180, 90, 260, 140, 60, 40, 150][i], digital: V === 'gifts' || V === 'mens' }; });
+  const ps = (P[V] || P.beauty).split(';').map((k, i) => { const [a, e, p, w, d] = CAT[k].split('|'); const price = +p, was = +w || null;
+    return { id: 9000 + i, name: ar() ? a : e, slug: e.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), url: '#', img: asset(k), price, was, sale: !!was, out: false, stars: [4.8, 4.6, 4.7, 4.5, 4.9, 4.4, 4.6, 4.7][i], reviews: [214, 162, 88, 301, 120, 64, 45, 140][i], sold: [320, 180, 90, 260, 140, 60, 40, 150][i], desc: d || '', digital: false }; });
   const cats = (VERTICALS[V].cats || [V]).map((c, i) => ({ id: null, name: ar() ? VERTICALS[c].ar : VERTICALS[c].en, url: '#', img: asset(`${c}-${MODES[i % 3]}`), sub: [], v: c }));
   return { v: V, ps, cats };
 }
@@ -188,7 +189,7 @@ function skinProduct(pack) {
     (last.querySelector('a, span') || last).textContent = p.name; }
   /* the address bar names the tech product too (same /p<id>, so a reload still opens this page) */
   if (/\/[^/]+\/p\d+\/?$/.test(location.pathname) && !location.pathname.includes(`/${p.slug}/`)) try { history.replaceState(history.state, '', location.pathname.replace(/\/[^/]+(\/p\d+\/?)$/, `/${p.slug}$1`) + location.search + location.hash); } catch (e) {  }
-  if (once(desc)) desc.innerHTML = `<p>${vt(V.hero)}</p><ul>${(V.specs || []).map(([l]) => `<li>${vt(l)}</li>`).join('')}</ul>`;
+  if (once(desc)) desc.innerHTML = `<p>${esc(p.desc || vt(V.hero))}</p><ul>${(V.specs || []).map(([l]) => `<li>${vt(l)}</li>`).join('')}</ul>`; // the demo product's own description (actives + size feed the ingredient checker)
   document.querySelectorAll('salla-product-options, .s-product-options-wrapper, .product-options, [data-size-guide]').forEach(e => { e.style.display = 'none'; });
 }
 
