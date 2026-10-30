@@ -5,11 +5,12 @@
    Cached in sessionStorage for 20 minutes per store so navigation stays instant. No external calls, no tracking. */
 import { VERTICALS, detect } from './verticals';
 import { isPreview, demoPack, demoV } from './demo';
+import { formatSar, parseAmount } from './money';
 
 const TTL = 20 * 60 * 1000;
 const B = document.body;
 const cfg = k => { try { return window.salla?.config?.get?.(k); } catch (e) { return null; } };
-export const num = x => { if (x && typeof x === 'object') x = x.amount ?? x.value; const n = parseFloat(String(x == null ? '' : x).replace(/[^\d.]/g, '')); return isNaN(n) ? null : n; };
+export const num = parseAmount;
 
 /* brand dictionary: [display, ...aliases] — matched against real product/category names only */
 const BRANDS = [
@@ -117,10 +118,13 @@ function publish(c){
   return c;
 }
 
-/* formatting in the store's own currency + the store's numbering preference */
+/* formatting in the store's own currency + the store's numbering preference.
+   Preview always prints SAR with Western digits — the demo store's visitor currency is not the catalogue. */
 export function money(n, cur){
   if (n == null) return '';
-  const ar = (document.documentElement.lang || 'ar').startsWith('ar'), arNum = B.dataset.ocArnum === '1';
+  const ar = (document.documentElement.lang || 'ar').startsWith('ar');
+  if (B.classList.contains('oc-demo') || B.classList.contains('oc-preview')) return formatSar(n, ar);
+  const arNum = B.dataset.ocArnum === '1';
   const s = Math.round(n).toLocaleString(arNum ? 'ar-SA' : 'en-US');
   const sym = { SAR: ar ? 'ر.س' : 'SAR', AED: ar ? 'د.إ' : 'AED', KWD: ar ? 'د.ك' : 'KWD', QAR: ar ? 'ر.ق' : 'QAR', BHD: ar ? 'د.ب' : 'BHD', OMR: ar ? 'ر.ع' : 'OMR', EGP: ar ? 'ج.م' : 'EGP', USD: '$' }[cur] || cur;
   return `${s} ${sym}`;

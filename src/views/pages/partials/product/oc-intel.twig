@@ -9,7 +9,7 @@
 <div class="oc-intel" data-testid="oc-intel">
   <div class="oc-gauge" style="--v:{{ trust }}" aria-label="{{ trans('oc.trust') }} {{ trust }}%">
     <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.9"/><circle class="v" cx="18" cy="18" r="15.9" pathLength="100"/></svg>
-    <b>{{ trust ? trust ~ '%' : '—' }}</b>
+    <b>{{ trust ? trust ~ '%' : trans('oc.v_new') }}</b>
     <span>{{ trans('oc.trust') }}</span>
     <small>{{ trust >= 90 ? trans('oc.v_exceptional') : (trust >= 80 ? trans('oc.v_high') : (trust >= 60 ? trans('oc.v_good') : (trust ? trans('oc.v_mixed') : trans('oc.v_new')))) }}</small>
   </div>

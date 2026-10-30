@@ -40,6 +40,7 @@
             <div id="{{ component_id }}-{{ section.id }}" class="tabs__item {{ loop.first?'is-active':'' }}">
                 {% if is_slider %}
                     <salla-products-slider 
+                      product-card-component="custom-salla-product-card"
                       slider-id="section-{{ section.id }}-slider" 
                       source="{{ section.products.source }}"
                       limit="{{ section.products.limit }}"
@@ -48,6 +49,7 @@
                     </salla-products-slider>
                 {% else %}
                     <salla-products-list  
+                      product-card-component="custom-salla-product-card"
                       source="{{ section.products.source }}"
                       limit="{{ section.products.limit }}"
                       source-value="{{ section.products.source_value|json_encode }}"

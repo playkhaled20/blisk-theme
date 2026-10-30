@@ -53,7 +53,13 @@
 <html lang="{{ language.code }}" dir="{{ theme.is_rtl ? 'rtl' : 'ltr' }}">
 <!-- بسم الله الرحمن الرحيم -->
 <head>
-<script>(function(){try{var h=location.hostname,q=location.search;if(/(^|\.)salla\.design$/.test(h)||h==='demostore.salla.sa'||/[?&](oc_preview|oc_type|oc_p)=/.test(q)){var d=document.documentElement;d.classList.add('oc-pre');setTimeout(function(){d.classList.remove('oc-pre')},2500)}}catch(e){}})();</script>
+<script>(function(){try{var h=location.hostname,q=location.search,d=document.documentElement;var preview=/(^|\.)salla\.design$/.test(h)||h==='demostore.salla.sa'||h==='localhost'||/[?&](preview|oc_preview|oc_type|oc_p)=/.test(q);if(!preview)return;d.classList.add('oc-pre');
+function sar(n){n=Math.round(Number(n)||0);var ar=(d.lang||'ar').indexOf('ar')===0;return n.toLocaleString('en-US')+' '+(ar?'ر.س':'SAR');}
+function amt(p){if(p&&typeof p==='object')p=p.amount!=null?p.amount:p.value;if(typeof p==='string')p=p.replace(/[٠-٩]/g,function(ch){return '٠١٢٣٤٥٦٧٨٩'.indexOf(ch);}).replace(/[^\d.]/g,'');var n=parseFloat(p);return isNaN(n)?null:n;}
+function hook(){if(!window.salla||typeof salla.money!=='function'||salla.money.__blisk)return;var orig=salla.money.bind(salla);var w=function(p){var n=amt(p);return n==null?orig(p):sar(n);};w.__blisk=1;salla.money=w;}
+hook();var i=setInterval(function(){hook();if(window.salla&&salla.money&&salla.money.__blisk)clearInterval(i);},40);
+setTimeout(function(){clearInterval(i);if(!d.classList.contains('oc-priced'))d.classList.remove('oc-pre');},8000);
+}catch(e){}})();</script>
 <style>html.oc-pre #main-content,html.oc-pre .main-menu,html.oc-pre footer,html.oc-pre salla-cart-summary{visibility:hidden}</style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -2247,7 +2247,8 @@
             }
           ]
         }
-      ]
+      ],
+      "is_default": true
     },
     {
       "key": "98f45197-0701-50f1-8753-9709d39eadbd",
@@ -2992,7 +2993,8 @@
           "minimum": 1,
           "maximum": 24
         }
-      ]
+      ],
+      "is_default": true
     },
     {
       "key": "302cddb4-b0bd-5a2b-a84a-98d9979db03c",

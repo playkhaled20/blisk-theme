@@ -1,4 +1,5 @@
 import BasePage from '../base-page';
+import { formatSar, parseAmount } from '../obsidian/money';
 class ProductCard extends HTMLElement {
   constructor(){
     super()
@@ -72,6 +73,8 @@ class ProductCard extends HTMLElement {
       return salla.config.get('store.settings.product.show_price_as_dash')?'-':'';
     }
 
+    const preview = document.body.dataset.ocMode === 'preview' || document.body.classList.contains('oc-demo') || /(^|\.)salla\.design$/.test(location.hostname) || location.hostname === 'demostore.salla.sa';
+    if (preview) { const n = parseAmount(price); const ar = (document.documentElement.lang || 'ar').startsWith('ar'); if (n != null) return formatSar(n, ar); }
     return salla.money(price);
   }
 
@@ -260,7 +263,7 @@ class ProductCard extends HTMLElement {
               </div>`
                : ``}
           </div>
-          ${this.product?.is_free_shipping ? `<salla-free-shipping-tag product-id="${this.product.id}" from-product-card show-free-shipping></salla-free-shipping-tag>` : ''}
+          ${this.product?.is_free_shipping && document.body.dataset.ocMode !== 'preview' && !document.body.classList.contains('oc-demo') ? `<salla-free-shipping-tag product-id="${this.product.id}" from-product-card show-free-shipping></salla-free-shipping-tag>` : ''}
 
           ${this.isSpecial && this.product.discount_ends
             ? `<salla-count-down date="${this.formatDate(this.product.discount_ends)}" end-of-day=${true} boxed=${true}

@@ -69,12 +69,17 @@ function buildPicker(){
   fab.onclick = () => { const o = el.classList.toggle('is-open'); fab.setAttribute('aria-expanded', o); };
   el.querySelectorAll('[data-k]').forEach(b => b.onclick = () => {
     const k = b.dataset.k==='__auto' ? detect(currentTexts()) : b.dataset.k; b.dataset.k==='__auto' ? sessionStorage.removeItem('oc_type') : sessionStorage.setItem('oc_type', k); applyVertical(k); B.classList.add('oc-swap'); setTimeout(()=>B.classList.remove('oc-swap'),600);
-    el.querySelectorAll('[data-k]').forEach(x=>x.classList.toggle('is-on', x.dataset.k===k)); fab.querySelector('span').innerHTML = ICONS[k]; list.querySelector('select').value=k; document.dispatchEvent(new CustomEvent('oc:type',{detail:k}));
+    el.querySelectorAll('[data-k]').forEach(x=>x.classList.toggle('is-on', x.dataset.k===k)); fab.querySelector('span').innerHTML = ICONS[k]; list.querySelector('select').value=k;
+    document.documentElement.classList.add('oc-pre'); /* hide the fashion demo frame before the reload paints the new type */
+    document.dispatchEvent(new CustomEvent('oc:type',{detail:k}));
   });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') el.classList.remove('is-open'); });
 }
 
 /* ---------- vertical-only sections: hide cards that don't match this vertical (fallback: show all) ---------- */
 function filterCards(sec){
+  /* preview already shows this type's own catalogue; hiding cards by keyword drops makeup / body / K-beauty / men's cards */
+  if (B.classList.contains('oc-preview') || B.classList.contains('oc-demo')) return;
   const V = VERTICALS[sec.dataset.ocVfilter === 'auto' ? B.dataset.ocV : sec.dataset.ocVfilter]; if(!V) return;
   const cards = [...sec.querySelectorAll('custom-salla-product-card')];
   const hit = cards.filter(c => { const tx = norm(c.textContent); return V.kw.some(w => tx.includes(norm(w).trim())); });
@@ -151,6 +156,8 @@ async function boot(){
   try{ initDemo(); }catch(e){}
   try{ liftFloaters(); }catch(e){}
   try{ initBeauty(); }catch(e){} // independent of the store read below, so it never waits on it
+  applyVertical(resolveVertical());
+  try{ mountAddons(window.ocStore || null, isAr); }catch(e){} // panel exists before the store read, so tab clicks are not lost to a slow API
   let st=null; try{ st=await buildSmart(isAr); }catch(e){}
   try{ st=(await mountSections())||st; }catch(e){}
   try{ st=st||await brain(); }catch(e){}

@@ -112,6 +112,7 @@ class NavigationMenu extends HTMLElement {
                     <salla-products-list
                     source="selected"
                     shadow-on-hover
+                    product-card-component="custom-salla-product-card"
                     source-value="[${menu.products}]" />` : ''}
                 </div>` : ''}
         </li>`;
@@ -213,6 +214,8 @@ class NavigationMenu extends HTMLElement {
         });
 
         const availableWidth = containerWidth - usedWidth - 300; // 300px buffer for More dropdown
+        /* a narrow editor frame used to set display:none on every item and then drop the More menu, so the bar looked empty */
+        if (availableWidth < 160 || document.body.classList.contains('oc-demo') || document.body.dataset.ocMode === 'preview') return;
         let currentWidth = 0;
         let visibleCount = 0;
 

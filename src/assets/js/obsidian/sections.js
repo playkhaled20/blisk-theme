@@ -166,15 +166,33 @@ function compare(sec, st){
   draw();
 }
 
+/* preview-only labels so the brands wall is visible on the fashion demo store, which has no beauty houses */
+const PREVIEW_BRANDS = {
+  beauty: ['The Ordinary', 'CeraVe', 'Rare Beauty', 'Lattafa'],
+  skincare: ['The Ordinary', 'CeraVe', 'La Roche-Posay', 'COSRX'],
+  makeup: ['Huda Beauty', 'MAC', 'Rare Beauty', 'NYX'],
+  perfume: ['Lattafa', 'Arabian Oud', 'Rasasi', 'Kayali'],
+  haircare: ['Olaplex', 'Moroccanoil', 'Kérastase', 'Schwarzkopf'],
+  bodycare: ['The Body Shop', 'Nivea', 'Vaseline', 'Dove'],
+  gifts: ['Kayali', 'Lattafa', 'Rare Beauty', 'The Ordinary'],
+  devices: ['Dyson', 'Philips', 'BaByliss', 'Foreo'],
+  nails: ['OPI', 'Essie', 'Sally Hansen', 'Kiko Milano'],
+  kbeauty: ['COSRX', 'Laneige', 'Beauty of Joseon', 'Anua'],
+  mens: ['Gillette', 'CeraVe', 'The Ordinary', 'Nivea']
+};
 /* ---------- 4. brands wall: merchant logos, else brands actually found in the store's products ---------- */
 function brands(sec, st){
   if (sec.dataset.ready) return; sec.dataset.ready = 1;
   const grid = sec.querySelector('.oc-brands__grid'), demo = [...grid.querySelectorAll('[data-oc-demo]')];
-  const found = st?.brands || [];
+  const preview = B.classList.contains('oc-demo') || B.classList.contains('oc-preview');
+  let found = st?.brands || [];
+  const sample = !found.length && preview;
+  if (sample) { const v = st?.main || B.dataset.ocV || 'beauty'; found = (PREVIEW_BRANDS[v] || PREVIEW_BRANDS.beauty).map(name => ({ name, n: 1 })); }
   if (!found.length) { demo.forEach(d => d.remove()); if (!grid.children.length) sec.hidden = true; return; }
+  sec.hidden = false;
   demo.forEach((d, k) => { const b = found[k]; if (!b) return d.remove();
     d.href = '/search?q=' + encodeURIComponent(b.name); d.querySelector('b').textContent = b.name;
-    d.querySelector('small').textContent = t('ضمن منتجات المتجر', 'In this store'); });
+    const small = d.querySelector('small'); if (small) small.textContent = sample ? t('معاينة', 'Preview') : t('ضمن منتجات المتجر', 'In this store'); });
   const extra = found.slice(demo.length, 12);
   grid.insertAdjacentHTML('beforeend', extra.map(b => `<a class="oc-brand-tile" href="/search?q=${encodeURIComponent(b.name)}" data-oc-reveal><b>${esc(b.name)}</b><small>${t('ضمن منتجات المتجر', 'In this store')}</small></a>`).join(''));
   reveal(grid);
