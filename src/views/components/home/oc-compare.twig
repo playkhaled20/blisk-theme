@@ -1,0 +1,15 @@
+{# Blisk · Model lineup & compare (6–12 models). Merchant models compare on the merchant's own spec rows;
+   with none, the section compares the store's REAL products on real data (price, rating, reviews, stock, discount). #}
+{% set list = component.models ?: [] %}{% set have = list|length %}
+{% set labels = [component.label1, component.label2, component.label3, component.label4] %}
+<section component-id="{{ componentId }}" class="s-block oc-cmp container" data-oc-sec="compare" data-labels="{{ labels|json_encode|e('html_attr') }}" data-testid="oc-compare">
+  <header class="oc-head" data-k="VS"><div><h2 class="oc-metal">{{ component.title ?: trans('oc.cmp_title') }}</h2><p data-oc-cmp-mode>{{ component.subtitle ?: trans('oc.cmp_sub') }}</p></div></header>
+  <div class="oc-cmp__rail">
+    {% for m in list %}
+    <button type="button" class="oc-cmp__card" data-m="{{ {name: m.name, url: m.url, img: m.image, price: m.price, v: [m.s1, m.s2, m.s3, m.s4]}|json_encode|e('html_attr') }}"><img src="{{ m.image }}" alt="{{ m.name }}" loading="lazy"><b>{{ m.name }}</b><em>{{ m.price }}</em></button>
+    {% endfor %}
+    {% if have < 6 %}{% for i in have..5 %}<span class="oc-cmp__card oc-skel" data-oc-demo="img"><img data-oc-fill src="{{ 'images/oc/beauty-featured.webp'|asset }}" alt="" loading="lazy"><b>&nbsp;</b><em>&nbsp;</em></span>{% endfor %}{% endif %}
+  </div>
+  <p class="oc-cmp__hint">{{ trans('oc.cmp_hint') }}</p>
+  <div class="oc-cmp__out" data-oc-cmp aria-live="polite"></div>
+</section>

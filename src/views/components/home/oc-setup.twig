@@ -1,0 +1,13 @@
+{# Blisk · Build your setup (6–12 items). Each item searches the store's real products; the running total is the
+   real sum of the picked products' prices in the store currency. Adding to cart stays on the product page. #}
+{% set list = component.items ?: [] %}{% set have = list|length %}
+{% set demo = ['kbeauty-featured','bodycare-featured','kbeauty-bestsellers','skincare-bundle','makeup-bundle','devices-featured','haircare-bundle','nails-bundle','perfume-bundle','bodycare-bundle','kbeauty-bundle','beauty-bundle'] %}
+<section component-id="{{ componentId }}" class="s-block oc-setup container" data-oc-sec="setup" data-testid="oc-setup">
+  <header class="oc-head" data-k="SETUP"><h2 class="oc-metal">{{ component.title ?: trans('oc.setup_title') }}</h2><p>{{ component.subtitle ?: trans('oc.setup_sub') }}</p></header>
+  <div class="oc-setup__grid">
+    {% for s in list %}<button type="button" class="oc-setup__item" data-kw="{{ s.keyword ?: s.label }}" data-oc-reveal><img src="{{ s.image }}" alt="" loading="lazy"><b>{{ s.label }}</b></button>{% endfor %}
+    {% if have < 6 %}{% for i in have..5 %}<button type="button" class="oc-setup__item" data-oc-demo="img" data-oc-reveal><img data-oc-fill src="{{ ('images/oc/' ~ demo[i] ~ '.webp')|asset }}" alt="" loading="lazy"><b></b></button>{% endfor %}{% endif %}
+  </div>
+  <div class="oc-setup__out" data-oc-setup-out aria-live="polite"></div>
+  <div class="oc-setup__sum oc-glass" data-oc-setup-sum></div>
+</section>

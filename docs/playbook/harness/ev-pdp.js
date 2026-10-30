@@ -1,0 +1,6 @@
+(() => { const R = e => e && e.getBoundingClientRect(); const ov = (a, b) => a && b && !(a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top);
+  const bar = R(document.querySelector('.sticky-product-bar')); const tgt = [...document.querySelectorAll('.sticky-product-bar salla-quantity-input, .sticky-product-bar .oc-packs button, .sticky-product-bar .s-button-btn, .sticky-product-bar salla-mini-checkout-widget')].map(R);
+  const thumbs = [...document.querySelectorAll('.details-slider img, main img')].map(R);
+  return { barH: Math.round(bar.height), barTop: Math.round(bar.top), lift: getComputedStyle(document.body).getPropertyValue('--oc-lift'), padB: getComputedStyle(document.body).paddingBottom,
+    floaters: ['.oc-pk__fab', '.oc-ai__fab', '.oc-cc__fab'].map(s => { const r = R(document.querySelector(s)); if (!r || !r.width) return s + ':none'; return `${s} ${Math.round(r.left)},${Math.round(r.top)} ${Math.round(r.width)}px insideBar=${r.top >= bar.top - 1} hitsControls=${tgt.some(t => ov(r, t))} hitsPageImg=${thumbs.some(t => ov(r, t) && t.bottom < bar.top)}`; }),
+    cut: [...document.querySelectorAll('.sticky-product-bar .s-button-text, .s-add-product-button-mini-checkout-content')].filter(e => e.scrollWidth > e.clientWidth + 1).length }; })()

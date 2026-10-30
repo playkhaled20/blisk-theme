@@ -1,0 +1,8 @@
+{# Shared vertical section. mode: featured|bestsellers|new|deals|bundle. Only products of the vertical are shown (JS filter); vertical=auto follows setting/auto-detect/preview. #}
+{% set v = (component.vertical is iterable ? (component.vertical|first).value : component.vertical) ?: 'auto' %}
+{% set src = component.category|length ? 'categories' : (mode == 'deals' ? 'offers' : 'latest') %}
+<section component-id="{{ componentId }}" class="s-block oc-products oc-vsec oc-vsec--{{ mode }} container" data-oc-vfilter="{{ v }}" data-oc-mode="{{ mode }}" data-testid="oc-v-{{ mode }}">
+  <header class="oc-head" data-k="{{ mode|upper }}"><h2 class="oc-metal" data-oc-vtitle="{{ mode }}"{% if component.title %} data-custom="1"{% endif %}>{{ component.title ?: trans('oc.featured') }}</h2>{% if component.subtitle %}<p>{{ component.subtitle }}</p>{% endif %}</header>
+  {% if mode == 'bundle' %}<div class="oc-bundle-bar oc-glass"><span>{{ trans('oc.bundle_hint') }}</span><b data-oc-bundle-total></b></div>{% endif %}
+  <salla-products-list source="{{ src }}" {% if component.category|length %}source-value="[{{ component.category|map(c => c.id)|join(',') }}]"{% endif %}{% if mode == 'bestsellers' %} sort-by="top-sales"{% endif %} limit="{{ component.limit ?: (mode == 'bundle' ? 3 : 8) }}"></salla-products-list>
+</section>

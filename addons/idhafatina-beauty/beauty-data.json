@@ -1,0 +1,2039 @@
+{
+ "beauty": {
+  "words": [
+   "تجميل",
+   "عناية",
+   "مكياج",
+   "عطر",
+   "بشرة",
+   "شعر"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش تبين تهتمين فيه؟",
+     "en": "What do you want to focus on?"
+    },
+    "opts": [
+     {
+      "ar": "بشرتي",
+      "en": "My skin",
+      "kw": "بشرة"
+     },
+     {
+      "ar": "إطلالتي",
+      "en": "My look",
+      "kw": "مكياج"
+     },
+     {
+      "ar": "عطري",
+      "en": "My scent",
+      "kw": "عطر"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "ميزانيتك؟",
+     "en": "Budget?"
+    },
+    "opts": [
+     {
+      "ar": "اقتصادي",
+      "en": "Value",
+      "kw": "ميني"
+     },
+     {
+      "ar": "متوسط",
+      "en": "Mid",
+      "kw": "مجموعة"
+     },
+     {
+      "ar": "فاخر",
+      "en": "Luxury",
+      "kw": "فاخر"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "سيروم",
+    "en": "Serum",
+    "kw": "سيروم"
+   },
+   {
+    "ar": "مرطّب",
+    "en": "Moisturizer",
+    "kw": "مرطب"
+   },
+   {
+    "ar": "واقي شمس",
+    "en": "Sunscreen",
+    "kw": "واقي"
+   },
+   {
+    "ar": "عطر",
+    "en": "Perfume",
+    "kw": "عطر"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "بشرة جافة",
+    "en": "Dry skin",
+    "kw": "جافة"
+   },
+   {
+    "ar": "بشرة دهنية",
+    "en": "Oily skin",
+    "kw": "دهنية"
+   },
+   {
+    "ar": "بشرة مختلطة",
+    "en": "Combination skin",
+    "kw": "مختلطة"
+   },
+   {
+    "ar": "بشرة حساسة",
+    "en": "Sensitive skin",
+    "kw": "حساسة"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "فاتح جداً",
+    "en": "Fair",
+    "hex": "#f6dcc6"
+   },
+   {
+    "ar": "فاتح",
+    "en": "Light",
+    "hex": "#e9c4a3"
+   },
+   {
+    "ar": "حنطي",
+    "en": "Medium",
+    "hex": "#d6a57c"
+   },
+   {
+    "ar": "قمحي دافئ",
+    "en": "Warm tan",
+    "hex": "#bf8a5e"
+   },
+   {
+    "ar": "أسمر",
+    "en": "Deep",
+    "hex": "#8f5f3f"
+   },
+   {
+    "ar": "داكن",
+    "en": "Rich",
+    "hex": "#5c3a26"
+   }
+  ],
+  "mm": [
+   45,
+   110
+  ],
+  "sizeLabel": {
+   "ar": "عبوة 50 مل",
+   "en": "50 ml bottle"
+  },
+  "gift": [
+   150,
+   300,
+   600,
+   1200
+  ],
+  "photo": [
+   {
+    "ar": "جرّبي المنتج أول مرة على جزء صغير من البشرة واتركيه 24 ساعة (اختبار الحساسية).",
+    "en": "Patch-test on a small area for 24 hours before first use."
+   },
+   {
+    "ar": "احفظي المنتجات بعيداً عن الشمس والحرارة؛ الحمّام الحار يقلّل فعالية المكوّنات.",
+    "en": "Store away from sun and heat; a hot bathroom weakens active ingredients."
+   },
+   {
+    "ar": "انتبهي لرمز العلبة المفتوحة (مثل 12M) — مدة صلاحية المنتج بعد فتحه.",
+    "en": "Check the open-jar symbol (e.g. 12M) — shelf life after opening."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "روتين صباحي: منظّف + سيروم + واقي",
+    "en": "Morning: cleanser + serum + SPF",
+    "kw": [
+     "منظف",
+     "سيروم",
+     "واقي"
+    ]
+   },
+   {
+    "ar": "إطلالة يومية: كريم أساس + ماسكارا + أحمر شفاه",
+    "en": "Everyday look: base + mascara + lipstick",
+    "kw": [
+     "فاونديشن",
+     "ماسكارا",
+     "احمر شفاه"
+    ]
+   }
+  ],
+  "listen": "طريقة الاستخدام"
+ },
+ "skincare": {
+  "words": [
+   "سيروم",
+   "كريم",
+   "مرطب",
+   "غسول",
+   "تونر",
+   "واقي",
+   "بشرة",
+   "ريتينول",
+   "نياسيناميد"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش أكثر شي يضايقك في بشرتك؟",
+     "en": "What bothers your skin most?"
+    },
+    "opts": [
+     {
+      "ar": "جفاف",
+      "en": "Dryness",
+      "kw": "ترطيب"
+     },
+     {
+      "ar": "حبوب ومسام",
+      "en": "Acne & pores",
+      "kw": "نياسيناميد"
+     },
+     {
+      "ar": "تصبغات وبهتان",
+      "en": "Dark spots & dullness",
+      "kw": "فيتامين سي"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "وش تبين تضيفين لروتينك؟",
+     "en": "What do you want to add?"
+    },
+    "opts": [
+     {
+      "ar": "ترطيب عميق",
+      "en": "Deep hydration",
+      "kw": "هيالورونيك"
+     },
+     {
+      "ar": "مضاد للتجاعيد",
+      "en": "Anti-aging",
+      "kw": "ريتينول"
+     },
+     {
+      "ar": "حماية من الشمس",
+      "en": "Sun protection",
+      "kw": "واقي"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "منظّف لطيف",
+    "en": "Gentle cleanser",
+    "kw": "غسول"
+   },
+   {
+    "ar": "تونر",
+    "en": "Toner",
+    "kw": "تونر"
+   },
+   {
+    "ar": "سيروم",
+    "en": "Serum",
+    "kw": "سيروم"
+   },
+   {
+    "ar": "مرطّب",
+    "en": "Moisturizer",
+    "kw": "مرطب"
+   },
+   {
+    "ar": "واقي شمس",
+    "en": "Sunscreen",
+    "kw": "واقي"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "بشرة جافة",
+    "en": "Dry skin",
+    "kw": "جافة"
+   },
+   {
+    "ar": "بشرة دهنية",
+    "en": "Oily skin",
+    "kw": "دهنية"
+   },
+   {
+    "ar": "بشرة مختلطة",
+    "en": "Combination skin",
+    "kw": "مختلطة"
+   },
+   {
+    "ar": "بشرة حساسة",
+    "en": "Sensitive skin",
+    "kw": "حساسة"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "فاتح جداً",
+    "en": "Fair",
+    "hex": "#f6dcc6"
+   },
+   {
+    "ar": "فاتح",
+    "en": "Light",
+    "hex": "#e9c4a3"
+   },
+   {
+    "ar": "حنطي",
+    "en": "Medium",
+    "hex": "#d6a57c"
+   },
+   {
+    "ar": "قمحي دافئ",
+    "en": "Warm tan",
+    "hex": "#bf8a5e"
+   },
+   {
+    "ar": "أسمر",
+    "en": "Deep",
+    "hex": "#8f5f3f"
+   },
+   {
+    "ar": "داكن",
+    "en": "Rich",
+    "hex": "#5c3a26"
+   }
+  ],
+  "mm": [
+   38,
+   105
+  ],
+  "sizeLabel": {
+   "ar": "سيروم 30 مل",
+   "en": "30 ml serum"
+  },
+  "gift": [
+   100,
+   250,
+   500,
+   900
+  ],
+  "photo": [
+   {
+    "ar": "جرّبي المنتج أول مرة على جزء صغير من البشرة واتركيه 24 ساعة (اختبار الحساسية).",
+    "en": "Patch-test on a small area for 24 hours before first use."
+   },
+   {
+    "ar": "احفظي المنتجات بعيداً عن الشمس والحرارة؛ الحمّام الحار يقلّل فعالية المكوّنات.",
+    "en": "Store away from sun and heat; a hot bathroom weakens active ingredients."
+   },
+   {
+    "ar": "انتبهي لرمز العلبة المفتوحة (مثل 12M) — مدة صلاحية المنتج بعد فتحه.",
+    "en": "Check the open-jar symbol (e.g. 12M) — shelf life after opening."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "روتين البشرة الجافة: غسول كريمي + هيالورونيك + مرطّب",
+    "en": "Dry skin: cream cleanser + hyaluronic + moisturizer",
+    "kw": [
+     "غسول",
+     "هيالورونيك",
+     "مرطب"
+    ]
+   },
+   {
+    "ar": "روتين البشرة الدهنية: جل منظّف + نياسيناميد + واقي خفيف",
+    "en": "Oily skin: gel cleanser + niacinamide + light SPF",
+    "kw": [
+     "جل",
+     "نياسيناميد",
+     "واقي"
+    ]
+   }
+  ],
+  "listen": "طريقة الاستخدام"
+ },
+ "makeup": {
+  "words": [
+   "مكياج",
+   "فاونديشن",
+   "كونسيلر",
+   "روج",
+   "احمر شفاه",
+   "ماسكارا",
+   "ظلال",
+   "بلاشر",
+   "هايلايتر",
+   "برايمر"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش الإطلالة اللي تبينها؟",
+     "en": "Which look?"
+    },
+    "opts": [
+     {
+      "ar": "طبيعية يومية",
+      "en": "Natural everyday",
+      "kw": "تنت"
+     },
+     {
+      "ar": "سهرة",
+      "en": "Evening glam",
+      "kw": "ظلال"
+     },
+     {
+      "ar": "عروس",
+      "en": "Bridal",
+      "kw": "ثابت"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "وش تحبين في كريم الأساس؟",
+     "en": "Foundation finish?"
+    },
+    "opts": [
+     {
+      "ar": "خفيف",
+      "en": "Light",
+      "kw": "تنت"
+     },
+     {
+      "ar": "مطفي",
+      "en": "Matte",
+      "kw": "مطفي"
+     },
+     {
+      "ar": "مضيء",
+      "en": "Dewy",
+      "kw": "مضيء"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "برايمر",
+    "en": "Primer",
+    "kw": "برايمر"
+   },
+   {
+    "ar": "كونسيلر",
+    "en": "Concealer",
+    "kw": "كونسيلر"
+   },
+   {
+    "ar": "بودرة تثبيت",
+    "en": "Setting powder",
+    "kw": "بودرة"
+   },
+   {
+    "ar": "سبراي تثبيت",
+    "en": "Setting spray",
+    "kw": "مثبت"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "بشرة جافة",
+    "en": "Dry skin",
+    "kw": "جافة"
+   },
+   {
+    "ar": "بشرة دهنية",
+    "en": "Oily skin",
+    "kw": "دهنية"
+   },
+   {
+    "ar": "بشرة مختلطة",
+    "en": "Combination skin",
+    "kw": "مختلطة"
+   },
+   {
+    "ar": "بشرة حساسة",
+    "en": "Sensitive skin",
+    "kw": "حساسة"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "فاتح جداً",
+    "en": "Fair",
+    "hex": "#f6dcc6"
+   },
+   {
+    "ar": "فاتح",
+    "en": "Light",
+    "hex": "#e9c4a3"
+   },
+   {
+    "ar": "حنطي",
+    "en": "Medium",
+    "hex": "#d6a57c"
+   },
+   {
+    "ar": "قمحي دافئ",
+    "en": "Warm tan",
+    "hex": "#bf8a5e"
+   },
+   {
+    "ar": "أسمر",
+    "en": "Deep",
+    "hex": "#8f5f3f"
+   },
+   {
+    "ar": "داكن",
+    "en": "Rich",
+    "hex": "#5c3a26"
+   },
+   {
+    "ar": "نود",
+    "en": "Nude",
+    "hex": "#c99a86"
+   },
+   {
+    "ar": "وردي",
+    "en": "Pink",
+    "hex": "#d9798a"
+   },
+   {
+    "ar": "أحمر كلاسيكي",
+    "en": "Classic red",
+    "hex": "#a3202c"
+   },
+   {
+    "ar": "توتي",
+    "en": "Berry",
+    "hex": "#7a2a45"
+   },
+   {
+    "ar": "مرجاني",
+    "en": "Coral",
+    "hex": "#e07a5f"
+   },
+   {
+    "ar": "بني دافئ",
+    "en": "Warm brown",
+    "hex": "#7d4a35"
+   }
+  ],
+  "mm": [
+   22,
+   85
+  ],
+  "sizeLabel": {
+   "ar": "أحمر شفاه / فاونديشن 30 مل",
+   "en": "Lipstick / 30 ml foundation"
+  },
+  "gift": [
+   100,
+   250,
+   500,
+   1000
+  ],
+  "photo": [
+   {
+    "ar": "نظّفي الفرش أسبوعياً بماء دافئ وصابون لطيف لتجنّب البكتيريا.",
+    "en": "Wash brushes weekly with warm water and gentle soap."
+   },
+   {
+    "ar": "الماسكارا صلاحيتها 3 أشهر بعد الفتح.",
+    "en": "Mascara lasts 3 months after opening."
+   },
+   {
+    "ar": "جرّبي درجة الفاونديشن على خط الفك في ضوء النهار.",
+    "en": "Test foundation shade on the jawline in daylight."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "إطلالة يومية: تنت + ماسكارا + بلسم شفاه",
+    "en": "Everyday: tint + mascara + lip balm",
+    "kw": [
+     "تنت",
+     "ماسكارا",
+     "بلسم"
+    ]
+   },
+   {
+    "ar": "إطلالة سهرة: برايمر + ظلال + أحمر شفاه ثابت",
+    "en": "Evening: primer + eyeshadow + long-wear lipstick",
+    "kw": [
+     "برايمر",
+     "ظلال",
+     "احمر شفاه"
+    ]
+   }
+  ],
+  "listen": "طريقة التطبيق"
+ },
+ "perfume": {
+  "words": [
+   "عطر",
+   "عطور",
+   "عود",
+   "مسك",
+   "بخور",
+   "دهن",
+   "perfume",
+   "oud"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش الرائحة اللي تحبينها؟",
+     "en": "Which scent family?"
+    },
+    "opts": [
+     {
+      "ar": "عودي شرقي",
+      "en": "Oriental oud",
+      "kw": "عود"
+     },
+     {
+      "ar": "زهري ناعم",
+      "en": "Soft floral",
+      "kw": "ورد"
+     },
+     {
+      "ar": "منعش",
+      "en": "Fresh",
+      "kw": "منعش"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "متى تستخدمينه؟",
+     "en": "When will you wear it?"
+    },
+    "opts": [
+     {
+      "ar": "يومي",
+      "en": "Daily",
+      "kw": "خفيف"
+     },
+     {
+      "ar": "مناسبات",
+      "en": "Occasions",
+      "kw": "فاخر"
+     },
+     {
+      "ar": "هدية",
+      "en": "Gift",
+      "kw": "هدية"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "بخاخ شعر",
+    "en": "Hair mist",
+    "kw": "معطر شعر"
+   },
+   {
+    "ar": "لوشن بنفس العطر",
+    "en": "Matching lotion",
+    "kw": "لوشن"
+   },
+   {
+    "ar": "بخور",
+    "en": "Bakhoor",
+    "kw": "بخور"
+   },
+   {
+    "ar": "دهن عود",
+    "en": "Oud oil",
+    "kw": "دهن"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "رجالي",
+    "en": "For him",
+    "kw": "رجالي"
+   },
+   {
+    "ar": "نسائي",
+    "en": "For her",
+    "kw": "نسائي"
+   },
+   {
+    "ar": "للجنسين",
+    "en": "Unisex",
+    "kw": "للجنسين"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "عودي",
+    "en": "Oud",
+    "hex": "#5b3a29"
+   },
+   {
+    "ar": "مسكي",
+    "en": "Musky",
+    "hex": "#d8cfc4"
+   },
+   {
+    "ar": "زهري",
+    "en": "Floral",
+    "hex": "#e6a4b4"
+   },
+   {
+    "ar": "فانيلا",
+    "en": "Vanilla",
+    "hex": "#f1dfb8"
+   },
+   {
+    "ar": "حمضي منعش",
+    "en": "Citrus",
+    "hex": "#f2c94c"
+   },
+   {
+    "ar": "خشبي",
+    "en": "Woody",
+    "hex": "#8b6b4a"
+   }
+  ],
+  "mm": [
+   52,
+   98
+  ],
+  "sizeLabel": {
+   "ar": "عطر 100 مل",
+   "en": "100 ml perfume"
+  },
+  "gift": [
+   150,
+   350,
+   700,
+   1500
+  ],
+  "photo": [
+   {
+    "ar": "رشّي العطر على نقاط النبض (المعصم وخلف الأذن) ولا تفركيه.",
+    "en": "Spray on pulse points and don’t rub."
+   },
+   {
+    "ar": "احفظي العطر بعيداً عن الضوء والحرارة لتحافظي على رائحته.",
+    "en": "Keep perfume away from light and heat."
+   },
+   {
+    "ar": "بخّة على الملابس تطوّل ثبات الرائحة.",
+    "en": "A spritz on clothes makes it last longer."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "طقم فاخر: عطر + لوشن + بخاخ شعر",
+    "en": "Luxury set: perfume + lotion + hair mist",
+    "kw": [
+     "عطر",
+     "لوشن",
+     "معطر شعر"
+    ]
+   },
+   {
+    "ar": "طقم شرقي: عطر عود + دهن + بخور",
+    "en": "Oriental set: oud perfume + oil + bakhoor",
+    "kw": [
+     "عود",
+     "دهن",
+     "بخور"
+    ]
+   }
+  ],
+  "listen": "المكوّنات والنوتات"
+ },
+ "haircare": {
+  "words": [
+   "شعر",
+   "شامبو",
+   "بلسم",
+   "زيت شعر",
+   "ماسك شعر",
+   "كيراتين",
+   "صبغة"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش مشكلة شعرك؟",
+     "en": "Your hair concern?"
+    },
+    "opts": [
+     {
+      "ar": "تساقط",
+      "en": "Hair fall",
+      "kw": "تساقط"
+     },
+     {
+      "ar": "جفاف وتقصف",
+      "en": "Dryness & split ends",
+      "kw": "ترطيب"
+     },
+     {
+      "ar": "هيشان",
+      "en": "Frizz",
+      "kw": "كيراتين"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "نوع شعرك؟",
+     "en": "Hair type?"
+    },
+    "opts": [
+     {
+      "ar": "ناعم",
+      "en": "Straight",
+      "kw": "ناعم"
+     },
+     {
+      "ar": "مموج",
+      "en": "Wavy",
+      "kw": "مموج"
+     },
+     {
+      "ar": "كيرلي",
+      "en": "Curly",
+      "kw": "كيرلي"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "شامبو",
+    "en": "Shampoo",
+    "kw": "شامبو"
+   },
+   {
+    "ar": "بلسم",
+    "en": "Conditioner",
+    "kw": "بلسم"
+   },
+   {
+    "ar": "ماسك",
+    "en": "Hair mask",
+    "kw": "ماسك"
+   },
+   {
+    "ar": "زيت أطراف",
+    "en": "Hair oil",
+    "kw": "زيت شعر"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "شعر جاف",
+    "en": "Dry hair",
+    "kw": "جاف"
+   },
+   {
+    "ar": "شعر دهني",
+    "en": "Oily scalp",
+    "kw": "دهني"
+   },
+   {
+    "ar": "شعر مصبوغ",
+    "en": "Color-treated",
+    "kw": "مصبوغ"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "أسود",
+    "en": "Black",
+    "hex": "#1c1714"
+   },
+   {
+    "ar": "بني داكن",
+    "en": "Dark brown",
+    "hex": "#3b2a20"
+   },
+   {
+    "ar": "بني فاتح",
+    "en": "Light brown",
+    "hex": "#7a5534"
+   },
+   {
+    "ar": "أشقر عسلي",
+    "en": "Honey blonde",
+    "hex": "#c49a5c"
+   },
+   {
+    "ar": "أحمر نحاسي",
+    "en": "Copper",
+    "hex": "#9a4a2a"
+   },
+   {
+    "ar": "رمادي فضي",
+    "en": "Silver grey",
+    "hex": "#b7b5b0"
+   }
+  ],
+  "mm": [
+   55,
+   180
+  ],
+  "sizeLabel": {
+   "ar": "شامبو 400 مل",
+   "en": "400 ml shampoo"
+  },
+  "gift": [
+   100,
+   250,
+   500,
+   1000
+  ],
+  "photo": [
+   {
+    "ar": "اغسلي بماء فاتر واختمي بماء بارد للمعان.",
+    "en": "Wash with lukewarm water, finish cool for shine."
+   },
+   {
+    "ar": "استخدمي واقي حرارة قبل السشوار أو المكواة.",
+    "en": "Use heat protectant before styling."
+   },
+   {
+    "ar": "الماسك مرة إلى مرتين أسبوعياً يكفي.",
+    "en": "A mask once or twice a week is enough."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "روتين الترطيب: شامبو + بلسم + زيت أطراف",
+    "en": "Hydration: shampoo + conditioner + oil",
+    "kw": [
+     "شامبو",
+     "بلسم",
+     "زيت شعر"
+    ]
+   },
+   {
+    "ar": "روتين التساقط: شامبو مقوي + سيروم فروة",
+    "en": "Hair fall: strengthening shampoo + scalp serum",
+    "kw": [
+     "شامبو",
+     "سيروم"
+    ]
+   }
+  ],
+  "listen": "طريقة الاستخدام"
+ },
+ "bodycare": {
+  "words": [
+   "جسم",
+   "لوشن",
+   "زبدة",
+   "مقشر",
+   "شاور",
+   "مزيل عرق",
+   "زيت جسم",
+   "صابون"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش تحتاج بشرة جسمك؟",
+     "en": "What does your body skin need?"
+    },
+    "opts": [
+     {
+      "ar": "ترطيب",
+      "en": "Hydration",
+      "kw": "لوشن"
+     },
+     {
+      "ar": "تقشير ونعومة",
+      "en": "Exfoliation",
+      "kw": "مقشر"
+     },
+     {
+      "ar": "رائحة تدوم",
+      "en": "Lasting scent",
+      "kw": "معطر"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "الرائحة؟",
+     "en": "Scent?"
+    },
+    "opts": [
+     {
+      "ar": "فانيلا",
+      "en": "Vanilla",
+      "kw": "فانيلا"
+     },
+     {
+      "ar": "ورد",
+      "en": "Rose",
+      "kw": "ورد"
+     },
+     {
+      "ar": "بدون رائحة",
+      "en": "Unscented",
+      "kw": "بدون عطر"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "شاور جل",
+    "en": "Shower gel",
+    "kw": "شاور"
+   },
+   {
+    "ar": "مقشر",
+    "en": "Scrub",
+    "kw": "مقشر"
+   },
+   {
+    "ar": "لوشن",
+    "en": "Lotion",
+    "kw": "لوشن"
+   },
+   {
+    "ar": "بخاخ معطر",
+    "en": "Body mist",
+    "kw": "معطر"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "بشرة جافة",
+    "en": "Dry skin",
+    "kw": "جافة"
+   },
+   {
+    "ar": "بشرة دهنية",
+    "en": "Oily skin",
+    "kw": "دهنية"
+   },
+   {
+    "ar": "بشرة مختلطة",
+    "en": "Combination skin",
+    "kw": "مختلطة"
+   },
+   {
+    "ar": "بشرة حساسة",
+    "en": "Sensitive skin",
+    "kw": "حساسة"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "عودي",
+    "en": "Oud",
+    "hex": "#5b3a29"
+   },
+   {
+    "ar": "مسكي",
+    "en": "Musky",
+    "hex": "#d8cfc4"
+   },
+   {
+    "ar": "زهري",
+    "en": "Floral",
+    "hex": "#e6a4b4"
+   },
+   {
+    "ar": "فانيلا",
+    "en": "Vanilla",
+    "hex": "#f1dfb8"
+   },
+   {
+    "ar": "حمضي منعش",
+    "en": "Citrus",
+    "hex": "#f2c94c"
+   },
+   {
+    "ar": "خشبي",
+    "en": "Woody",
+    "hex": "#8b6b4a"
+   }
+  ],
+  "mm": [
+   60,
+   170
+  ],
+  "sizeLabel": {
+   "ar": "لوشن 250 مل",
+   "en": "250 ml lotion"
+  },
+  "gift": [
+   80,
+   200,
+   400,
+   800
+  ],
+  "photo": [
+   {
+    "ar": "طبّقي اللوشن والجسم رطب بعد الاستحمام مباشرة.",
+    "en": "Apply lotion on damp skin right after a shower."
+   },
+   {
+    "ar": "المقشر مرة أو مرتين أسبوعياً فقط.",
+    "en": "Exfoliate once or twice a week only."
+   },
+   {
+    "ar": "احفظي الزبدة بمكان بارد حتى ما تذوب.",
+    "en": "Keep body butters cool."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "روتين النعومة: مقشر + شاور جل + زبدة",
+    "en": "Smooth skin: scrub + shower gel + butter",
+    "kw": [
+     "مقشر",
+     "شاور",
+     "زبدة"
+    ]
+   },
+   {
+    "ar": "طقم الرائحة: شاور جل + لوشن + بخاخ بنفس العطر",
+    "en": "Scent layering: gel + lotion + mist",
+    "kw": [
+     "شاور",
+     "لوشن",
+     "معطر"
+    ]
+   }
+  ],
+  "listen": "طريقة الاستخدام"
+ },
+ "gifts": {
+  "words": [
+   "هدية",
+   "هدايا",
+   "مجموعة",
+   "طقم",
+   "بوكس",
+   "set",
+   "gift"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "لمن الهدية؟",
+     "en": "Who is it for?"
+    },
+    "opts": [
+     {
+      "ar": "لها",
+      "en": "For her",
+      "kw": "نسائي"
+     },
+     {
+      "ar": "له",
+      "en": "For him",
+      "kw": "رجالي"
+     },
+     {
+      "ar": "للعروس",
+      "en": "For a bride",
+      "kw": "عروس"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "المناسبة؟",
+     "en": "Occasion?"
+    },
+    "opts": [
+     {
+      "ar": "عيد",
+      "en": "Eid",
+      "kw": "عيد"
+     },
+     {
+      "ar": "تخرج",
+      "en": "Graduation",
+      "kw": "هدية"
+     },
+     {
+      "ar": "بدون مناسبة",
+      "en": "Just because",
+      "kw": "مجموعة"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "بطاقة إهداء",
+    "en": "Gift card",
+    "kw": "بطاقة"
+   },
+   {
+    "ar": "تغليف فاخر",
+    "en": "Gift wrap",
+    "kw": "تغليف"
+   },
+   {
+    "ar": "شمعة معطرة",
+    "en": "Scented candle",
+    "kw": "شمعة"
+   },
+   {
+    "ar": "ميني عطر",
+    "en": "Mini perfume",
+    "kw": "ميني"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "لها",
+    "en": "For her",
+    "kw": "نسائي"
+   },
+   {
+    "ar": "له",
+    "en": "For him",
+    "kw": "رجالي"
+   },
+   {
+    "ar": "للعائلة",
+    "en": "For family",
+    "kw": "عائلي"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "عودي",
+    "en": "Oud",
+    "hex": "#5b3a29"
+   },
+   {
+    "ar": "مسكي",
+    "en": "Musky",
+    "hex": "#d8cfc4"
+   },
+   {
+    "ar": "زهري",
+    "en": "Floral",
+    "hex": "#e6a4b4"
+   },
+   {
+    "ar": "فانيلا",
+    "en": "Vanilla",
+    "hex": "#f1dfb8"
+   },
+   {
+    "ar": "حمضي منعش",
+    "en": "Citrus",
+    "hex": "#f2c94c"
+   },
+   {
+    "ar": "خشبي",
+    "en": "Woody",
+    "hex": "#8b6b4a"
+   }
+  ],
+  "mm": [
+   220,
+   160
+  ],
+  "sizeLabel": {
+   "ar": "صندوق هدية متوسط",
+   "en": "Medium gift box"
+  },
+  "gift": [
+   150,
+   350,
+   700,
+   1500
+  ],
+  "photo": [
+   {
+    "ar": "اختاري منتجات بدون ألوان لو ما تعرفين درجة بشرتها.",
+    "en": "Pick shade-free products if unsure of her shade."
+   },
+   {
+    "ar": "أضيفي رسالة شخصية — تفرق كثير.",
+    "en": "Add a personal note — it matters."
+   },
+   {
+    "ar": "تأكدي من موعد التوصيل قبل المناسبة.",
+    "en": "Check delivery date before the occasion."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "هدية فاخرة: عطر + لوشن + شمعة",
+    "en": "Luxury: perfume + lotion + candle",
+    "kw": [
+     "عطر",
+     "لوشن",
+     "شمعة"
+    ]
+   },
+   {
+    "ar": "هدية عناية: سيروم + ماسك + مرطّب",
+    "en": "Care: serum + mask + moisturizer",
+    "kw": [
+     "سيروم",
+     "ماسك",
+     "مرطب"
+    ]
+   }
+  ],
+  "listen": "طريقة الاستخدام"
+ },
+ "devices": {
+  "words": [
+   "جهاز",
+   "سشوار",
+   "مكواة",
+   "فير",
+   "ليزر",
+   "منظف بشرة",
+   "ديرما",
+   "led",
+   "ماساج"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش تبين يسوي الجهاز؟",
+     "en": "What should it do?"
+    },
+    "opts": [
+     {
+      "ar": "تصفيف الشعر",
+      "en": "Hair styling",
+      "kw": "سشوار"
+     },
+     {
+      "ar": "العناية بالبشرة",
+      "en": "Skincare",
+      "kw": "منظف بشرة"
+     },
+     {
+      "ar": "إزالة الشعر",
+      "en": "Hair removal",
+      "kw": "ليزر"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "الاستخدام؟",
+     "en": "Usage?"
+    },
+    "opts": [
+     {
+      "ar": "يومي",
+      "en": "Daily",
+      "kw": "يومي"
+     },
+     {
+      "ar": "أسبوعي",
+      "en": "Weekly",
+      "kw": "أسبوعي"
+     },
+     {
+      "ar": "سفر",
+      "en": "Travel",
+      "kw": "سفر"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "واقي حرارة",
+    "en": "Heat protectant",
+    "kw": "واقي حرارة"
+   },
+   {
+    "ar": "رؤوس بديلة",
+    "en": "Spare heads",
+    "kw": "رؤوس"
+   },
+   {
+    "ar": "حقيبة حفظ",
+    "en": "Storage pouch",
+    "kw": "حقيبة"
+   },
+   {
+    "ar": "سيروم بشرة",
+    "en": "Serum",
+    "kw": "سيروم"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "شعر ناعم",
+    "en": "Fine hair",
+    "kw": "ناعم"
+   },
+   {
+    "ar": "شعر كثيف",
+    "en": "Thick hair",
+    "kw": "كثيف"
+   },
+   {
+    "ar": "بشرة حساسة",
+    "en": "Sensitive skin",
+    "kw": "حساسة"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "أسود",
+    "en": "Black",
+    "hex": "#1c1714"
+   },
+   {
+    "ar": "بني داكن",
+    "en": "Dark brown",
+    "hex": "#3b2a20"
+   },
+   {
+    "ar": "بني فاتح",
+    "en": "Light brown",
+    "hex": "#7a5534"
+   },
+   {
+    "ar": "أشقر عسلي",
+    "en": "Honey blonde",
+    "hex": "#c49a5c"
+   },
+   {
+    "ar": "أحمر نحاسي",
+    "en": "Copper",
+    "hex": "#9a4a2a"
+   },
+   {
+    "ar": "رمادي فضي",
+    "en": "Silver grey",
+    "hex": "#b7b5b0"
+   }
+  ],
+  "mm": [
+   70,
+   230
+  ],
+  "sizeLabel": {
+   "ar": "سشوار متوسط",
+   "en": "Mid-size hair dryer"
+  },
+  "gift": [
+   200,
+   500,
+   1200,
+   2500
+  ],
+  "photo": [
+   {
+    "ar": "اقرئي حدود الحرارة المناسبة لنوع شعرك قبل الاستخدام.",
+    "en": "Check the right heat setting for your hair."
+   },
+   {
+    "ar": "نظّفي فلتر السشوار شهرياً.",
+    "en": "Clean the dryer filter monthly."
+   },
+   {
+    "ar": "احتفظي بالفاتورة للضمان.",
+    "en": "Keep the invoice for warranty."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "طقم التصفيف: سشوار + واقي حرارة + سيروم",
+    "en": "Styling: dryer + heat protectant + serum",
+    "kw": [
+     "سشوار",
+     "واقي حرارة",
+     "سيروم"
+    ]
+   },
+   {
+    "ar": "طقم البشرة: جهاز تنظيف + غسول + مرطّب",
+    "en": "Skin: cleansing device + cleanser + moisturizer",
+    "kw": [
+     "منظف بشرة",
+     "غسول",
+     "مرطب"
+    ]
+   }
+  ],
+  "listen": "المواصفات وطريقة الاستخدام"
+ },
+ "nails": {
+  "words": [
+   "أظافر",
+   "اظافر",
+   "مناكير",
+   "طلاء",
+   "جل",
+   "اكريليك",
+   "nail"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش تفضلين؟",
+     "en": "Preference?"
+    },
+    "opts": [
+     {
+      "ar": "مناكير عادي",
+      "en": "Regular polish",
+      "kw": "طلاء"
+     },
+     {
+      "ar": "جل",
+      "en": "Gel",
+      "kw": "جل"
+     },
+     {
+      "ar": "عناية فقط",
+      "en": "Care only",
+      "kw": "زيت أظافر"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "الستايل؟",
+     "en": "Style?"
+    },
+    "opts": [
+     {
+      "ar": "نود هادئ",
+      "en": "Soft nude",
+      "kw": "نود"
+     },
+     {
+      "ar": "ألوان جريئة",
+      "en": "Bold",
+      "kw": "أحمر"
+     },
+     {
+      "ar": "لامع",
+      "en": "Shimmer",
+      "kw": "لامع"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "بيس كوت",
+    "en": "Base coat",
+    "kw": "بيس"
+   },
+   {
+    "ar": "توب كوت",
+    "en": "Top coat",
+    "kw": "توب"
+   },
+   {
+    "ar": "مزيل طلاء",
+    "en": "Remover",
+    "kw": "مزيل"
+   },
+   {
+    "ar": "زيت أظافر",
+    "en": "Cuticle oil",
+    "kw": "زيت"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "أظافر ضعيفة",
+    "en": "Weak nails",
+    "kw": "تقوية"
+   },
+   {
+    "ar": "أظافر جافة",
+    "en": "Dry cuticles",
+    "kw": "زيت"
+   },
+   {
+    "ar": "حساسية",
+    "en": "Sensitive",
+    "kw": "خالي"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "نود وردي",
+    "en": "Pink nude",
+    "hex": "#e8bfb5"
+   },
+   {
+    "ar": "أحمر",
+    "en": "Red",
+    "hex": "#b3122d"
+   },
+   {
+    "ar": "عنابي",
+    "en": "Burgundy",
+    "hex": "#5e1a2a"
+   },
+   {
+    "ar": "أبيض حليبي",
+    "en": "Milky white",
+    "hex": "#f2ece6"
+   },
+   {
+    "ar": "ذهبي لامع",
+    "en": "Gold shimmer",
+    "hex": "#d4af6a"
+   },
+   {
+    "ar": "أسود",
+    "en": "Black",
+    "hex": "#151214"
+   }
+  ],
+  "mm": [
+   30,
+   70
+  ],
+  "sizeLabel": {
+   "ar": "طلاء 15 مل",
+   "en": "15 ml polish"
+  },
+  "gift": [
+   60,
+   150,
+   300,
+   600
+  ],
+  "photo": [
+   {
+    "ar": "ابدئي دايماً بطبقة بيس عشان تحمين الظفر.",
+    "en": "Always start with a base coat."
+   },
+   {
+    "ar": "طبقتين رقيقة أفضل من طبقة سميكة.",
+    "en": "Two thin coats beat one thick."
+   },
+   {
+    "ar": "رطّبي الجلد حول الظفر يومياً بزيت.",
+    "en": "Oil cuticles daily."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "مانيكير بيتي: بيس + لون + توب",
+    "en": "Home manicure: base + color + top",
+    "kw": [
+     "بيس",
+     "طلاء",
+     "توب"
+    ]
+   },
+   {
+    "ar": "عناية الأظافر: مقوي + زيت + مبرد",
+    "en": "Nail care: strengthener + oil + file",
+    "kw": [
+     "تقوية",
+     "زيت",
+     "مبرد"
+    ]
+   }
+  ],
+  "listen": "طريقة الاستخدام"
+ },
+ "kbeauty": {
+  "words": [
+   "كوري",
+   "كورية",
+   "korean",
+   "سنتيلا",
+   "حلزون",
+   "شيت ماسك",
+   "cosrx"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش هدفك؟",
+     "en": "Your goal?"
+    },
+    "opts": [
+     {
+      "ar": "بشرة زجاجية",
+      "en": "Glass skin",
+      "kw": "ترطيب"
+     },
+     {
+      "ar": "تهدئة الحبوب",
+      "en": "Calm breakouts",
+      "kw": "سنتيلا"
+     },
+     {
+      "ar": "إشراقة",
+      "en": "Glow",
+      "kw": "رز"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "كم خطوة تبين؟",
+     "en": "How many steps?"
+    },
+    "opts": [
+     {
+      "ar": "3 خطوات",
+      "en": "3 steps",
+      "kw": "تونر"
+     },
+     {
+      "ar": "5 خطوات",
+      "en": "5 steps",
+      "kw": "اسنس"
+     },
+     {
+      "ar": "الروتين الكامل",
+      "en": "Full routine",
+      "kw": "شيت ماسك"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "زيت منظّف",
+    "en": "Cleansing oil",
+    "kw": "زيت منظف"
+   },
+   {
+    "ar": "إسنس",
+    "en": "Essence",
+    "kw": "اسنس"
+   },
+   {
+    "ar": "شيت ماسك",
+    "en": "Sheet mask",
+    "kw": "شيت ماسك"
+   },
+   {
+    "ar": "واقي كوري",
+    "en": "K-sunscreen",
+    "kw": "واقي"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "بشرة جافة",
+    "en": "Dry skin",
+    "kw": "جافة"
+   },
+   {
+    "ar": "بشرة دهنية",
+    "en": "Oily skin",
+    "kw": "دهنية"
+   },
+   {
+    "ar": "بشرة مختلطة",
+    "en": "Combination skin",
+    "kw": "مختلطة"
+   },
+   {
+    "ar": "بشرة حساسة",
+    "en": "Sensitive skin",
+    "kw": "حساسة"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "فاتح جداً",
+    "en": "Fair",
+    "hex": "#f6dcc6"
+   },
+   {
+    "ar": "فاتح",
+    "en": "Light",
+    "hex": "#e9c4a3"
+   },
+   {
+    "ar": "حنطي",
+    "en": "Medium",
+    "hex": "#d6a57c"
+   },
+   {
+    "ar": "قمحي دافئ",
+    "en": "Warm tan",
+    "hex": "#bf8a5e"
+   },
+   {
+    "ar": "أسمر",
+    "en": "Deep",
+    "hex": "#8f5f3f"
+   },
+   {
+    "ar": "داكن",
+    "en": "Rich",
+    "hex": "#5c3a26"
+   }
+  ],
+  "mm": [
+   40,
+   120
+  ],
+  "sizeLabel": {
+   "ar": "إسنس 100 مل",
+   "en": "100 ml essence"
+  },
+  "gift": [
+   80,
+   200,
+   450,
+   900
+  ],
+  "photo": [
+   {
+    "ar": "جرّبي المنتج أول مرة على جزء صغير من البشرة واتركيه 24 ساعة (اختبار الحساسية).",
+    "en": "Patch-test on a small area for 24 hours before first use."
+   },
+   {
+    "ar": "احفظي المنتجات بعيداً عن الشمس والحرارة؛ الحمّام الحار يقلّل فعالية المكوّنات.",
+    "en": "Store away from sun and heat; a hot bathroom weakens active ingredients."
+   },
+   {
+    "ar": "انتبهي لرمز العلبة المفتوحة (مثل 12M) — مدة صلاحية المنتج بعد فتحه.",
+    "en": "Check the open-jar symbol (e.g. 12M) — shelf life after opening."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "التنظيف المزدوج: زيت منظّف + غسول رغوي",
+    "en": "Double cleanse: oil + foam",
+    "kw": [
+     "زيت منظف",
+     "غسول"
+    ]
+   },
+   {
+    "ar": "البشرة الزجاجية: تونر + إسنس + كريم + واقي",
+    "en": "Glass skin: toner + essence + cream + SPF",
+    "kw": [
+     "تونر",
+     "اسنس",
+     "كريم",
+     "واقي"
+    ]
+   }
+  ],
+  "listen": "طريقة الاستخدام"
+ },
+ "mens": {
+  "words": [
+   "رجالي",
+   "رجال",
+   "لحية",
+   "حلاقة",
+   "شيفر",
+   "افترشيف",
+   "كولونيا",
+   "men"
+  ],
+  "quiz": [
+   {
+    "q": {
+     "ar": "وش تبي تهتم فيه؟",
+     "en": "Focus?"
+    },
+    "opts": [
+     {
+      "ar": "اللحية",
+      "en": "Beard",
+      "kw": "لحية"
+     },
+     {
+      "ar": "البشرة",
+      "en": "Skin",
+      "kw": "غسول رجالي"
+     },
+     {
+      "ar": "العطر",
+      "en": "Scent",
+      "kw": "عطر رجالي"
+     }
+    ]
+   },
+   {
+    "q": {
+     "ar": "نوع الحلاقة؟",
+     "en": "Shaving?"
+    },
+    "opts": [
+     {
+      "ar": "شفرة",
+      "en": "Razor",
+      "kw": "شفرة"
+     },
+     {
+      "ar": "ماكينة",
+      "en": "Electric",
+      "kw": "شيفر"
+     },
+     {
+      "ar": "ما أحلق",
+      "en": "Full beard",
+      "kw": "زيت لحية"
+     }
+    ]
+   }
+  ],
+  "kit": [
+   {
+    "ar": "زيت لحية",
+    "en": "Beard oil",
+    "kw": "زيت لحية"
+   },
+   {
+    "ar": "بلسم لحية",
+    "en": "Beard balm",
+    "kw": "بلسم لحية"
+   },
+   {
+    "ar": "غسول وجه",
+    "en": "Face wash",
+    "kw": "غسول"
+   },
+   {
+    "ar": "مرطّب",
+    "en": "Moisturizer",
+    "kw": "مرطب"
+   }
+  ],
+  "compat": [
+   {
+    "ar": "بشرة دهنية",
+    "en": "Oily skin",
+    "kw": "دهنية"
+   },
+   {
+    "ar": "بشرة جافة",
+    "en": "Dry skin",
+    "kw": "جافة"
+   },
+   {
+    "ar": "بشرة حساسة بعد الحلاقة",
+    "en": "Sensitive after shave",
+    "kw": "حساسة"
+   }
+  ],
+  "finish": [
+   {
+    "ar": "عودي",
+    "en": "Oud",
+    "hex": "#5b3a29"
+   },
+   {
+    "ar": "مسكي",
+    "en": "Musky",
+    "hex": "#d8cfc4"
+   },
+   {
+    "ar": "زهري",
+    "en": "Floral",
+    "hex": "#e6a4b4"
+   },
+   {
+    "ar": "فانيلا",
+    "en": "Vanilla",
+    "hex": "#f1dfb8"
+   },
+   {
+    "ar": "حمضي منعش",
+    "en": "Citrus",
+    "hex": "#f2c94c"
+   },
+   {
+    "ar": "خشبي",
+    "en": "Woody",
+    "hex": "#8b6b4a"
+   }
+  ],
+  "mm": [
+   50,
+   130
+  ],
+  "sizeLabel": {
+   "ar": "زيت لحية 50 مل",
+   "en": "50 ml beard oil"
+  },
+  "gift": [
+   100,
+   250,
+   500,
+   1000
+  ],
+  "photo": [
+   {
+    "ar": "زيت اللحية بعد الاستحمام على شعر رطب يتوزع أحسن.",
+    "en": "Apply beard oil after a shower on damp hair."
+   },
+   {
+    "ar": "بدّل الشفرة كل 5–7 حلاقات لتجنب الالتهاب.",
+    "en": "Change blades every 5–7 shaves."
+   },
+   {
+    "ar": "مرطّب بدون كحول بعد الحلاقة.",
+    "en": "Use an alcohol-free moisturizer after shaving."
+   }
+  ],
+  "bundle": [
+   {
+    "ar": "روتين اللحية: غسول لحية + زيت + بلسم",
+    "en": "Beard: wash + oil + balm",
+    "kw": [
+     "غسول لحية",
+     "زيت لحية",
+     "بلسم لحية"
+    ]
+   },
+   {
+    "ar": "روتين الحلاقة: جل حلاقة + شفرة + افترشيف",
+    "en": "Shave: gel + razor + aftershave",
+    "kw": [
+     "جل حلاقة",
+     "شفرة",
+     "افترشيف"
+    ]
+   }
+  ],
+  "listen": "طريقة الاستخدام"
+ }
+}

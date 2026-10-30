@@ -1,0 +1,183 @@
+/* Obsidian Cinema — original cinematic graphite/titanium/champagne layer over Raed.
+   Pure CSS, no external fonts/images. Scoped to body.oc so turning it off restores Raed. */
+body.oc{
+  --oc-bg:#0b0b0d; --oc-bg2:#141417; --oc-line:rgba(255,236,200,.14);
+  --oc-gold:#d9b779; --oc-gold2:#f3e2bd; --oc-ti:#c9ccd1; --oc-txt:#e9e6df; --oc-mut:#9a968e;
+  --oc-acc:var(--oc-gold); --oc-glow:rgba(217,183,121,.35);
+  background:radial-gradient(120% 80% at 70% -10%,var(--oc-bg3,#25211a) 0,var(--oc-bg) 55%) fixed,var(--oc-bg); color:var(--oc-txt);
+  &[data-oc-accent=titanium]{--oc-acc:#c9ccd1;--oc-glow:rgba(201,204,209,.3)}
+  &[data-oc-accent=rose]{--oc-acc:#e0a98f;--oc-glow:rgba(224,169,143,.35)}
+  &[data-oc-accent=ice]{--oc-acc:#e8b4b8;--oc-glow:rgba(232,180,184,.32)}
+  &[data-oc-accent=store]{--oc-acc:var(--color-primary);--oc-glow:color-mix(in srgb,var(--color-primary) 40%,transparent)}
+  .bg-white,.bg-gray-50,.bg-gray-100{background:transparent!important}
+  /* light-footer / light-drawer store settings would paint pale grey panels under the dark layer's light text */
+  .store-footer{color:var(--oc-txt)!important;.store-footer__inner{background:transparent!important;border-color:var(--oc-line)!important}
+    a,p,li,span,div{color:inherit}h3{color:var(--oc-gold2)}.social-link,.contact-social{border-color:var(--oc-line)!important}}
+  .mm-spn,.mm-spn.mm-spn--light,.mm-ocd__content{background:var(--oc-bg2)!important;color:var(--oc-txt)!important}
+  .mm-spn a,.mm-spn span,.mm-spn li{color:var(--oc-txt)!important}.mm-spn li:after{border-color:var(--oc-line)!important}
+  &.mm-ocd-opened :is(.oc-pk,.oc-ai,.oc-cc){display:none!important} // the drawer owns the screen while it is open
+  /* a dark store colour would vanish on the dark layer: the buy buttons always read (gold add to cart, outlined buy now) */
+  .product-form .s-button-primary,.sticky-product-bar .s-button-primary{background:linear-gradient(135deg,var(--oc-acc),var(--oc-gold2))!important;color:#111!important}
+  .s-add-product-button-mini-checkout{border:1px solid var(--oc-acc)!important;border-radius:10px;color:var(--oc-txt)!important;background:transparent!important;opacity:1!important}
+  .s-add-product-button-mini-checkout-content,.s-add-product-button-mini-checkout-content *{color:var(--oc-txt)!important;fill:currentColor}
+  /* skincare, product page: the cart bar arrives at once (no staged fade), stays compact (quantity + packs on one row), and the
+     floating buttons dock as icons inside its empty bottom corners beside the buy buttons, so they cover no page content */
+  @media (max-width:640px){&.is-sticky-product-bar .sticky-product-bar{transition-duration:.3s!important;transition-delay:0s!important;padding:.6rem .75rem calc(.6rem + env(safe-area-inset-bottom))!important;gap:.5rem!important}
+    &.is-sticky-product-bar .sticky-product-bar :is(.sticky-product-bar__quantity,salla-add-product-button){transition:none!important;transform:none!important;opacity:1!important}
+    .sticky-product-bar .sticky-product-bar__quantity{flex-wrap:nowrap;gap:.4rem;salla-quantity-input{flex:0 0 7.4rem;width:7.4rem!important}
+      .oc-packs{flex:1;flex-wrap:nowrap;overflow-x:auto;gap:.3rem;margin:0;scrollbar-width:none;button{flex:1 0 auto;padding:.35rem .5rem;font-size:.72rem;white-space:nowrap}}}
+    &.oc-lifted{padding-bottom:var(--oc-lift)!important} // the page (footer included) scrolls fully above the bar
+    /* until Salla has drawn the buy button the bar would be an empty strip: bar and docked buttons appear together */
+    &.is-sticky-product-bar .sticky-product-bar:not(:has(salla-add-product-button button)){opacity:0!important;pointer-events:none}
+    &.oc-lifted.oc-bar-wait :is(.oc-pk,.oc-ai,.oc-cc){opacity:0;pointer-events:none}
+    &.oc-lifted .sticky-product-bar salla-add-product-button{max-width:calc(100% - 7.5rem);margin-inline:auto!important}
+    &.oc-lifted :is(.oc-pk__fab,.oc-ai__fab,.oc-cc__fab){width:44px;height:44px;padding:0!important;justify-content:center;font-size:0;gap:0;border-radius:50%}
+    &.oc-lifted .oc-pk__fab::before{display:none}
+    &.oc-lifted .oc-ai__fab{display:grid;place-items:center;&::before{content:"✦";font-size:1.1rem}}
+    &.oc-lifted .oc-pk{inset-block-end:calc(.7rem + env(safe-area-inset-bottom));inset-inline-start:.75rem}
+    &.oc-lifted .oc-cc{inset-block-end:calc(.7rem + 52px + env(safe-area-inset-bottom));inset-inline-end:auto;inset-inline-start:.75rem}
+    &.oc-lifted .oc-ai{inset-block-end:calc(.7rem + env(safe-area-inset-bottom));inset-inline-end:.75rem}}
+  /* product cards on skincare: the add-to-cart label fits the narrow card (no icon, tighter type) */
+  @media (max-width:640px){.s-product-card-content-footer salla-add-product-button{min-width:0;flex:1 1 auto;i{display:none}span{font-size:.76rem;white-space:nowrap}}
+    .s-product-card-content-footer :is(.s-button-btn,button){padding-inline:.45rem!important;min-width:0}}
+  /* add to cart + buy now share one row: on skincare they stack, so neither label is cut */
+  @media (max-width:640px){.sticky-product-bar .s-add-product-button-main{flex-wrap:wrap;gap:.5rem}.sticky-product-bar .s-add-product-button-main>*{flex:1 1 100%;min-width:0;width:100%}
+    .sticky-product-bar .s-button-text{white-space:nowrap}}
+  /* the mobile sticky cart bar floats over the page: it needs a solid backdrop, or the trust/stock rings show through the quantity box */
+  @media (max-width:640px){&.is-sticky-product-bar .sticky-product-bar,.is-sticky-product-bar .sticky-product-bar{background:color-mix(in srgb,var(--oc-bg) 96%,transparent)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--oc-line);z-index:30}}
+  .text-gray-500,.text-gray-400{color:var(--oc-mut)!important}
+  .text-gray-800,.text-gray-900,h1,h2,h3{color:var(--oc-txt)}
+  .border-gray-200,.border-gray-100{border-color:var(--oc-line)!important}
+
+  /* glass header */
+  .store-header,.main-nav-container,#mainnav{background:var(--oc-hdr,rgba(18,18,21,.62))!important;backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border-bottom:1px solid var(--oc-line);color:var(--oc-txt)}
+  .top-navbar{background:var(--oc-foot,#08080a)!important;border-bottom:1px solid var(--oc-line)}
+  .main-menu a,.header-btn,.store-header a{color:var(--oc-txt)}
+  .store-footer,footer{background:var(--oc-foot,#08080a)!important;color:var(--oc-mut);border-top:1px solid var(--oc-line)}
+
+  .s-block{margin-top:3rem}
+  .oc-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;
+    h2{font-size:1.6rem;font-weight:800} p{color:var(--oc-mut)}}
+  .oc-metal{background:linear-gradient(180deg,var(--oc-gold2) 0,var(--oc-acc) 45%,#8a6a3a 70%,var(--oc-gold2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;text-shadow:0 0 30px var(--oc-glow)}
+  .oc-glass{background:linear-gradient(160deg,var(--oc-glass,rgba(255,255,255,.06)),transparent);border:1px solid var(--oc-line);border-radius:1.1rem;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .oc-chip{display:inline-flex;gap:.4rem;align-items:center;padding:.35rem .9rem;border:1px solid var(--oc-acc);border-radius:99px;color:var(--oc-gold2);font-size:.85rem;svg{width:1rem}}
+  .oc-btn{display:inline-flex;gap:.6rem;align-items:center;padding:.8rem 1.6rem;border-radius:99px;font-weight:700;color:#1a140a;background:linear-gradient(180deg,var(--oc-gold2),var(--oc-acc));box-shadow:0 8px 30px var(--oc-glow),inset 0 1px 0 #fff8;transition:transform .2s}
+  .oc-btn:hover{transform:translateY(-2px)}
+
+  /* gauges */
+  .oc-gauge{position:relative;display:grid;justify-items:center;text-align:center;gap:.1rem;min-width:5.5rem;
+    svg{width:4.2rem;height:4.2rem;transform:rotate(-90deg)}
+    circle{fill:none;stroke-width:3}
+    .t{stroke:rgba(255,255,255,.08)}
+    .v{stroke:var(--oc-acc);stroke-linecap:round;stroke-dasharray:calc(var(--v)*1) 100;filter:drop-shadow(0 0 4px var(--oc-glow));animation:oc-fill 1.4s ease-out}
+    b{position:absolute;top:1.25rem;font-size:.95rem;color:var(--oc-gold2)}
+    span{font-size:.8rem;color:var(--oc-txt)} small{font-size:.72rem;color:var(--oc-mut)}}
+  .oc-gauge--lg svg{width:5.5rem;height:5.5rem}.oc-gauge--lg b{top:1.9rem;font-size:1.1rem}
+  @keyframes oc-fill{from{stroke-dasharray:0 100}}
+
+  /* hero */
+  .oc-hero{position:relative}
+  .oc-hero__stage{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:center;padding:2.5rem 0}
+  .oc-hero__copy{display:grid;gap:1rem;justify-items:start;
+    h1{font-size:clamp(2.4rem,6vw,4.6rem);font-weight:900;line-height:1.05}
+    .oc-sub{font-size:clamp(1.1rem,2vw,1.5rem);color:var(--oc-txt)} p{color:var(--oc-mut);max-width:36rem}}
+  .oc-hero__media{display:grid;place-items:center;min-height:320px;img{max-height:420px;filter:drop-shadow(0 30px 60px #000) drop-shadow(0 0 40px var(--oc-glow))}}
+  .oc-hero__orb{position:relative;width:min(360px,80vw);aspect-ratio:1;
+    i{position:absolute;inset:0;border-radius:50%;border:1px solid var(--oc-acc);box-shadow:0 0 40px var(--oc-glow),inset 0 0 40px var(--oc-glow);transform:rotateX(72deg);animation:oc-spin 14s linear infinite}
+    i:nth-child(2){inset:12%;animation-duration:9s;animation-direction:reverse}
+    i:nth-child(3){inset:30%;transform:none;border:0;background:radial-gradient(circle at 35% 30%,#4a4a50,#0d0d10 70%);box-shadow:0 0 60px var(--oc-glow)}}
+  @keyframes oc-spin{to{transform:rotateX(72deg) rotateZ(360deg)}}
+  .oc-hero__gauges{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-around;padding:1.25rem;@extend .oc-glass;}
+  .oc-live{display:grid;gap:.2rem;padding-inline-end:1.5rem;border-inline-end:1px solid var(--oc-line);b{font-size:1.6rem}span,small{color:var(--oc-mut);font-size:.8rem}}
+
+  /* categories */
+  .oc-cats__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.9rem}
+  .oc-cat{@extend .oc-glass;display:grid;justify-items:center;gap:.6rem;padding:1.1rem .6rem;text-align:center;transition:.25s;
+    b{font-size:.9rem;color:var(--oc-txt)} &:hover{border-color:var(--oc-acc);box-shadow:0 0 0 1px var(--oc-acc),0 10px 30px var(--oc-glow)}}
+  .oc-cat__ic{width:2.4rem;height:2.4rem;color:var(--oc-acc);svg{width:100%;height:100%}}
+
+  /* hologram product cards (decorates native Raed card) */
+  custom-salla-product-card,.s-product-card-entry{position:relative;background:linear-gradient(170deg,var(--oc-surf,#1b1b1f),var(--oc-surf2,#0e0e11))!important;border:1px solid var(--oc-line)!important;border-radius:1.1rem!important;overflow:hidden;color:var(--oc-txt);transition:transform .3s,box-shadow .3s}
+  custom-salla-product-card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;
+    background:conic-gradient(from var(--oc-a,0deg),transparent 0 70%,var(--oc-acc) 80%,#e8b4b8 85%,transparent 92%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.0;transition:opacity .3s}
+  custom-salla-product-card:hover{transform:translateY(-4px);box-shadow:0 20px 50px #000a,0 0 30px var(--oc-glow)}
+  custom-salla-product-card:hover::before{opacity:1;animation:oc-holo 3s linear infinite}
+  @property --oc-a{syntax:'<angle>';initial-value:0deg;inherits:false}
+  @keyframes oc-holo{to{--oc-a:360deg}}
+  .s-product-card-content-title a,.s-product-card-content-title{color:var(--oc-txt)!important}
+  .s-product-card-price,.s-product-card-sale-price h4{color:var(--oc-gold2)!important}
+  .s-product-card-image{background:radial-gradient(circle at 50% 60%,var(--oc-bg3,#2a2a30),var(--oc-surf2,#111) 70%)!important}
+  .oc-card-intel{display:flex;gap:.6rem;align-items:center;justify-content:space-between;padding:.4rem .2rem;font-size:.72rem;color:var(--oc-mut)}
+  .oc-card-intel .oc-gauge{min-width:auto;svg{width:2.4rem;height:2.4rem}b{top:.72rem;font-size:.62rem}}
+  .oc-meter{flex:1;display:grid;gap:.25rem;i{display:block;height:4px;border-radius:9px;background:var(--oc-track,rgba(255,255,255,.08));overflow:hidden}
+    i::after{content:"";display:block;height:100%;width:var(--w);background:linear-gradient(90deg,#8a6a3a,var(--oc-acc));box-shadow:0 0 8px var(--oc-glow)}
+    &.is-low i::after{background:linear-gradient(90deg,#7a2a1a,#ff8a5c)}}
+  .oc-badge{position:absolute;top:.7rem;inset-inline-start:.7rem;z-index:2;padding:.15rem .6rem;border-radius:99px;font-size:.7rem;background:rgba(0,0,0,.6);border:1px solid var(--oc-acc);color:var(--oc-gold2)}
+
+  /* PDP intel */
+  .oc-intel{@extend .oc-glass;display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;padding:1rem;margin:.75rem 0 1rem}
+  .oc-bars{flex:1;min-width:200px;display:grid;gap:.55rem}
+  .oc-bar{display:grid;grid-template-columns:7rem 1fr auto;gap:.6rem;align-items:center;font-size:.8rem;
+    i{height:5px;border-radius:9px;background:var(--oc-track,rgba(255,255,255,.08));position:relative;overflow:hidden}
+    i::after{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:var(--w);background:linear-gradient(90deg,#8a6a3a,var(--oc-acc))}
+    em{font-style:normal;color:var(--oc-gold2)}}
+  .oc-packs{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0;button{padding:.4rem .9rem;border-radius:.7rem;border:1px solid var(--oc-line);color:var(--oc-txt);font-size:.85rem}
+    button.is-on,button:hover{border-color:var(--oc-acc);color:var(--oc-gold2);box-shadow:0 0 12px var(--oc-glow)}}
+
+  /* trust grid */
+  .oc-trust__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+  .oc-trust__card{display:grid;justify-items:center;text-align:center;gap:.5rem;padding:1.5rem;h3{font-weight:700}p{color:var(--oc-mut);font-size:.85rem}}
+
+  /* form controls on dark */
+  input,select,textarea{background-color:var(--oc-input,#121215);color:var(--oc-txt);border-color:var(--oc-line)}
+
+  @media (max-width:768px){.oc-hero__stage{grid-template-columns:1fr}.oc-live{border:0;padding:0}}
+}
+/* film grain — inline SVG noise data URI (no external asset) */
+body.oc.oc-grain::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:9999;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:oc-grain 1.2s steps(6) infinite}
+@keyframes oc-grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
+@media (prefers-reduced-motion:reduce){body.oc *,body.oc::after{animation:none!important;transition:none!important}}
+
+/* per-vertical skin: accent follows vertical when accent=champagne default */
+body.oc[data-oc-accent=champagne][data-oc-v]{--oc-acc:var(--oc-v-acc,#d9b779);--oc-glow:color-mix(in srgb,var(--oc-v-acc,#d9b779) 38%,transparent)}
+body.oc[data-oc-v=haircare] .oc-hero__orb i{border-style:dashed}
+body.oc[data-oc-v=gifts] .oc-cat,body.oc[data-oc-v=gifts] custom-salla-product-card{border-radius:1.6rem!important}
+body.oc[data-oc-v=skincare] .oc-hero__stage{grid-template-columns:1fr 1.2fr}
+.oc-hero__art{width:min(260px,60vw);color:var(--oc-acc);filter:drop-shadow(0 0 24px var(--oc-glow));position:absolute;inset:0;margin:auto;height:fit-content}
+[data-oc-only]{display:none}
+@each $v in beauty,skincare,perfume,makeup,haircare,bodycare,gifts,devices,nails,kbeauty,mens{body[data-oc-v=#{$v}] [data-oc-only~=#{$v}]{display:block}}
+
+/* WHITE preview picker system (merchant-facing) */
+.oc-pk{position:fixed;z-index:10000;inset-block-end:calc(1.2rem + var(--oc-lift,0px));inset-inline-start:1.2rem;font-family:inherit;color:#111}
+.oc-pk__fab{display:flex;gap:.5rem;align-items:center;padding:.7rem 1.1rem;border-radius:99px;background:#fff;color:#111;font-weight:700;box-shadow:0 10px 40px rgba(0,0,0,.35);border:1px solid #e7e7ea;span{width:1.3rem;display:inline-flex}svg{width:100%}}
+.oc-pk__sheet{display:none;position:absolute;inset-block-end:3.6rem;inset-inline-start:0;width:min(560px,92vw);background:#fff;border-radius:1.2rem;padding:1.1rem;box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid #ececf0;
+  header{display:grid;gap:.2rem;margin-bottom:.8rem;b{font-size:1.05rem}small{color:#6b6b73}}}
+.oc-pk.is-open .oc-pk__sheet{display:block}
+.oc-pk__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.55rem;
+  button{display:grid;justify-items:center;gap:.25rem;padding:.75rem .4rem;border-radius:.9rem;background:#f7f7f9;border:1.5px solid transparent;color:#111;transition:.2s}
+  button:hover{background:#fff;border-color:#ddd}
+  button.is-on{background:#fff;border-color:var(--a);box-shadow:0 0 0 3px color-mix(in srgb,var(--a) 25%,transparent)}
+  i{width:2rem;height:2rem;color:#222}svg{width:100%;height:100%}b{font-size:.85rem}small{font-size:.7rem;color:#8a8a92}}
+@import "./v11";
+@import "./v12";
+@import "./v13";
+
+/* Blisk · smart beauty tools (ingredient checker, refill estimate, refill reminder) */
+body.oc{
+  .bk-ing{display:grid;gap:.7rem;padding:1rem 1.1rem;margin:.6rem 0 1rem;font-size:.85rem;
+    header{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;b{color:var(--oc-gold2)}small{color:var(--oc-mut);font-size:.72rem}}}
+  .bk-row{display:grid;grid-template-columns:7.5rem 1fr;gap:.6rem;align-items:start;>span{color:var(--oc-mut);padding-top:.25rem}>div{display:flex;flex-wrap:wrap;gap:.35rem}}
+  .bk-chip{display:inline-flex;padding:.25rem .6rem;border-radius:99px;border:1px solid var(--oc-line);font-size:.75rem;color:var(--oc-txt)}
+  .bk-chip.is-act{border-color:var(--oc-acc);color:var(--oc-gold2)} .bk-chip.is-ok{background:rgba(120,190,150,.12);border-color:rgba(120,190,150,.4)}
+  .bk-chip.is-no{background:rgba(220,110,110,.12);border-color:rgba(220,110,110,.45)} .bk-chip.is-care{background:rgba(217,183,121,.12)}
+  .bk-refill{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding-top:.6rem;border-top:1px solid var(--oc-line);
+    i{width:.6rem;height:.6rem;border-radius:50%;background:var(--oc-acc);box-shadow:0 0 0 4px var(--oc-glow)} b{color:var(--oc-gold2);font-size:1rem} small{color:var(--oc-mut);font-size:.7rem;flex-basis:100%}}
+  .bk-remind{display:flex;align-items:center;gap:.9rem;max-width:min(1200px,calc(100% - 2rem));margin:1rem auto;padding:.8rem 1rem;position:relative;
+    img{width:56px;height:56px;border-radius:.8rem;object-fit:cover} div{flex:1;display:grid;gap:.15rem} b{font-size:.9rem} small{color:var(--oc-mut);font-size:.72rem}
+    .bk-btn{padding:.55rem 1rem;border-radius:99px;background:linear-gradient(135deg,var(--oc-acc),var(--oc-gold2));color:#1a1410;font-weight:700;font-size:.8rem;white-space:nowrap}
+    .bk-x{width:2rem;height:2rem;border-radius:50%;color:var(--oc-mut);font-size:1.2rem;line-height:1}}
+  @media (max-width:640px){.bk-row{grid-template-columns:1fr}.bk-remind{flex-wrap:wrap}}
+}

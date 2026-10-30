@@ -1,0 +1,4 @@
+{# Smart sections: JS reads the merchant's real categories/menus/products and renders one section per category. #}
+{% if theme.settings.get('oc_smart_sections', true) is not same as(false) %}
+<div class="oc-smart-host" data-oc-smart data-max="{{ component.max ?: 15 }}" data-limit="{{ component.limit ?: 8 }}" data-testid="oc-smart"></div>
+{% endif %}

@@ -1,0 +1,16 @@
+{# Blisk · Launch / drop countdown with 6–12 teaser images. Date format: 2026-12-01 20:00 (store local time). #}
+{% set list = component.teasers ?: [] %}{% set have = list|length %}
+{% set demo = ['skincare-featured','skincare-bestsellers','perfume-featured','bodycare-featured','haircare-featured','makeup-featured'] %}
+<section component-id="{{ componentId }}" class="s-block oc-launch container" data-oc-sec="launch" data-date="{{ component.date }}" data-testid="oc-launch">
+  <div class="oc-launch__reel" aria-hidden="true">
+    {% for s in list %}<img src="{{ s.image }}" alt="" loading="lazy">{% endfor %}
+    {% if have < 6 %}{% for i in have..5 %}<img data-oc-demo="img" data-oc-fill src="{{ ('images/oc/' ~ demo[i] ~ '.webp')|asset }}" alt="" loading="lazy">{% endfor %}{% endif %}
+  </div>
+  <div class="oc-launch__copy" data-oc-reveal>
+    <span class="oc-chip"><span class="oc-dot"></span>{{ component.kicker ?: trans('oc.launch_kicker') }}</span>
+    <h2 class="oc-metal">{{ component.title ?: trans('oc.launch_title') }}</h2>
+    {% if component.subtitle %}<p>{{ component.subtitle }}</p>{% endif %}
+    <div class="oc-cd" data-oc-cd></div>
+    {% if component.url %}<a class="oc-btn" href="{{ component.url }}">{{ component.cta ?: trans('oc.notify') }}</a>{% endif %}
+  </div>
+</section>

@@ -1,0 +1,87 @@
+import json
+def o(ar,en,**k): d={'ar':ar,'en':en}; d.update(k); return d
+SKIN=[o('بشرة جافة','Dry skin',kw='جافة'),o('بشرة دهنية','Oily skin',kw='دهنية'),o('بشرة مختلطة','Combination skin',kw='مختلطة'),o('بشرة حساسة','Sensitive skin',kw='حساسة')]
+SHADES=[o('فاتح جداً','Fair',hex='#f6dcc6'),o('فاتح','Light',hex='#e9c4a3'),o('حنطي','Medium',hex='#d6a57c'),o('قمحي دافئ','Warm tan',hex='#bf8a5e'),o('أسمر','Deep',hex='#8f5f3f'),o('داكن','Rich',hex='#5c3a26')]
+LIPS=[o('نود','Nude',hex='#c99a86'),o('وردي','Pink',hex='#d9798a'),o('أحمر كلاسيكي','Classic red',hex='#a3202c'),o('توتي','Berry',hex='#7a2a45'),o('مرجاني','Coral',hex='#e07a5f'),o('بني دافئ','Warm brown',hex='#7d4a35')]
+SCENTS=[o('عودي','Oud',hex='#5b3a29'),o('مسكي','Musky',hex='#d8cfc4'),o('زهري','Floral',hex='#e6a4b4'),o('فانيلا','Vanilla',hex='#f1dfb8'),o('حمضي منعش','Citrus',hex='#f2c94c'),o('خشبي','Woody',hex='#8b6b4a')]
+HAIR=[o('أسود','Black',hex='#1c1714'),o('بني داكن','Dark brown',hex='#3b2a20'),o('بني فاتح','Light brown',hex='#7a5534'),o('أشقر عسلي','Honey blonde',hex='#c49a5c'),o('أحمر نحاسي','Copper',hex='#9a4a2a'),o('رمادي فضي','Silver grey',hex='#b7b5b0')]
+NAILS=[o('نود وردي','Pink nude',hex='#e8bfb5'),o('أحمر','Red',hex='#b3122d'),o('عنابي','Burgundy',hex='#5e1a2a'),o('أبيض حليبي','Milky white',hex='#f2ece6'),o('ذهبي لامع','Gold shimmer',hex='#d4af6a'),o('أسود','Black',hex='#151214')]
+TIPS_CARE=[o('جرّبي المنتج أول مرة على جزء صغير من البشرة واتركيه 24 ساعة (اختبار الحساسية).','Patch-test on a small area for 24 hours before first use.'),
+ o('احفظي المنتجات بعيداً عن الشمس والحرارة؛ الحمّام الحار يقلّل فعالية المكوّنات.','Store away from sun and heat; a hot bathroom weakens active ingredients.'),
+ o('انتبهي لرمز العلبة المفتوحة (مثل 12M) — مدة صلاحية المنتج بعد فتحه.','Check the open-jar symbol (e.g. 12M) — shelf life after opening.')]
+def V(words,quiz,kit,compat,finish,mm,size,gift,photo,bundle,listen='طريقة الاستخدام'):
+  return dict(words=words,quiz=quiz,kit=kit,compat=compat,finish=finish,mm=mm,sizeLabel=size,gift=gift,photo=photo,bundle=bundle,listen=listen)
+Q=lambda q,qe,opts: {'q':{'ar':q,'en':qe},'opts':opts}
+D={
+'beauty':V(['تجميل','عناية','مكياج','عطر','بشرة','شعر'],
+ [Q('وش تبين تهتمين فيه؟','What do you want to focus on?',[o('بشرتي','My skin',kw='بشرة'),o('إطلالتي','My look',kw='مكياج'),o('عطري','My scent',kw='عطر')]),
+  Q('ميزانيتك؟','Budget?',[o('اقتصادي','Value',kw='ميني'),o('متوسط','Mid',kw='مجموعة'),o('فاخر','Luxury',kw='فاخر')])],
+ [o('سيروم','Serum',kw='سيروم'),o('مرطّب','Moisturizer',kw='مرطب'),o('واقي شمس','Sunscreen',kw='واقي'),o('عطر','Perfume',kw='عطر')],SKIN,SHADES,[45,110],o('عبوة 50 مل','50 ml bottle'),[150,300,600,1200],TIPS_CARE,
+ [o('روتين صباحي: منظّف + سيروم + واقي','Morning: cleanser + serum + SPF',kw=['منظف','سيروم','واقي']),o('إطلالة يومية: كريم أساس + ماسكارا + أحمر شفاه','Everyday look: base + mascara + lipstick',kw=['فاونديشن','ماسكارا','احمر شفاه'])]),
+'skincare':V(['سيروم','كريم','مرطب','غسول','تونر','واقي','بشرة','ريتينول','نياسيناميد'],
+ [Q('وش أكثر شي يضايقك في بشرتك؟','What bothers your skin most?',[o('جفاف','Dryness',kw='ترطيب'),o('حبوب ومسام','Acne & pores',kw='نياسيناميد'),o('تصبغات وبهتان','Dark spots & dullness',kw='فيتامين سي')]),
+  Q('وش تبين تضيفين لروتينك؟','What do you want to add?',[o('ترطيب عميق','Deep hydration',kw='هيالورونيك'),o('مضاد للتجاعيد','Anti-aging',kw='ريتينول'),o('حماية من الشمس','Sun protection',kw='واقي')])],
+ [o('منظّف لطيف','Gentle cleanser',kw='غسول'),o('تونر','Toner',kw='تونر'),o('سيروم','Serum',kw='سيروم'),o('مرطّب','Moisturizer',kw='مرطب'),o('واقي شمس','Sunscreen',kw='واقي')],SKIN,SHADES,[38,105],o('سيروم 30 مل','30 ml serum'),[100,250,500,900],TIPS_CARE,
+ [o('روتين البشرة الجافة: غسول كريمي + هيالورونيك + مرطّب','Dry skin: cream cleanser + hyaluronic + moisturizer',kw=['غسول','هيالورونيك','مرطب']),o('روتين البشرة الدهنية: جل منظّف + نياسيناميد + واقي خفيف','Oily skin: gel cleanser + niacinamide + light SPF',kw=['جل','نياسيناميد','واقي'])]),
+'makeup':V(['مكياج','فاونديشن','كونسيلر','روج','احمر شفاه','ماسكارا','ظلال','بلاشر','هايلايتر','برايمر'],
+ [Q('وش الإطلالة اللي تبينها؟','Which look?',[o('طبيعية يومية','Natural everyday',kw='تنت'),o('سهرة','Evening glam',kw='ظلال'),o('عروس','Bridal',kw='ثابت')]),
+  Q('وش تحبين في كريم الأساس؟','Foundation finish?',[o('خفيف','Light',kw='تنت'),o('مطفي','Matte',kw='مطفي'),o('مضيء','Dewy',kw='مضيء')])],
+ [o('برايمر','Primer',kw='برايمر'),o('كونسيلر','Concealer',kw='كونسيلر'),o('بودرة تثبيت','Setting powder',kw='بودرة'),o('سبراي تثبيت','Setting spray',kw='مثبت')],SKIN,SHADES+LIPS,[22,85],o('أحمر شفاه / فاونديشن 30 مل','Lipstick / 30 ml foundation'),[100,250,500,1000],
+ [o('نظّفي الفرش أسبوعياً بماء دافئ وصابون لطيف لتجنّب البكتيريا.','Wash brushes weekly with warm water and gentle soap.'),o('الماسكارا صلاحيتها 3 أشهر بعد الفتح.','Mascara lasts 3 months after opening.'),o('جرّبي درجة الفاونديشن على خط الفك في ضوء النهار.','Test foundation shade on the jawline in daylight.')],
+ [o('إطلالة يومية: تنت + ماسكارا + بلسم شفاه','Everyday: tint + mascara + lip balm',kw=['تنت','ماسكارا','بلسم']),o('إطلالة سهرة: برايمر + ظلال + أحمر شفاه ثابت','Evening: primer + eyeshadow + long-wear lipstick',kw=['برايمر','ظلال','احمر شفاه'])],'طريقة التطبيق'),
+'perfume':V(['عطر','عطور','عود','مسك','بخور','دهن','perfume','oud'],
+ [Q('وش الرائحة اللي تحبينها؟','Which scent family?',[o('عودي شرقي','Oriental oud',kw='عود'),o('زهري ناعم','Soft floral',kw='ورد'),o('منعش','Fresh',kw='منعش')]),
+  Q('متى تستخدمينه؟','When will you wear it?',[o('يومي','Daily',kw='خفيف'),o('مناسبات','Occasions',kw='فاخر'),o('هدية','Gift',kw='هدية')])],
+ [o('بخاخ شعر','Hair mist',kw='معطر شعر'),o('لوشن بنفس العطر','Matching lotion',kw='لوشن'),o('بخور','Bakhoor',kw='بخور'),o('دهن عود','Oud oil',kw='دهن')],
+ [o('رجالي','For him',kw='رجالي'),o('نسائي','For her',kw='نسائي'),o('للجنسين','Unisex',kw='للجنسين')],SCENTS,[52,98],o('عطر 100 مل','100 ml perfume'),[150,350,700,1500],
+ [o('رشّي العطر على نقاط النبض (المعصم وخلف الأذن) ولا تفركيه.','Spray on pulse points and don’t rub.'),o('احفظي العطر بعيداً عن الضوء والحرارة لتحافظي على رائحته.','Keep perfume away from light and heat.'),o('بخّة على الملابس تطوّل ثبات الرائحة.','A spritz on clothes makes it last longer.')],
+ [o('طقم فاخر: عطر + لوشن + بخاخ شعر','Luxury set: perfume + lotion + hair mist',kw=['عطر','لوشن','معطر شعر']),o('طقم شرقي: عطر عود + دهن + بخور','Oriental set: oud perfume + oil + bakhoor',kw=['عود','دهن','بخور'])],'المكوّنات والنوتات'),
+'haircare':V(['شعر','شامبو','بلسم','زيت شعر','ماسك شعر','كيراتين','صبغة'],
+ [Q('وش مشكلة شعرك؟','Your hair concern?',[o('تساقط','Hair fall',kw='تساقط'),o('جفاف وتقصف','Dryness & split ends',kw='ترطيب'),o('هيشان','Frizz',kw='كيراتين')]),
+  Q('نوع شعرك؟','Hair type?',[o('ناعم','Straight',kw='ناعم'),o('مموج','Wavy',kw='مموج'),o('كيرلي','Curly',kw='كيرلي')])],
+ [o('شامبو','Shampoo',kw='شامبو'),o('بلسم','Conditioner',kw='بلسم'),o('ماسك','Hair mask',kw='ماسك'),o('زيت أطراف','Hair oil',kw='زيت شعر')],
+ [o('شعر جاف','Dry hair',kw='جاف'),o('شعر دهني','Oily scalp',kw='دهني'),o('شعر مصبوغ','Color-treated',kw='مصبوغ')],HAIR,[55,180],o('شامبو 400 مل','400 ml shampoo'),[100,250,500,1000],
+ [o('اغسلي بماء فاتر واختمي بماء بارد للمعان.','Wash with lukewarm water, finish cool for shine.'),o('استخدمي واقي حرارة قبل السشوار أو المكواة.','Use heat protectant before styling.'),o('الماسك مرة إلى مرتين أسبوعياً يكفي.','A mask once or twice a week is enough.')],
+ [o('روتين الترطيب: شامبو + بلسم + زيت أطراف','Hydration: shampoo + conditioner + oil',kw=['شامبو','بلسم','زيت شعر']),o('روتين التساقط: شامبو مقوي + سيروم فروة','Hair fall: strengthening shampoo + scalp serum',kw=['شامبو','سيروم'])]),
+'bodycare':V(['جسم','لوشن','زبدة','مقشر','شاور','مزيل عرق','زيت جسم','صابون'],
+ [Q('وش تحتاج بشرة جسمك؟','What does your body skin need?',[o('ترطيب','Hydration',kw='لوشن'),o('تقشير ونعومة','Exfoliation',kw='مقشر'),o('رائحة تدوم','Lasting scent',kw='معطر')]),
+  Q('الرائحة؟','Scent?',[o('فانيلا','Vanilla',kw='فانيلا'),o('ورد','Rose',kw='ورد'),o('بدون رائحة','Unscented',kw='بدون عطر')])],
+ [o('شاور جل','Shower gel',kw='شاور'),o('مقشر','Scrub',kw='مقشر'),o('لوشن','Lotion',kw='لوشن'),o('بخاخ معطر','Body mist',kw='معطر')],SKIN,SCENTS,[60,170],o('لوشن 250 مل','250 ml lotion'),[80,200,400,800],
+ [o('طبّقي اللوشن والجسم رطب بعد الاستحمام مباشرة.','Apply lotion on damp skin right after a shower.'),o('المقشر مرة أو مرتين أسبوعياً فقط.','Exfoliate once or twice a week only.'),o('احفظي الزبدة بمكان بارد حتى ما تذوب.','Keep body butters cool.')],
+ [o('روتين النعومة: مقشر + شاور جل + زبدة','Smooth skin: scrub + shower gel + butter',kw=['مقشر','شاور','زبدة']),o('طقم الرائحة: شاور جل + لوشن + بخاخ بنفس العطر','Scent layering: gel + lotion + mist',kw=['شاور','لوشن','معطر'])]),
+'gifts':V(['هدية','هدايا','مجموعة','طقم','بوكس','set','gift'],
+ [Q('لمن الهدية؟','Who is it for?',[o('لها','For her',kw='نسائي'),o('له','For him',kw='رجالي'),o('للعروس','For a bride',kw='عروس')]),
+  Q('المناسبة؟','Occasion?',[o('عيد','Eid',kw='عيد'),o('تخرج','Graduation',kw='هدية'),o('بدون مناسبة','Just because',kw='مجموعة')])],
+ [o('بطاقة إهداء','Gift card',kw='بطاقة'),o('تغليف فاخر','Gift wrap',kw='تغليف'),o('شمعة معطرة','Scented candle',kw='شمعة'),o('ميني عطر','Mini perfume',kw='ميني')],
+ [o('لها','For her',kw='نسائي'),o('له','For him',kw='رجالي'),o('للعائلة','For family',kw='عائلي')],SCENTS,[220,160],o('صندوق هدية متوسط','Medium gift box'),[150,350,700,1500],
+ [o('اختاري منتجات بدون ألوان لو ما تعرفين درجة بشرتها.','Pick shade-free products if unsure of her shade.'),o('أضيفي رسالة شخصية — تفرق كثير.','Add a personal note — it matters.'),o('تأكدي من موعد التوصيل قبل المناسبة.','Check delivery date before the occasion.')],
+ [o('هدية فاخرة: عطر + لوشن + شمعة','Luxury: perfume + lotion + candle',kw=['عطر','لوشن','شمعة']),o('هدية عناية: سيروم + ماسك + مرطّب','Care: serum + mask + moisturizer',kw=['سيروم','ماسك','مرطب'])]),
+'devices':V(['جهاز','سشوار','مكواة','فير','ليزر','منظف بشرة','ديرما','led','ماساج'],
+ [Q('وش تبين يسوي الجهاز؟','What should it do?',[o('تصفيف الشعر','Hair styling',kw='سشوار'),o('العناية بالبشرة','Skincare',kw='منظف بشرة'),o('إزالة الشعر','Hair removal',kw='ليزر')]),
+  Q('الاستخدام؟','Usage?',[o('يومي','Daily',kw='يومي'),o('أسبوعي','Weekly',kw='أسبوعي'),o('سفر','Travel',kw='سفر')])],
+ [o('واقي حرارة','Heat protectant',kw='واقي حرارة'),o('رؤوس بديلة','Spare heads',kw='رؤوس'),o('حقيبة حفظ','Storage pouch',kw='حقيبة'),o('سيروم بشرة','Serum',kw='سيروم')],
+ [o('شعر ناعم','Fine hair',kw='ناعم'),o('شعر كثيف','Thick hair',kw='كثيف'),o('بشرة حساسة','Sensitive skin',kw='حساسة')],HAIR,[70,230],o('سشوار متوسط','Mid-size hair dryer'),[200,500,1200,2500],
+ [o('اقرئي حدود الحرارة المناسبة لنوع شعرك قبل الاستخدام.','Check the right heat setting for your hair.'),o('نظّفي فلتر السشوار شهرياً.','Clean the dryer filter monthly.'),o('احتفظي بالفاتورة للضمان.','Keep the invoice for warranty.')],
+ [o('طقم التصفيف: سشوار + واقي حرارة + سيروم','Styling: dryer + heat protectant + serum',kw=['سشوار','واقي حرارة','سيروم']),o('طقم البشرة: جهاز تنظيف + غسول + مرطّب','Skin: cleansing device + cleanser + moisturizer',kw=['منظف بشرة','غسول','مرطب'])],'المواصفات وطريقة الاستخدام'),
+'nails':V(['أظافر','اظافر','مناكير','طلاء','جل','اكريليك','nail'],
+ [Q('وش تفضلين؟','Preference?',[o('مناكير عادي','Regular polish',kw='طلاء'),o('جل','Gel',kw='جل'),o('عناية فقط','Care only',kw='زيت أظافر')]),
+  Q('الستايل؟','Style?',[o('نود هادئ','Soft nude',kw='نود'),o('ألوان جريئة','Bold',kw='أحمر'),o('لامع','Shimmer',kw='لامع')])],
+ [o('بيس كوت','Base coat',kw='بيس'),o('توب كوت','Top coat',kw='توب'),o('مزيل طلاء','Remover',kw='مزيل'),o('زيت أظافر','Cuticle oil',kw='زيت')],
+ [o('أظافر ضعيفة','Weak nails',kw='تقوية'),o('أظافر جافة','Dry cuticles',kw='زيت'),o('حساسية','Sensitive',kw='خالي')],NAILS,[30,70],o('طلاء 15 مل','15 ml polish'),[60,150,300,600],
+ [o('ابدئي دايماً بطبقة بيس عشان تحمين الظفر.','Always start with a base coat.'),o('طبقتين رقيقة أفضل من طبقة سميكة.','Two thin coats beat one thick.'),o('رطّبي الجلد حول الظفر يومياً بزيت.','Oil cuticles daily.')],
+ [o('مانيكير بيتي: بيس + لون + توب','Home manicure: base + color + top',kw=['بيس','طلاء','توب']),o('عناية الأظافر: مقوي + زيت + مبرد','Nail care: strengthener + oil + file',kw=['تقوية','زيت','مبرد'])]),
+'kbeauty':V(['كوري','كورية','korean','سنتيلا','حلزون','شيت ماسك','cosrx'],
+ [Q('وش هدفك؟','Your goal?',[o('بشرة زجاجية','Glass skin',kw='ترطيب'),o('تهدئة الحبوب','Calm breakouts',kw='سنتيلا'),o('إشراقة','Glow',kw='رز')]),
+  Q('كم خطوة تبين؟','How many steps?',[o('3 خطوات','3 steps',kw='تونر'),o('5 خطوات','5 steps',kw='اسنس'),o('الروتين الكامل','Full routine',kw='شيت ماسك')])],
+ [o('زيت منظّف','Cleansing oil',kw='زيت منظف'),o('إسنس','Essence',kw='اسنس'),o('شيت ماسك','Sheet mask',kw='شيت ماسك'),o('واقي كوري','K-sunscreen',kw='واقي')],SKIN,SHADES,[40,120],o('إسنس 100 مل','100 ml essence'),[80,200,450,900],TIPS_CARE,
+ [o('التنظيف المزدوج: زيت منظّف + غسول رغوي','Double cleanse: oil + foam',kw=['زيت منظف','غسول']),o('البشرة الزجاجية: تونر + إسنس + كريم + واقي','Glass skin: toner + essence + cream + SPF',kw=['تونر','اسنس','كريم','واقي'])]),
+'mens':V(['رجالي','رجال','لحية','حلاقة','شيفر','افترشيف','كولونيا','men'],
+ [Q('وش تبي تهتم فيه؟','Focus?',[o('اللحية','Beard',kw='لحية'),o('البشرة','Skin',kw='غسول رجالي'),o('العطر','Scent',kw='عطر رجالي')]),
+  Q('نوع الحلاقة؟','Shaving?',[o('شفرة','Razor',kw='شفرة'),o('ماكينة','Electric',kw='شيفر'),o('ما أحلق','Full beard',kw='زيت لحية')])],
+ [o('زيت لحية','Beard oil',kw='زيت لحية'),o('بلسم لحية','Beard balm',kw='بلسم لحية'),o('غسول وجه','Face wash',kw='غسول'),o('مرطّب','Moisturizer',kw='مرطب')],
+ [o('بشرة دهنية','Oily skin',kw='دهنية'),o('بشرة جافة','Dry skin',kw='جافة'),o('بشرة حساسة بعد الحلاقة','Sensitive after shave',kw='حساسة')],SCENTS,[50,130],o('زيت لحية 50 مل','50 ml beard oil'),[100,250,500,1000],
+ [o('زيت اللحية بعد الاستحمام على شعر رطب يتوزع أحسن.','Apply beard oil after a shower on damp hair.'),o('بدّل الشفرة كل 5–7 حلاقات لتجنب الالتهاب.','Change blades every 5–7 shaves.'),o('مرطّب بدون كحول بعد الحلاقة.','Use an alcohol-free moisturizer after shaving.')],
+ [o('روتين اللحية: غسول لحية + زيت + بلسم','Beard: wash + oil + balm',kw=['غسول لحية','زيت لحية','بلسم لحية']),o('روتين الحلاقة: جل حلاقة + شفرة + افترشيف','Shave: gel + razor + aftershave',kw=['جل حلاقة','شفرة','افترشيف'])]),
+}
+json.dump(D,open('beauty-data.json','w'),ensure_ascii=False,indent=1)
+print(len(D))

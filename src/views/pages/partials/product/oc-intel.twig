@@ -1,0 +1,27 @@
+{# Obsidian Cinema · PDP intelligence panel. Uses ONLY real Salla data (product.rating, product.quantity, sold_quantity). Replaces stars; falls back to native when oc_smart_ratings is off. #}
+{% set stars = product.rating.stars ?? 0 %}
+{% set count = product.rating.count ?? 0 %}
+{% set trust = stars ? (stars * 20)|round : 0 %}
+{% set conf = count >= 50 ? 'high' : (count >= 10 ? 'mid' : 'early') %}
+{% set q = product.quantity %}
+{% set unlimited = product.quantity is null or not product.can_show_remained_quantity %}
+{% set stock = product.is_out_of_stock ? 0 : (unlimited ? 100 : (q >= 50 ? 95 : (q >= 20 ? 75 : (q >= 6 ? 45 : 18)))) %}
+<div class="oc-intel" data-testid="oc-intel">
+  <div class="oc-gauge" style="--v:{{ trust }}" aria-label="{{ trans('oc.trust') }} {{ trust }}%">
+    <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.9"/><circle class="v" cx="18" cy="18" r="15.9" pathLength="100"/></svg>
+    <b>{{ trust ? trust ~ '%' : '—' }}</b>
+    <span>{{ trans('oc.trust') }}</span>
+    <small>{{ trust >= 90 ? trans('oc.v_exceptional') : (trust >= 80 ? trans('oc.v_high') : (trust >= 60 ? trans('oc.v_good') : (trust ? trans('oc.v_mixed') : trans('oc.v_new')))) }}</small>
+  </div>
+  <div class="oc-gauge" style="--v:{{ stock }}" aria-label="{{ trans('oc.stock') }}">
+    <svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.9"/><circle class="v" cx="18" cy="18" r="15.9" pathLength="100"/></svg>
+    <b>{{ stock }}%</b>
+    <span>{{ trans('oc.stock') }}</span>
+    <small>{{ stock == 0 ? trans('oc.s_out') : (stock >= 90 ? trans('oc.s_confident') : (stock >= 70 ? trans('oc.s_good') : (stock >= 40 ? trans('oc.s_low') : trans('oc.s_last')))) }}</small>
+  </div>
+  <div class="oc-bars">
+    <div class="oc-bar"><span>{{ trans('oc.confidence') }}</span><i style="--w:{{ conf == 'high' ? 96 : (conf == 'mid' ? 64 : 30) }}%"></i><em>{{ trans('oc.c_' ~ conf) }}</em></div>
+    <div class="oc-bar"><span>{{ trans('oc.demand') }}</span><i style="--w:{{ product.sold_quantity ? (product.sold_quantity > 100 ? 95 : (product.sold_quantity > 20 ? 70 : 40)) : 15 }}%"></i><em>{{ product.sold_quantity > 20 ? trans('oc.trending') : trans('oc.steady') }}</em></div>
+    {% if product.is_on_sale %}<div class="oc-bar oc-bar--deal"><span>{{ trans('oc.deal') }}</span><i style="--w:88%"></i><em>{{ trans('oc.deal_live') }}</em></div>{% endif %}
+  </div>
+</div>

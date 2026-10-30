@@ -1,0 +1,8 @@
+{# Obsidian Cinema · hologram product grid. Native salla-products-list (cart/wishlist/options untouched); cards decorated by obsidian.js. #}
+<section component-id="{{ componentId }}" class="s-block oc-products container" data-testid="oc-products">
+  <header class="oc-head" data-k="OBSIDIAN"><h2 class="oc-metal">{{ component.title ?: trans('oc.featured') }}</h2>{% if component.subtitle %}<p>{{ component.subtitle }}</p>{% endif %}</header>
+  {% set src = component.products|length ? 'selected' : (component.category|length ? 'categories' : (component.source ?: 'latest')) %}
+  <salla-products-list source="{{ src }}"
+    {% if component.products|length %}source-value="[{{ component.products|map(p => p.id)|join(',') }}]"{% elseif component.category|length %}source-value="[{{ component.category|map(c => c.id)|join(',') }}]"{% endif %}
+    limit="{{ component.limit ?: 8 }}"></salla-products-list>
+</section>

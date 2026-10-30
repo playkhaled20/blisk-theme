@@ -1,0 +1,119 @@
+{
+  "blocks": {
+    "header": {
+      "cart": "Cart"
+    },
+    "appBanner": {
+      "download_now": "download now"
+    }
+  },
+  "pages": {
+    "cart": {
+      "cart_options": "Cart Options"
+    },
+    "products": {
+      "barcode": "Barcode"
+    },
+    "order": {
+      "can_edit_or_delete_your_review_within": "You can edit or delete your review within",
+      "edit_period_ended": "The period to edit the review has ended",
+      "delete_period_ended": "The period to delete the review has ended",
+      "days_since_added": "days since it was added",
+      "option_name": "Option name",
+      "option_content": "Content"
+    },
+    "thank_you": {
+      "view_invoice": "View invoice",
+      "contact_us": "Got a question? We are happy to hear from you",
+      "cashback": "Cashback",
+      "loyalty_points": "Loyalty points",
+      "gifts_title": "Gifts you cannot miss 🎉",
+      "order_received": "Thank you for shopping with us. We are working on your order."
+    }
+  },
+  "common": {
+    "bank_offer_sub_title_multiple": "Pay for your purchases via one of the following bank cards and get the specified discount",
+    "bank_offer_sub_title_single": "Pay for your purchases via :bank_name bank card and get discount"
+  },
+  "oc": {
+    "trust": "Customer trust",
+    "stock": "Stock level",
+    "confidence": "Rating confidence",
+    "demand": "Demand",
+    "deal": "Deal",
+    "deal_live": "Live offer",
+    "trending": "Trending",
+    "steady": "Steady",
+    "v_exceptional": "Exceptional",
+    "v_high": "High",
+    "v_good": "Good",
+    "v_mixed": "Mixed",
+    "v_new": "New arrival",
+    "s_out": "Sold out · notify me",
+    "s_confident": "In stock",
+    "s_good": "Good availability",
+    "s_low": "Running low",
+    "s_last": "Last units",
+    "c_high": "High",
+    "c_mid": "Medium",
+    "c_early": "Early",
+    "hero_kicker": "Luxury beauty store",
+    "hero_sub": "Your beauty, intelligently luxurious",
+    "explore": "Explore the collection",
+    "stock_update": "Stock update",
+    "live": "Live",
+    "updated_now": "Updated: now",
+    "original": "Authentic products",
+    "authentic": "Authenticity guaranteed",
+    "availability": "Availability",
+    "trust_level": "Trust level",
+    "browse": "Browse departments",
+    "featured": "Luxury picks",
+    "why_us": "Why us",
+    "t_warranty": "Guaranteed authentic",
+    "t_warranty_n": "Genuine products from official sources",
+    "t_delivery": "Fast delivery",
+    "t_delivery_n": "Shipping across the Kingdom",
+    "t_support": "Beauty advice",
+    "t_support_n": "Experts help you choose",
+    "t_secure": "Secure payment",
+    "t_secure_n": "Salla certified gateways",
+    "bundle_hint": "Complete the routine and save",
+    "vt_featured": "Featured",
+    "vt_bestsellers": "Bestsellers",
+    "vt_new": "New arrivals",
+    "vt_deals": "Deals",
+    "vt_bundle": "Complete the routine",
+    "cine_title": "The world of luxury beauty",
+    "prev": "Previous",
+    "next": "Next",
+    "spec_kicker": "Ingredient infographic",
+    "spec_title": "Inside the formula",
+    "cmp_title": "Compare before you buy",
+    "cmp_sub": "Pick up to 3 products to compare side by side",
+    "cmp_hint": "Tap products to add or remove them — the best in each row is highlighted in gold",
+    "brands_title": "Brands in our store",
+    "show_title": "Beauty showcase",
+    "board_title": "Our store in numbers",
+    "board_sub": "Live figures read from the store itself as you visit",
+    "setup_title": "Build your routine",
+    "setup_sub": "Pick your routine steps and see matching store products with your real total",
+    "svc_title": "After you buy",
+    "svc_ship": "Shipping & delivery",
+    "svc_ship_n": "Cost and time show in the cart for your city before payment",
+    "svc_unbox": "Receiving & checking",
+    "svc_unbox_n": "Check the seal and expiry date when it arrives",
+    "svc_ret": "Exchange & returns",
+    "svc_ret_n": "As per the store’s published policy",
+    "svc_pay": "Secure payment",
+    "svc_pay_n": "All payments go through Salla’s certified gateway",
+    "svc_help": "Help & contact",
+    "svc_help_n": "Reach the store from the contact page or WhatsApp",
+    "svc_setup": "Using it right",
+    "svc_setup_n": "Patch-test on a small area of skin the first time",
+    "more": "Details",
+    "launch_kicker": "Coming soon",
+    "launch_title": "The new collection arrives soon",
+    "notify": "Register interest"
+  }
+}

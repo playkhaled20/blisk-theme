@@ -1,0 +1,15 @@
+const { chromium } = require('playwright'); const fs = require('fs'); const PUB = '/home/user/hangul-theme/public';
+(async () => { const b = await chromium.launch(); const T = process.argv[2];
+  const p = await b.newPage({ viewport: { width: 390, height: 844 } });
+  await p.route('https://oc.local/**', r => { const f = PUB + new URL(r.request().url()).pathname; r.fulfill({ body: fs.readFileSync(f), contentType: f.endsWith('.css') ? 'text/css' : f.endsWith('.js') ? 'application/javascript' : 'image/webp' }); });
+  await p.addInitScript(() => addEventListener('DOMContentLoaded', () => { const B = document.body; B.classList.add('oc', 'is-sticky-product-bar'); B.dataset.ocImg = 'https://oc.local/images/oc/electronics-featured.webp'; B.dataset.ocMode = 'preview';
+    const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://oc.local/obsidian.css'; document.head.appendChild(l); const s = document.createElement('script'); s.src = 'https://oc.local/obsidian.js'; document.head.appendChild(s);
+    const ai = document.createElement('div'); ai.className = 'oc-ai'; ai.innerHTML = '<button type="button" class="oc-ai__fab">✦ إضافاتي الذكية</button>'; B.appendChild(ai); }));
+  await p.goto(`https://salla.design/dev-mzjydsfu2leo9nzt/x/p1615885378?preview=true&oc_type=${T}&oc_p=0`, { waitUntil: 'commit', timeout: 60000 });
+  await p.waitForLoadState('domcontentloaded');
+  const snap = async (ms, tag) => { await p.waitForTimeout(ms); const r = await p.evaluate(() => { const bar = document.querySelector('.sticky-product-bar'); if (!bar) return 'nobar'; const bb = bar.getBoundingClientRect(), op = getComputedStyle(bar).opacity;
+      const btn = document.querySelector('.sticky-product-bar salla-add-product-button'); const f = s => { const e = document.querySelector(s); if (!e) return '-'; const r = e.getBoundingClientRect(); return `${Math.round(r.left)},${Math.round(r.top)}-${Math.round(r.right)},${Math.round(r.bottom)}`; };
+      return { barTop: Math.round(bb.top), barOp: op, btnOp: btn && getComputedStyle(btn).opacity, lift: getComputedStyle(document.body).getPropertyValue('--oc-lift'), pk: f('.oc-pk__fab'), ai: f('.oc-ai__fab'), thumbs: f('.details-slider .swiper-wrapper ~ *, salla-slider.details-slider .s-slider-thumbs, .s-slider-thumbs') }; });
+    console.log(tag, JSON.stringify(r)); await p.screenshot({ path: `out4/early-${T}-${tag}.png` }); };
+  await snap(500, 't05'); await snap(1000, 't15'); await snap(2500, 't40'); await p.evaluate(() => scrollTo(0, 250)); await snap(1500, 'scrolled');
+  await b.close(); })();

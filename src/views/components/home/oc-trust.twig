@@ -1,0 +1,17 @@
+{# Obsidian Cinema · store trust infographic (rings + verdict bars, no stars). Default cards come from real store signals only. #}
+<section component-id="{{ componentId }}" class="s-block oc-trust container" data-testid="oc-trust">
+  <header class="oc-head" data-k="OBSIDIAN"><h2 class="oc-metal">{{ component.title ?: trans('oc.why_us') }}</h2></header>
+  {% if component.items|length %}
+  <div class="oc-trust__grid">
+  {% for i in component.items %}{% set v = i.value ?? i['items.value'] ?? 0 %}
+    <div class="oc-glass oc-trust__card">
+      <div class="oc-gauge oc-gauge--lg" style="--v:{{ v }}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle class="t" cx="18" cy="18" r="15.9"/><circle class="v" cx="18" cy="18" r="15.9" pathLength="100"/></svg><b>{{ v }}%</b></div>
+      <h3>{{ i.title ?? i['items.title'] }}</h3><p>{{ i.note ?? i['items.note'] }}</p>
+    </div>
+  {% endfor %}
+  </div>
+  {% else %}
+  {# no merchant cards → built from real signals: Salla checkout, measured rating & stock, VAT registration, published policy pages #}
+  <div class="oc-trust__grid" data-oc-trust-auto></div>
+  {% endif %}
+</section>

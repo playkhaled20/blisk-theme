@@ -1,0 +1,9 @@
+{# Obsidian Cinema · category rail. LIVE auto-bind: merchant-picked categories, else the store's real categories via salla.api (JS), else nothing. No store-type picker. #}
+<section component-id="{{ componentId }}" class="s-block oc-cats container" data-testid="oc-categories">
+  <header class="oc-head" data-k="OBSIDIAN"><h2 class="oc-metal">{{ component.title ?: trans('oc.browse') }}</h2>{% if component.subtitle %}<p>{{ component.subtitle }}</p>{% endif %}</header>
+  <div class="oc-cats__grid" data-oc-autocats="{{ component.categories|length ? '0' : '1' }}" data-limit="{{ component.limit ?: 8 }}">
+    {% for c in component.categories %}
+      <a class="oc-cat" href="{{ c.url }}"><span class="oc-cat__ic" data-oc-icon="{{ c.name }}"></span><b>{{ c.name }}</b></a>
+    {% endfor %}
+  </div>
+</section>

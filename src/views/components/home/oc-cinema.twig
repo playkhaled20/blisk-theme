@@ -1,0 +1,29 @@
+{# Blisk · Cinematic slider (6–12 images). Empty slots are filled from the store's own categories (name, link, image)
+   with photos matched to the detected store type; a live ticker shows only figures measured from the store. #}
+{% set list = component.slides ?: [] %}{% set have = list|length %}
+{% set demo = ['beauty-featured','skincare-featured','makeup-featured','bodycare-featured','haircare-featured','nails-featured','perfume-featured','devices-featured','kbeauty-featured','skincare-bestsellers','makeup-bestsellers','bodycare-bestsellers'] %}
+{% set total = have < 6 ? 6 : have %}
+<section component-id="{{ componentId }}" class="s-block oc-cine container" data-oc-sec="cinema" data-speed="{{ component.speed ?: 6 }}" data-testid="oc-cinema" aria-roledescription="carousel" aria-label="{{ component.title ?: trans('oc.cine_title') }}">
+  <div class="oc-cine__stage">
+    {% for s in list %}
+    <a class="oc-cine__slide" href="{{ s.url ?: '#' }}" aria-label="{{ s.title ?: store.name }}">
+      <img src="{{ s.image }}" alt="{{ s.title ?: store.name }}" loading="{{ loop.first ? 'eager' : 'lazy' }}">
+      <span class="oc-cine__copy"><small class="oc-cine__k">{{ s.kicker ?: store.name }}</small><b class="oc-metal">{{ s.title }}</b>{% if s.subtitle %}<em>{{ s.subtitle }}</em>{% endif %}{% if s.cta %}<i class="oc-btn">{{ s.cta }}</i>{% endif %}</span>
+    </a>
+    {% endfor %}
+    {% if have < 6 %}{% for i in have..5 %}
+    <a class="oc-cine__slide" href="#" data-oc-demo="cat">
+      <img data-oc-fill src="{{ ('images/oc/' ~ demo[i] ~ '.webp')|asset }}" alt="{{ store.name }}" loading="{{ i == 0 ? 'eager' : 'lazy' }}">
+      <span class="oc-cine__copy"><small class="oc-cine__k" data-oc-fill-k></small><b class="oc-metal" data-oc-fill-t>{{ i == 0 ? store.name : trans('oc.cine_title') }}</b><em data-oc-fill-s></em><i class="oc-btn">{{ trans('oc.explore') }}</i></span>
+    </a>
+    {% endfor %}{% endif %}
+    <span class="oc-cine__bars" aria-hidden="true"></span>
+    <div class="oc-cine__hud"><span><b data-oc-idx>01</b>/{{ '%02d'|format(total) }}</span><div class="oc-cine__bar"><i></i></div>
+      <button type="button" data-oc-prev aria-label="{{ trans('oc.prev') }}">‹</button><button type="button" data-oc-next aria-label="{{ trans('oc.next') }}">›</button></div>
+  </div>
+  <div class="oc-cine__thumbs" role="tablist">
+    {% for s in list %}<button type="button" class="oc-cine__thumb" role="tab" aria-label="{{ s.title ?: loop.index }}"><img src="{{ s.image }}" alt="" loading="lazy"></button>{% endfor %}
+    {% if have < 6 %}{% for i in have..5 %}<button type="button" class="oc-cine__thumb" role="tab" aria-label="{{ i + 1 }}"><img src="{{ ('images/oc/' ~ demo[i] ~ '.webp')|asset }}" alt="" loading="lazy"></button>{% endfor %}{% endif %}
+  </div>
+  <div class="oc-tick" data-oc-ticker hidden></div>
+</section>

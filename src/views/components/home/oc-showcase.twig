@@ -1,0 +1,14 @@
+{# Blisk · Cinematic bento showcase (6–12 tiles) with pointer parallax. Empty tiles take the store's real categories. #}
+{% set list = component.tiles ?: [] %}{% set have = list|length %}
+{% set demo = ['makeup-featured','skincare-featured','bodycare-featured','haircare-featured','perfume-featured','nails-featured','devices-featured','kbeauty-featured','beauty-featured','mens-featured','gifts-featured','skincare-bundle'] %}
+<section component-id="{{ componentId }}" class="s-block oc-show container" data-oc-sec="showcase" data-testid="oc-showcase">
+  <header class="oc-head" data-k="SHOWCASE"><h2 class="oc-metal">{{ component.title ?: trans('oc.show_title') }}</h2>{% if component.subtitle %}<p>{{ component.subtitle }}</p>{% endif %}</header>
+  <div class="oc-show__grid oc-show__grid--{{ (have < 6 ? 6 : have) }}">
+    {% for s in list %}
+    <a class="oc-show__tile" href="{{ s.url ?: '#' }}" data-oc-reveal><img src="{{ s.image }}" alt="{{ s.title }}" loading="lazy"><span><small>{{ s.caption }}</small><b>{{ s.title }}</b></span></a>
+    {% endfor %}
+    {% if have < 6 %}{% for i in have..5 %}
+    <a class="oc-show__tile" href="#" data-oc-demo="cat" data-oc-reveal><img data-oc-fill src="{{ ('images/oc/' ~ demo[i] ~ '.webp')|asset }}" alt="" loading="lazy"><span><small data-oc-fill-k></small><b data-oc-fill-t></b></span></a>
+    {% endfor %}{% endif %}
+  </div>
+</section>

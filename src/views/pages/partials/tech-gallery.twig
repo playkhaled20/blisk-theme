@@ -1,0 +1,7 @@
+{# Luxury image strip (6–12). Merchant images first; otherwise JS fills it with THIS store's own product photos matching `q`. Zero bundled images. #}
+{% set n = n ?? 8 %}
+<div class="tg" data-tg-q="{{ q ?? '' }}" data-tg-n="{{ n }}" style="--tg-n:{{ n == 8 ? 4 : 6 }}">
+  {% for g in (gallery ?? [])|slice(0, 12) %}{% if g.image %}
+  <a class="tg-i" href="{{ g.url ?: '#' }}"><img loading="lazy" src="{{ g.image }}" alt="{{ g.label }}">{% if g.label %}<span>{{ g.label }}</span>{% endif %}</a>
+  {% endif %}{% endfor %}
+</div>

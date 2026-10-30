@@ -1,0 +1,25 @@
+const fs = require('fs'), Twig = require('twig'), path = require('path'), T = '/home/user/hangul-theme', S = process.argv[2];
+const L = JSON.parse(fs.readFileSync(T + '/src/locales/ar.json')); Twig.extendFunction('trans', k => k.split('.').reduce((o, p) => o && o[p], L) || k);
+const menu = fs.readFileSync('menu.html', 'utf8').match(/<header[\s\S]*?<\/header>/)[0];
+const head = `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/pub/app.css"><link rel="stylesheet" href="/pub/obsidian.css"><style>body{font-family:system-ui,"Noto Sans Arabic",sans-serif}.container{max-width:1280px;margin-inline:auto;padding-inline:16px}</style>
+<script>window.salla={config:{get:k=>({'store.name':'Aneeq','user.currency_code':'SAR'})[k]},api:{request:async()=>({data:[]})},product:{fetch:async()=>({data:[]})}};</script></head>`;
+const body = cls => `<body id="app" class="theme-raed overflow-x-hidden oc oc-smart ${cls}" data-oc-store="Aneeq" data-oc-bg="graphite" data-oc-img="/pub/images/oc/electronics-featured.webp" data-oc-accent="champagne" data-oc-vertical="auto">`;
+const IMG = 'https://salla-dev.s3.eu-central-1.amazonaws.com/nWzD/bL3FLXsYnlcjdn2TbeSdXh1y6nhiXWkzg7bMV9Lf.jpg';
+const card = i => `<div class="s-product-card-entry"><div class="s-product-card-image"><a href="http://127.0.0.1:8765/dev-abc/p/dress.html"><img src="${IMG}" style="width:100%;aspect-ratio:1;object-fit:cover"></a></div><div class="s-product-card-content"><h3 class="s-product-card-content-title"><a href="http://127.0.0.1:8765/dev-abc/p/dress.html">فستان سهرة ${i}</a></h3><h4 class="s-product-card-price">${100 + i} ر.س</h4></div></div>`;
+const slider = `<section class="container s-block"><h2>أحدث الفساتين</h2><salla-products-slider><div style="display:flex;gap:12px;overflow:auto">${[...Array(8)].map((_, i) => `<div class="swiper-slide" style="min-width:180px">${card(i)}</div>`).join('')}</div></salla-products-slider></section>`;
+const grid = `<section class="container s-block"><h2>تخفيضات التنانير</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px">${[...Array(8)].map((_, i) => card(i + 8)).join('')}</div></section>`;
+const foot = `<footer class="store-footer container" style="padding:2rem 16px"><a href="#">الشحن</a> · <a href="#">ملابس نسائية</a></footer><script src="/pub/obsidian.js"></script></body></html>`;
+fs.writeFileSync(S + '/dev-abc/home.html', head + body('') + menu + `<main id="main-content">${slider}${grid}</main>` + foot);
+const intel = Twig.twig({ data: fs.readFileSync(T + '/src/views/pages/partials/product/oc-intel.twig', 'utf8') }).render({ product: { rating: { stars: 5, count: 200 }, quantity: null, sold_quantity: 150, is_on_sale: true } });
+const pdp = `<main id="main-content" class="product-single container"><nav class="breadcrumbs"><salla-breadcrumb><ul style="display:flex;gap:6px"><li class="s-breadcrumb-item"><a href="#">الرئيسية</a></li><li class="s-breadcrumb-item"><a href="#">التنانير</a></li><li class="s-breadcrumb-item"><span>تنورة جينز</span></li></ul></salla-breadcrumb></nav>
+<div class="flex flex-col md:flex-row gap-8"><div class="md:w-2/4"><salla-slider class="details-slider"><img src="${IMG}" style="width:100%"><img src="${IMG}" width="80"></salla-slider></div>
+<div class="main-content w-full md:w-2/4"><h1 data-testid="store-product-title" class="text-xl font-bold mb-6">تنورة جينز</h1><h2 class="product-entry__sub-title">ملابس نسائية</h2>${intel}
+<div data-testid="store-product-price" class="flex gap-4"><div><p class="font-bold text-xl">174 ر.س</p><span class="line-through">199 ر.س</span></div></div>
+<div class="product__description"><article class="article--main">فستان قطن بمقاسات متعددة</article></div>
+<form class="form product-form"><salla-product-options><label>المقاس</label><select><option>S</option><option>M</option></select></salla-product-options>
+<section class="sticky-product-bar bg-white p-5 rounded-md"><div class="sticky-product-bar__quantity center-between mb-5"><label class="form-label font-bold">الكمية</label><salla-quantity-input class="flex justify-end"><div style="display:flex;border:1px solid #888;border-radius:6px;width:120px;height:40px;align-items:center;justify-content:space-around"><button type=button>+</button><input value="1" style="width:30px;background:transparent;color:inherit;text-align:center"><button type=button>-</button></div></salla-quantity-input></div>
+<div class="sticky-product-bar__price"><h2 class="total-price">174 ر.س</h2></div><salla-add-product-button><button type=button style="width:100%;padding:12px;background:#d9b779;color:#000;border-radius:8px">إضافة للسلة</button></salla-add-product-button></section></form>
+<div style="height:900px"></div></div></div></main>
+<style>.is-sticky-product-bar .sticky-product-bar,.is-sticky-product-bar .sticky-product-bar *{transform:none!important;opacity:1!important}</style>`;
+fs.writeFileSync(S + '/dev-abc/p/dress.html', head + body('is-sticky-product-bar') + menu + pdp + foot);
+console.log('ok');

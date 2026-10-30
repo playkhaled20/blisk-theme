@@ -1,0 +1,1 @@
+(() => { const w = document.querySelector('.s-breadcrumb-wrapper'); const items = [...w.querySelectorAll('.s-breadcrumb-item')]; return { lines: new Set(items.map(i => Math.round(i.getBoundingClientRect().top))).size, h: Math.round(w.getBoundingClientRect().height), overflowX: w.scrollWidth > w.clientWidth + 1, text: items.map(i => i.textContent.trim()) }; })()
