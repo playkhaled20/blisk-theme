@@ -69,7 +69,7 @@ const asset = name => (B.dataset.ocImg || '').replace(/[^/]*\.webp(\?.*)?$/, `${
 export function demoPack(v) {
   const V = VERTICALS[v] ? v : 'beauty';
   const ps = (P[V] || P.beauty).split(';').map((k, i) => { const [a, e, p, w, d] = CAT[k].split('|'); const price = +p, was = +w || null;
-    return { id: 9000 + i, name: ar() ? a : e, slug: e.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), url: '#', img: asset(k), price, was, sale: !!was, out: false, stars: [4.8, 4.6, 4.7, 4.5, 4.9, 4.4, 4.6, 4.7][i], reviews: [214, 162, 88, 301, 120, 64, 45, 140][i], sold: [320, 180, 90, 260, 140, 60, 40, 150][i], desc: d || '', digital: false }; });
+    return { id: 9000 + i, name: ar() ? a : e, slug: e.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), url: '#', img: asset(k), price, was, sale: !!was, out: false, stars: null, reviews: 0, sold: 0, /* the preview never shows ratings or sales it cannot prove */ desc: d || '', digital: false }; });
   const cats = (VERTICALS[V].cats || [V]).map((c, i) => ({ id: null, name: ar() ? VERTICALS[c].ar : VERTICALS[c].en, url: '#', img: asset(`${c}-${MODES[i % 3]}`), sub: [], v: c }));
   return { v: V, ps, cats };
 }
@@ -109,7 +109,7 @@ function skinCards(pack) {
     c.querySelectorAll('.s-product-card-content-subtitle').forEach(e => e.remove());
     const pr = c.querySelector('.s-product-card-sale-price, .s-product-card-price, .s-product-card-starting-price');
     if (pr) { const h = document.createElement('div'); h.innerHTML = p.was ? `<div class="s-product-card-sale-price"><h4>${money(p.price)}</h4><span>${money(p.was)}</span></div>` : `<h4 class="s-product-card-price">${money(p.price)}</h4>`; pr.replaceWith(h.firstElementChild); }
-    if (c.product) c.product = { ...c.product, url, name: p.name, price: p.price, sale_price: p.price, regular_price: p.was || p.price, is_on_sale: !!p.was, is_out_of_stock: false, rating: { stars: p.stars, count: p.reviews }, sold_quantity: p.sold, quantity: null };
+    if (c.product) c.product = { ...c.product, url, name: p.name, price: p.price, sale_price: p.price, regular_price: p.was || p.price, is_on_sale: !!p.was, is_out_of_stock: false, image: { url: p.img, alt: p.name }, thumbnail: p.img, rating: null, sold_quantity: 0, quantity: null };
     c.querySelectorAll('.oc-card-intel, .oc-badge').forEach(e => e.remove()); c.classList.remove('oc-urgent');
     c.dataset.ocDemo = pack.v + i;
   });
@@ -167,7 +167,7 @@ function sweep(pack) {
 }
 /* product page in preview: one tech demo product (stable per URL) */
 function skinProduct(pack) {
-  const h1 = document.querySelector('[data-testid="store-product-title"], .product-single h1, .product-entry__title, main h1'); if (!h1 || !document.querySelector('salla-add-product-button, .product-form, [class*="product-single"]')) return;
+  const h1 = document.querySelector('[data-testid="store-product-title"], .product-single h1, .product-entry__title, main h1'); if (!h1 || ![...document.querySelectorAll('salla-add-product-button, .product-form, [class*="product-single"]')].some(e => !e.closest('custom-salla-product-card, .s-product-card-entry, salla-products-list, salla-products-slider'))) return; // a category page's cards carry their own add buttons
   const once = e => !e || e.dataset.ocDemo ? false : (e.dataset.ocDemo = '1', true); // each element is skinned once (late renders still get theirs)
   /* the product the shopper clicked (?oc_p from the card), else stable per URL */
   let h = 0; for (const ch of location.pathname) h = (h * 31 + ch.charCodeAt(0)) >>> 0; const q = parseInt(new URLSearchParams(location.search).get('oc_p'), 10);
@@ -178,7 +178,7 @@ function skinProduct(pack) {
   gal.querySelectorAll('img').forEach(img => { if (themeImg(img.getAttribute('src'))) return; img.src = p.img; img.removeAttribute('srcset'); img.alt = p.name; img.dataset.ocSwept = '1'; });
   /* prices: the title price block, the form / sticky bar prices; old price only when the demo product has an offer */
   document.querySelectorAll('[data-testid="store-product-price"] p, .total-price, .product-entry__price, .sticky-product-bar .total-price').forEach(e => { if (once(e)) e.textContent = money(p.price); });
-  document.querySelectorAll('[data-testid="store-product-price"] .line-through, .before-price').forEach(e => { if (once(e)) { if (p.was) e.textContent = money(p.was); else e.style.display = 'none'; } });
+  document.querySelectorAll('[data-testid="store-product-price"] .line-through, .before-price').forEach(e => { if (once(e)) { if (p.was) e.textContent = money(p.was); else { e.textContent = ''; e.style.display = 'none'; document.querySelectorAll('.ux-pdp-off').forEach(b => b.remove()); } } });
   /* sub-title / sku / sizes copied from the fashion product */
   document.querySelectorAll('.product-entry__sub-title').forEach(e => { if (once(e)) e.textContent = vt(V.hero); });
   const desc = document.querySelector('.product__description .article--main, .product__description, .product-single__description');

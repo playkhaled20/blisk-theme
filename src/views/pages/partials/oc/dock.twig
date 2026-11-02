@@ -28,6 +28,9 @@
     ai.classList.add('is-open');
     if(id&&id!=='open'){ var b=ai.querySelector('[data-a="'+id+'"]'); if(b) b.click(); }
   }
+  /* oc-dock-sync: each chip takes the panel's own label; an add-on the panel does not offer for this store type is hidden */
+  function sync(){ var ai=document.querySelector('.oc-ai'); if(!ai) return false; document.querySelectorAll('.oc-dock__chip').forEach(function(c){ var b=ai.querySelector('[data-a="'+c.getAttribute('data-oc-dock')+'"]'); c.hidden=!b; if(b) c.textContent=b.textContent; }); return true; }
+  var n=0,iv=setInterval(function(){ if(sync()||++n>40) clearInterval(iv); },250);
   document.addEventListener('click',function(e){
     var t=e.target.closest&&e.target.closest('[data-oc-dock]'); if(!t) return;
     var id=t.getAttribute('data-oc-dock'), ai=document.querySelector('.oc-ai');

@@ -187,3 +187,6 @@ body.oc{
 body.oc .s-product-card-vertical .s-product-card-image{flex:none!important;aspect-ratio:4/3;height:auto!important;max-height:none!important}
 body.oc .s-product-card-vertical .s-product-card-image>a,body.oc .s-product-card-vertical .s-product-card-image img{width:100%;height:100%}
 @import "./ux";
+
+/* cinema slides sit on dark photos: titles stay light whatever the palette */
+body.oc .oc-cine__copy h2,body.oc .oc-cine__copy .oc-metal{color:#fff!important}
