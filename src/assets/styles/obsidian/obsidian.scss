@@ -186,3 +186,4 @@ body.oc{
    short title stretch its photo taller than its neighbour. */
 body.oc .s-product-card-vertical .s-product-card-image{flex:none!important;aspect-ratio:4/3;height:auto!important;max-height:none!important}
 body.oc .s-product-card-vertical .s-product-card-image>a,body.oc .s-product-card-vertical .s-product-card-image img{width:100%;height:100%}
+@import "./ux";

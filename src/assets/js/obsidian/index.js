@@ -7,6 +7,7 @@ import { mountSections } from './sections';
 import { initDemo, demoV, demoPack } from './demo';
 import { money, brain } from './brain';
 import { initBeauty } from './beauty';
+import { initUx } from './ux';
 const B = document.body, isAr = (document.documentElement.lang || 'ar').startsWith('ar');
 const tr = (ar,en) => isAr ? ar : en;
 
@@ -150,6 +151,7 @@ async function boot(){
   customerColor(isAr); applySquares(); window.ocApplySquares=applySquares; B.classList.toggle('oc-preview', !!isPreview());
   try{ initDemo(); }catch(e){}
   try{ liftFloaters(); }catch(e){}
+  try{ initUx(); }catch(e){}
   try{ initBeauty(); }catch(e){} // independent of the store read below, so it never waits on it
   let st=null; try{ st=await buildSmart(isAr); }catch(e){}
   try{ st=(await mountSections())||st; }catch(e){}
