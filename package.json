@@ -47,6 +47,5 @@
     "vite": "8.2.2",
     "vitest": "^4.1.11"
   },
-  "license": "UNLICENSED",
-  "private": true
+  "license": "UNLICENSED"
 }
