@@ -13,6 +13,7 @@ import { SallaInstallment } from '@salla.sa/twilight-components-react/installmen
 import { useHydrated } from '../../hooks/useHydrated';
 import { useMobileViewport } from '../../hooks/useMobileViewport';
 import { youtubeFacades } from '../../lib/descriptionVideos';
+import { fixGluedTables } from '../../lib/gluedTables';
 import { ProductMetadata } from './ProductMetadata';
 import { WishlistHeartButton } from './WishlistHeartButton';
 
@@ -254,7 +255,7 @@ function ProductDescription({ product }: { product: Product }) {
   if (!product.description) return null;
 
   const description = youtubeFacades(
-    lazyIframes(product.description.replace(/&nbsp;/g, '\n')),
+    lazyIframes(fixGluedTables(product.description.replace(/&nbsp;/g, '\n'))),
     playingVideos,
     t('pages.products.play_video', 'Play video')
   );
