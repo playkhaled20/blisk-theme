@@ -1,0 +1,413 @@
+/*
+ * Blisk «Obsidian Cinema» layer.
+ *
+ * Tokens arrive on `body.theme-blisk` (components/blisk/BliskDesign.tsx):
+ *   --oc-bg, --oc-bg2, --oc-bg3   page, surfaces, glow
+ *   --oc-txt, --oc-mut, --oc-line, --oc-glass
+ *   --oc-acc, --oc-acc2, --oc-glow   metallic accent
+ * `blisk-dark` / `blisk-light` tell which text colours the palette needs.
+ * Without `theme-blisk` (cinematic mode off) none of this applies.
+ */
+
+body.theme-blisk {
+  // Map the starter's and the engine's tokens onto the Blisk palette.
+  --main-text-color: var(--oc-txt);
+  --main-text-color-dark: var(--oc-txt);
+  --color-text: var(--oc-mut);
+  --bg-gray: var(--oc-glass);
+  --color-grey: var(--oc-bg2);
+  --color-light-grey: var(--oc-line);
+  --infinte-color: var(--oc-line);
+
+  background:
+    radial-gradient(120% 80% at 70% -10%, var(--oc-bg3) 0, var(--oc-bg) 55%) fixed,
+    var(--oc-bg);
+  color: var(--oc-txt);
+
+  // Panels the starter paints white follow the palette's surface colour.
+  .bg-white,
+  .bg-gray-50,
+  .bg-gray-100 {
+    background-color: var(--oc-bg2) !important;
+  }
+
+  // Readable text on every palette: the starter's grey text classes map to the
+  // palette's text and muted colours (the Twig review asked for clearer text).
+  .text-gray-900,
+  .text-gray-800,
+  .text-gray-700,
+  .text-dark {
+    color: var(--oc-txt) !important;
+  }
+  .text-gray-600,
+  .text-gray-500,
+  .text-gray-400 {
+    color: var(--oc-mut) !important;
+  }
+
+  .border-gray-100,
+  .border-gray-200,
+  .border-gray-300,
+  .divide-gray-200 > * + * {
+    border-color: var(--oc-line) !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  .s-block__title h2,
+  .s-block__title h3 {
+    color: var(--oc-txt);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--oc-acc);
+    outline-offset: 2px;
+  }
+
+  .site-header,
+  .store-footer {
+    background-color: var(--oc-bg2);
+    color: var(--oc-txt);
+  }
+  .store-footer {
+    border-top: 1px solid var(--oc-line);
+  }
+
+  // The buy buttons always read, whatever the merchant's primary colour.
+  .btn--primary,
+  .s-button-primary {
+    background: linear-gradient(135deg, var(--oc-acc), var(--oc-acc2));
+    color: var(--oc-bg);
+    border-color: transparent;
+  }
+
+  // Product cards: one surface, a fine line, and the same height in a row.
+  .s-product-card-entry,
+  .product-entry {
+    background: var(--oc-bg2);
+    border: 1px solid var(--oc-line);
+  }
+}
+
+// Optional film grain: a still texture (no motion), under everything clickable.
+body.theme-blisk.blisk-grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Shared pieces ---------- */
+
+.blisk-metal {
+  background: linear-gradient(180deg, var(--oc-acc2), var(--oc-acc) 55%, color-mix(in srgb, var(--oc-acc), #000 25%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+// Metallic gradient text is hard to read when small; keep it for headings only.
+@media (forced-colors: active) {
+  .blisk-metal {
+    color: CanvasText;
+    background: none;
+  }
+}
+
+.blisk-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 32px;
+  padding: 0.25rem 0.85rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 999px;
+  background: var(--oc-glass);
+  color: var(--oc-acc);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+}
+
+.blisk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.75rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--oc-acc), var(--oc-acc2));
+  color: var(--oc-bg);
+  font-weight: 700;
+  font-style: normal;
+  box-shadow: 0 10px 30px -12px var(--oc-glow);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.blisk-card {
+  border: 1px solid var(--oc-line);
+  border-radius: 1.25rem;
+  background: var(--oc-glass);
+}
+
+.blisk-ring {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+
+  svg {
+    position: absolute;
+    inset: 0;
+    transform: rotate(-90deg);
+  }
+  circle {
+    fill: none;
+    stroke-width: 2.6;
+  }
+  .t {
+    stroke: var(--oc-line);
+  }
+  .v {
+    stroke: var(--oc-acc);
+    stroke-linecap: round;
+  }
+  b {
+    font-size: 1rem;
+    color: var(--oc-txt);
+  }
+
+  &--lg {
+    width: 6rem;
+    height: 6rem;
+
+    b {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+/* ---------- Home: hero ---------- */
+
+.blisk-hero {
+  padding-block: 2rem 1rem;
+
+  &__stage {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__media {
+    display: grid;
+    place-items: center;
+    min-height: 260px;
+
+    img {
+      width: 100%;
+      max-height: 520px;
+      object-fit: contain;
+      filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.35));
+    }
+  }
+
+  &__orb {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: min(80vw, 380px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--oc-bg3), var(--oc-bg2) 60%, var(--oc-bg));
+    box-shadow:
+      inset 0 0 0 1px var(--oc-line),
+      0 40px 90px -40px var(--oc-glow);
+
+    i {
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      border: 1px solid var(--oc-line);
+
+      & + i {
+        inset: 26%;
+      }
+    }
+
+    span {
+      position: relative;
+      max-width: 60%;
+      text-align: center;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--oc-acc);
+    }
+  }
+
+  &__copy {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+
+    h1 {
+      font-size: clamp(2.25rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+    }
+  }
+
+  &__sub {
+    font-size: clamp(1.125rem, 2.4vw, 1.5rem);
+    color: var(--oc-txt);
+  }
+
+  &__desc {
+    max-width: 34rem;
+    color: var(--oc-mut);
+    line-height: 1.8;
+  }
+}
+
+.blisk-gauges {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.blisk-gauge {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  padding: 1rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 1rem;
+  background: var(--oc-glass);
+  text-align: center;
+
+  span {
+    font-weight: 700;
+    color: var(--oc-txt);
+  }
+  small {
+    font-size: 0.8125rem;
+    color: var(--oc-mut);
+  }
+}
+
+/* ---------- Home: promo banner ---------- */
+
+.blisk-banner {
+  display: grid;
+  gap: 1rem;
+  --h: 340px;
+
+  &--sm {
+    --h: 220px;
+  }
+  &--lg {
+    --h: 480px;
+  }
+
+  &__item {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--oc-line);
+    border-radius: 1.4rem;
+    background: var(--oc-bg2);
+
+    img {
+      display: block;
+      width: 100%;
+      height: var(--h);
+      object-fit: cover;
+    }
+  }
+
+  &__copy {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 2rem clamp(1.25rem, 5vw, 4rem);
+    background: linear-gradient(
+      to left,
+      transparent 30%,
+      color-mix(in srgb, var(--oc-bg) 85%, transparent)
+    );
+
+    b {
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      line-height: 1.15;
+    }
+    em {
+      max-width: 28rem;
+      font-style: normal;
+      color: var(--oc-txt);
+    }
+  }
+}
+
+[dir='ltr'] .blisk-banner__copy {
+  background: linear-gradient(
+    to right,
+    transparent 30%,
+    color-mix(in srgb, var(--oc-bg) 85%, transparent)
+  );
+}
+
+/* ---------- Home: trust gauges ---------- */
+
+.blisk-trust {
+  &__title {
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  &__card {
+    display: grid;
+    justify-items: center;
+    gap: 0.6rem;
+    padding: 1.5rem 1rem;
+    text-align: center;
+
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+    p {
+      color: var(--oc-mut);
+      line-height: 1.7;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blisk-btn {
+    transition: none;
+  }
+}
