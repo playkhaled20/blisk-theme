@@ -31,8 +31,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['var(--font-main)', '-apple-system', 'BlinkMacSystemFont'],
-      primary: 'var(--font-main)',
+      sans: ['var(--font-main)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Tahoma', 'Arial', 'sans-serif'],
+      primary: ['var(--font-main)', 'system-ui', '-apple-system', 'Segoe UI', 'Tahoma', 'Arial', 'sans-serif'],
     },
     extend: {
       transitionTimingFunction: {
