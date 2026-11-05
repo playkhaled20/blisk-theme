@@ -415,12 +415,26 @@ body.theme-blisk.blisk-grain::before {
 
 /* ---------- Touch targets and overflow (Salla review: 44px, no sideways scroll) ---------- */
 
-// Every control is at least 44px, the size Salla's review asks for.
-body :is(button, [role='button'], .btn, a.btn, input[type='submit'], select) {
+// Every control is at least 44px, the size Salla's review asks for. Slider
+// dots are the exception: the dot itself is what you see, so growing it would
+// draw big grey circles. They keep their size and get a 44px invisible target.
+body :is(button, [role='button'], .btn, a.btn, input[type='submit'], select):not(.swiper-pagination-bullet) {
   min-height: 44px;
 }
-body :is(button, [role='button']):not(:has(> span:not(.sr-only), > b, > p)) {
+body :is(button, [role='button']):not(.swiper-pagination-bullet):not(:has(> span:not(.sr-only), > b, > p)) {
   min-width: 44px;
+}
+body .swiper-pagination-bullet {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+  }
 }
 
 // A long run of text with no spaces (a size chart pasted on one line) wraps
