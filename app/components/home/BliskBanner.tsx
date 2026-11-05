@@ -36,7 +36,7 @@ export const BliskBanner = memo(function BliskBanner({ data }: { data: BliskBann
           <>
             <picture>
               {b.mobile && <source media="(max-width: 640px)" srcSet={b.mobile} />}
-              <img src={b.image} alt={b.title} loading="lazy" decoding="async" />
+              <img src={b.image} alt={b.title} width={1600} height={480} loading="lazy" decoding="async" />
             </picture>
             {(b.title || b.subtitle || b.cta) && (
               <span className="blisk-banner__copy">

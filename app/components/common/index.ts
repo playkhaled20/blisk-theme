@@ -6,4 +6,3 @@ export {
   type TestimonialItem,
   type TestimonialsCarouselProps,
 } from './TestimonialsCarousel';
-export { ProductOptionsPanel, type PanelOption } from './ProductOptionsPanel';

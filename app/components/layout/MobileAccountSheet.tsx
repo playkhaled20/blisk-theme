@@ -83,16 +83,13 @@ function ListButton({
  */
 function UserMenuCard({ open }: { open: boolean }) {
   // Its rows render asynchronously, so they get their own staggered entrance.
-  const rowsIn = useStaggeredRows(
-    open,
-    '.account-sheet__user-menu',
-    '.account-sheet__user-menu .s-user-menu-dropdown-item'
-  );
+  const [card, setCard] = useState<HTMLDivElement | null>(null);
+  const rowsIn = useStaggeredRows(open, card, '.s-user-menu-dropdown-item');
 
   // One parent for both: the wrapper wraps the element in its own hydration
   // `<div>`, so the placeholder is never the menu's sibling.
   return (
-    <div className="account-sheet__user-menu-card">
+    <div ref={setCard} className="account-sheet__user-menu-card">
       <SallaUserMenu
         inline
         className={`account-sheet__user-menu${rowsIn ? ' is-in' : ''}`}

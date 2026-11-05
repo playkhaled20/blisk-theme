@@ -219,6 +219,7 @@ body.theme-blisk.blisk-grain::before {
 
     img {
       width: 100%;
+      height: auto;
       max-height: 520px;
       object-fit: contain;
       filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.35));

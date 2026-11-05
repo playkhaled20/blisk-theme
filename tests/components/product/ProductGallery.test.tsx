@@ -12,6 +12,7 @@ const settings = vi.hoisted<Record<string, unknown>>(() => ({}));
 
 vi.mock('@salla.sa/twilight-theme-engine/providers', () => ({
   useTwilight: () => ({ theme: { settings } }),
+  useNavigate: () => () => {},
 }));
 
 vi.mock('@salla.sa/twilight-theme-engine/i18n', () => ({

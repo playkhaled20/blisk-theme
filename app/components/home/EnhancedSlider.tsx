@@ -180,7 +180,7 @@ function YouTubeFrame({ id }: { id: string }) {
       ref={ref}
       className="enhanced-slider__video enhanced-slider__video--embed"
       data-state={state}
-      src={youtubeEmbedUrl(id, window.location.origin)}
+      src={youtubeEmbedUrl(id, window.origin)}
       title=""
       loading="lazy"
       allow="autoplay; encrypted-media"

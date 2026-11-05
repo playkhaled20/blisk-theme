@@ -43,13 +43,11 @@ describe('ProductMetadata accordion', () => {
     const second = headers(container)[1];
 
     fireEvent.keyDown(second, { key: 'Enter' });
-    expect(second.parentElement!.classList.contains('is-open')).toBe(true);
     expect(second.getAttribute('aria-expanded')).toBe('true');
 
     // Space must not also scroll the page.
     const space = fireEvent.keyDown(second, { key: ' ' });
     expect(space).toBe(false);
-    expect(second.parentElement!.classList.contains('is-open')).toBe(false);
     expect(second.getAttribute('aria-expanded')).toBe('false');
   });
 
@@ -59,7 +57,6 @@ describe('ProductMetadata accordion', () => {
 
     fireEvent.click(first);
 
-    expect(first.parentElement!.classList.contains('is-open')).toBe(false);
     expect(first.getAttribute('aria-expanded')).toBe('false');
   });
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { MouseEvent } from 'react';
 import { SallaMenu } from '@salla.sa/twilight-components-react/menu';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
@@ -25,11 +26,8 @@ export function ImportantLinksSheet({ open, onClose }: ImportantLinksSheetProps)
 
   useCloseOnDesktop(open, onClose);
   // Same staggered row entrance as HeaderNav's drawer gives its root links.
-  const rowsIn = useStaggeredRows(
-    open,
-    '.important-links-sheet__menu',
-    '.important-links-sheet__menu .s-menu-footer-item'
-  );
+  const [menuBox, setMenuBox] = useState<HTMLDivElement | null>(null);
+  const rowsIn = useStaggeredRows(open, menuBox, '.s-menu-footer-item');
 
   // A link to the current page doesn't change the route, which is what
   // closes the sheet otherwise -- same handler as MobileAccountSheet's own.
@@ -44,7 +42,7 @@ export function ImportantLinksSheet({ open, onClose }: ImportantLinksSheetProps)
       title={t('blocks.footer.important_links', 'Important links')}
       className="important-links-sheet"
     >
-      <div role="presentation" onClick={closeOnLink}>
+      <div ref={setMenuBox} role="presentation" onClick={closeOnLink}>
         <SallaMenu
           source="footer"
           className={`important-links-sheet__menu${rowsIn ? ' is-in' : ''}`}

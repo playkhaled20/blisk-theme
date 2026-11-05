@@ -53,7 +53,7 @@ export const BliskHero = memo(function BliskHero({ data }: { data: BliskHeroData
       <div className="blisk-hero__stage">
         <div className="blisk-hero__media">
           {data.image ? (
-            <img src={data.image} alt={title} fetchPriority="high" decoding="async" />
+            <img src={data.image} alt={title} width={800} height={800} fetchPriority="high" decoding="async" />
           ) : (
             <div className="blisk-hero__orb" aria-hidden="true">
               <i />

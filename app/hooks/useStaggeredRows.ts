@@ -16,19 +16,16 @@ export const ROWS_IN_DELAY_MS = 350;
  *
  * For a sheet whose rows come from a web component (`<salla-menu>`,
  * `<salla-user-menu>`): two things can still be missing when `open` flips
- * true. `BottomSheet` defers its own mount to an effect, so `containerSelector`
- * may not exist yet, and the component renders its rows asynchronously on top
- * of that (registering the custom element, fetching data). A fixed delay can't
- * cover either reliably, so this watches the document (`BottomSheet` portals to
- * `<body>`) until a `rowSelector` match shows up, then releases the stagger.
- *
- * The build's `no-manual-dom` check flags its `document.querySelector` calls.
- * They stay: the rows are rendered by the web component, inside a portal, so
- * there is no ref or React state that reaches them.
+ * true. `BottomSheet` defers its own mount to an effect, so the container may
+ * not exist yet, and the component renders its rows asynchronously on top of
+ * that (registering the custom element, fetching data). A fixed delay can't
+ * cover either reliably, so the caller hands over the container element through
+ * a callback ref (`ref={setContainer}`), and this watches that element until a
+ * `rowSelector` match shows up inside it, then releases the stagger.
  */
 export function useStaggeredRows(
   open: boolean,
-  containerSelector: string,
+  container: HTMLElement | null,
   rowSelector: string
 ): boolean {
   const [rowsIn, setRowsIn] = useState(false);
@@ -38,6 +35,7 @@ export function useStaggeredRows(
       setRowsIn(false);
       return;
     }
+    if (!container) return;
 
     let timer: ReturnType<typeof setTimeout> | undefined;
     let cancelPaint: (() => void) | undefined;
@@ -47,21 +45,21 @@ export function useStaggeredRows(
       timer = setTimeout(() => {
         // Force a reflow so the web component's closed state is painted before
         // `.is-in` flips it; otherwise a just-inserted row never transitions.
-        void document.querySelector<HTMLElement>(containerSelector)?.offsetWidth;
+        void container.offsetWidth;
         cancelPaint = afterNextPaint(() => setRowsIn(true));
       }, ROWS_IN_DELAY_MS);
     };
 
-    if (document.querySelector(rowSelector)) {
+    if (container.querySelector(rowSelector)) {
       release();
     } else {
       observer = new MutationObserver(() => {
-        if (document.querySelector(rowSelector)) {
+        if (container.querySelector(rowSelector)) {
           observer?.disconnect();
           release();
         }
       });
-      observer.observe(document.body, { childList: true, subtree: true });
+      observer.observe(container, { childList: true, subtree: true });
     }
 
     return () => {
@@ -69,7 +67,7 @@ export function useStaggeredRows(
       clearTimeout(timer);
       cancelPaint?.();
     };
-  }, [open, containerSelector, rowSelector]);
+  }, [open, container, rowSelector]);
 
   return rowsIn;
 }

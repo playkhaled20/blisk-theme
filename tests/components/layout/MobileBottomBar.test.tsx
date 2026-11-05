@@ -3,33 +3,29 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, fireEvent, screen, act, cleanup } from '@testing-library/react';
 import { MobileBottomBar } from '../../../app/components/layout/MobileBottomBar';
 
-/** A logged-in `<salla-user-menu>` — the bar clicks `.s-user-menu-trigger-slot`,
- * which (like the real component's `open()`) toggles `.opened` on the toggler. */
-function mountUserMenu({ opened = false }: { opened?: boolean } = {}) {
-  const menu = document.createElement('salla-user-menu') as HTMLElement & { opened?: boolean };
-  menu.className = 'header-action';
-  const toggler = document.createElement('div');
-  toggler.className = `s-user-menu-toggler${opened ? ' opened' : ''}`;
-  const trigger = document.createElement('div');
-  trigger.className = 's-user-menu-trigger-slot';
-  trigger.addEventListener('click', () => toggler.classList.toggle('opened'));
-  toggler.appendChild(trigger);
-  menu.appendChild(toggler);
-  document.body.appendChild(menu);
-  Object.defineProperty(menu, 'opened', {
-    get: () => toggler.classList.contains('opened'),
-    set: (v: boolean) => toggler.classList.toggle('opened', !!v),
-    configurable: true,
-  });
-  return menu;
+/** The header's search modal, like `<salla-modal>`: `visible` flips fire the
+ * documented `modalVisibilityChanged` event (bubbling), and `close()` hides it. */
+function mountSearchModal() {
+  const modal = document.createElement('salla-modal') as HTMLElement & {
+    close: () => Promise<HTMLElement>;
+  };
+  modal.className = 's-search-modal';
+  const setVisible = (on: boolean) => {
+    modal.toggleAttribute('visible', on);
+    modal.dispatchEvent(new CustomEvent('modalVisibilityChanged', { detail: on, bubbles: true }));
+  };
+  modal.close = async () => {
+    setVisible(false);
+    return modal;
+  };
+  document.body.appendChild(modal);
+  return { modal, open: () => setVisible(true) };
 }
 
-function mountSearchModal({ visible = false }: { visible?: boolean } = {}) {
-  const modal = document.createElement('salla-modal');
-  modal.className = 's-search-modal';
-  if (visible) modal.setAttribute('visible', '');
-  document.body.appendChild(modal);
-  return modal;
+async function openModal(search: ReturnType<typeof mountSearchModal>) {
+  await act(async () => {
+    search.open();
+  });
 }
 
 const route = { pathname: '/', locale: 'en' };
@@ -191,8 +187,7 @@ describe('MobileBottomBar', () => {
     expect(dispatch).not.toHaveBeenCalledWith('login::open');
   });
 
-  it('dismisses the drawer and the header user-menu when the Account tab is tapped', async () => {
-    const menu = mountUserMenu({ opened: true });
+  it('dismisses the drawer when the Account tab is tapped', async () => {
     const onCloseNav = vi.fn();
 
     render(
@@ -208,7 +203,6 @@ describe('MobileBottomBar', () => {
     });
 
     expect(onCloseNav).toHaveBeenCalledTimes(1);
-    expect(menu.opened).toBe(false);
   });
 
   it('lights the Account tab while the account sheet is open', () => {
@@ -228,19 +222,12 @@ describe('MobileBottomBar', () => {
     expect(account.getAttribute('aria-expanded')).toBe('true');
   });
 
-  it('lights the Account tab while the header user-menu dropdown is open', () => {
-    mountUserMenu({ opened: true });
-
+  it('lights the Search tab while the search modal is open', async () => {
+    const search = mountSearchModal();
     render(<MobileBottomBar navOpen={false} onOpenNav={noop} />);
+    expect(screen.getByTestId('mobile-bottom-bar-search').className).not.toContain('is-active');
 
-    expect(screen.getByTestId('mobile-bottom-bar-account').className).toContain('is-active');
-    expect(screen.getByTestId('mobile-bottom-bar-home').className).not.toContain('is-active');
-  });
-
-  it('lights the Search tab while the search modal is open', () => {
-    mountSearchModal({ visible: true });
-
-    render(<MobileBottomBar navOpen={false} onOpenNav={noop} />);
+    await openModal(search);
 
     expect(screen.getByTestId('mobile-bottom-bar-search').className).toContain('is-active');
     expect(screen.getByTestId('mobile-bottom-bar-search').getAttribute('aria-pressed')).toBe(
@@ -249,17 +236,15 @@ describe('MobileBottomBar', () => {
     expect(screen.getByTestId('mobile-bottom-bar-home').className).not.toContain('is-active');
   });
 
-  it('lights the Search tab when a `search::open` event opens the modal later', async () => {
+  it('ignores other modals opening', async () => {
     render(<MobileBottomBar navOpen={false} onOpenNav={noop} />);
-    expect(screen.getByTestId('mobile-bottom-bar-search').className).not.toContain('is-active');
-
-    // The modal mounts + gets `visible` after the bar (SDK / hydration lag).
+    const other = document.createElement('salla-modal');
+    document.body.appendChild(other);
     await act(async () => {
-      mountSearchModal({ visible: true });
-      await new Promise((r) => setTimeout(r, 0));
+      other.dispatchEvent(new CustomEvent('modalVisibilityChanged', { detail: true, bubbles: true }));
     });
 
-    expect(screen.getByTestId('mobile-bottom-bar-search').className).toContain('is-active');
+    expect(screen.getByTestId('mobile-bottom-bar-search').className).not.toContain('is-active');
   });
 
   it('does not observe for search/account overlays on desktop (matchMedia not matching)', async () => {
@@ -279,12 +264,8 @@ describe('MobileBottomBar', () => {
       render(<MobileBottomBar navOpen={false} onOpenNav={noop} />);
       expect(screen.getByTestId('mobile-bottom-bar-search').className).not.toContain('is-active');
 
-      // Same "modal mounts later" scenario the mobile test above covers — on
-      // desktop the observer is never started, so this must NOT light the tab.
-      await act(async () => {
-        mountSearchModal({ visible: true });
-        await new Promise((r) => setTimeout(r, 0));
-      });
+      // On desktop the listener is never started, so this must NOT light the tab.
+      await openModal(mountSearchModal());
 
       expect(screen.getByTestId('mobile-bottom-bar-search').className).not.toContain('is-active');
     } finally {
@@ -292,10 +273,9 @@ describe('MobileBottomBar', () => {
     }
   });
 
-  it('dismisses the drawer, the account sheet and the user-menu when Search is tapped', async () => {
+  it('dismisses the drawer and the account sheet when Search is tapped', async () => {
     const dispatch = vi.fn();
     (window as unknown as { salla: unknown }).salla = { event: { dispatch } };
-    const menu = mountUserMenu({ opened: true });
     const onCloseNav = vi.fn();
     const onAccountOpenChange = vi.fn();
 
@@ -315,7 +295,6 @@ describe('MobileBottomBar', () => {
 
     expect(onCloseNav).toHaveBeenCalledTimes(1);
     expect(onAccountOpenChange).toHaveBeenCalledWith(false);
-    expect(menu.opened).toBe(false);
     expect(dispatch).toHaveBeenCalledWith('search::open');
   });
 
@@ -338,14 +317,16 @@ describe('MobileBottomBar', () => {
   });
 
   it('closes the search modal when a route tab is tapped', async () => {
-    const modal = mountSearchModal({ visible: true });
+    const search = mountSearchModal();
 
     render(<MobileBottomBar navOpen={false} onOpenNav={noop} onCloseNav={noop} />);
+    await openModal(search);
     await act(async () => {
       fireEvent.click(screen.getByTestId('mobile-bottom-bar-home'));
     });
 
-    expect(modal.hasAttribute('visible')).toBe(false);
+    expect(search.modal.hasAttribute('visible')).toBe(false);
+    expect(screen.getByTestId('mobile-bottom-bar-search').className).not.toContain('is-active');
   });
 
   it('renders on the product detail page with no tab lit (no tab owns it)', () => {

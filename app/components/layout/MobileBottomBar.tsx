@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useRouterState } from '@tanstack/react-router';
 import { Link } from '@salla.sa/twilight-theme-engine/common';
@@ -53,55 +53,36 @@ function getCartSdk(): CartSdk | undefined {
 /* ─── Overlay coordination ─────────────────────────────────────────────────
    The tabs fall into two groups: Home / Cart navigate to a route, while
    Categories, Search and Account each open an overlay — the shared nav drawer,
-   the Salla search modal and the account sheet (`MobileAccountSheet`; the
-   header's own `<salla-user-menu>` dropdown is dismissed too). Whichever
+   the Salla search modal and the account sheet (`MobileAccountSheet`). Whichever
    tab is tapped, every *other* overlay is dismissed first (so nothing is left
    stacked behind a backdrop) and the tapped tab's icon lights while its own
    overlay is open.
 
-   The build's `no-manual-dom` check flags the `document.querySelector` calls
-   below. They stay: the search modal and the user menu are rendered by Salla
-   web components elsewhere on the page, so there is no ref or React state
-   that reaches them. */
+   The search modal belongs to `<salla-search>` in the header, so the bar learns
+   about it from the modal's documented `modalVisibilityChanged` event (it
+   bubbles to `document`) and closes it with the modal's own `close()` method.
+   The header's `<salla-user-menu>` dropdown needs nothing: it closes itself on
+   any click outside it, and a tap on the bar is one. No DOM queries. */
 
 type Tab = 'home' | 'categories' | 'search' | 'cart' | 'account';
 
-const searchModal = (): Element | null => document.querySelector('salla-modal.s-search-modal');
-
-const userMenu = (): (HTMLElement & { opened?: boolean }) | null =>
-  (document.querySelector('salla-user-menu.header-action') ??
-    document.querySelector('salla-user-menu')) as (HTMLElement & { opened?: boolean }) | null;
+type SallaModalElement = HTMLElement & { close?: () => Promise<HTMLElement> };
 
 /** Open the Salla search modal — the same event the header's search button fires. */
 function openSearch() {
   window.salla?.event?.dispatch('search::open');
 }
 
-/** Close the search modal if it's up — drops the `visible` attribute it toggles on. */
-function closeSearch() {
-  searchModal()?.removeAttribute('visible');
-}
-
-/** Force-close the `<salla-user-menu>` sheet if it's open (toggle its trigger). */
-function closeUserMenu() {
-  const menu = userMenu();
-  if (menu?.querySelector('.s-user-menu-toggler.opened')) {
-    menu.querySelector<HTMLElement>('.s-user-menu-trigger-slot')?.click();
-  }
-}
-
 /** Dismiss every overlay the bar owns except the one `keep` is about to open. */
 function closeOverlays(
   keep: Tab,
+  closeSearch: () => void,
   closeNav?: () => void,
   closeAccount?: () => void,
   closeSecondSheet?: () => void
 ) {
   if (keep !== 'categories') closeNav?.();
   if (keep !== 'search') closeSearch();
-  // The header's `<salla-user-menu>` dropdown goes even when Account is tapped:
-  // the bar opens its own account sheet now, not that one.
-  closeUserMenu();
   // The second-level sheets (important links, user menu) live under the same
   // More tab as the account sheet, so they go whenever the account sheet
   // would -- any tab other than its own.
@@ -129,68 +110,37 @@ function activeTab(
   return null;
 }
 
-const isSearchOpen = () => !!document.querySelector('salla-modal.s-search-modal[visible]');
-const isMenuOpen = () => !!document.querySelector('.s-user-menu-toggler.opened');
-
 /**
- * Reflect a DOM condition into React state. Used for the two overlays the bar
- * doesn't own — the search modal (`<salla-search>`'s `<salla-modal>`) and the
- * header's `<salla-user-menu>` dropdown: both mount *after* this component and are opened /
- * closed by the Salla web components themselves (their trigger, the modal's own
- * dismiss, an outside click…).
- *
- * A permanent `<body>` observer — not a one-shot `querySelector` + retries — is
- * what makes this reliable: `theme::ready` has usually already fired by the time
- * this bar hydrates, and the watched nodes appear late then just toggle a class
- * / attribute in place. Mutation callbacks are batched, and `test()` is a single
- * cheap selector, so the whole-subtree scope is fine here — but only while the
- * bar can actually be seen: the component stays mounted (CSS-hidden) on desktop,
- * so `enabled` (from `useMobileViewport`) skips the observer there entirely
- * instead of running it for the component's whole lifetime regardless of
- * viewport.
+ * Whether the header's search modal is open, plus a way to close it. Driven by
+ * the modal's `modalVisibilityChanged` event (`detail` is `true` on open). Only
+ * listens while the bar can be seen: it stays mounted (CSS-hidden) on desktop,
+ * so `enabled` (from `useMobileViewport`) turns the listener off there.
  */
-function useDomFlag(test: () => boolean, enabled: boolean): boolean {
-  const [on, setOn] = useState(false);
+function useSearchModal(enabled: boolean): [boolean, () => void] {
+  const [open, setOpen] = useState(false);
+  const modal = useRef<SallaModalElement | null>(null);
 
   useEffect(() => {
     if (!enabled) {
-      setOn(false);
+      setOpen(false);
       return;
     }
-
-    let current = test();
-    setOn(current);
-
-    // Only push a state update on an actual transition — the observer fires for
-    // every mutation under `<body>`, and a no-op `setOn` each time would trip
-    // React's act() warnings in tests and churn needlessly in the app.
-    const check = () => {
-      const next = test();
-      if (next === current) return;
-      current = next;
-      setOn(next);
+    const onVisibility = (event: Event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement) || !target.classList.contains('s-search-modal')) return;
+      modal.current = target as SallaModalElement;
+      setOpen((event as CustomEvent<boolean>).detail === true);
     };
+    document.addEventListener('modalVisibilityChanged', onVisibility);
+    return () => document.removeEventListener('modalVisibilityChanged', onVisibility);
+  }, [enabled]);
 
-    const obs = new MutationObserver(check);
-    obs.observe(document.body, {
-      subtree: true,
-      childList: true,
-      attributes: true,
-      attributeFilter: ['class', 'visible'],
-    });
-    document.addEventListener('theme::ready', check);
+  const close = useCallback(() => {
+    if (open) void modal.current?.close?.();
+  }, [open]);
 
-    return () => {
-      obs.disconnect();
-      document.removeEventListener('theme::ready', check);
-    };
-  }, [test, enabled]);
-
-  return on;
+  return [open, close];
 }
-
-const useSearchOpen = (enabled: boolean) => useDomFlag(isSearchOpen, enabled);
-const useUserMenuOpen = (enabled: boolean) => useDomFlag(isMenuOpen, enabled);
 
 /**
  * Drop a leading `/ar` / `/en-US` locale segment and any trailing slash so the
@@ -330,16 +280,15 @@ export function MobileBottomBar({
   const cartCount = useCartCount();
   const isMobile = useMobileViewport();
   const navHasContent = useNavHasContent();
-  const searchOpen = useSearchOpen(isMobile);
-  const headerMenuOpen = useUserMenuOpen(isMobile);
+  const [searchOpen, closeSearch] = useSearchModal(isMobile);
   // The second-level sheets live under the More tab too -- light it the same way.
   const moreOpen = accountOpen || secondSheetOpen;
-  const menuOpen = moreOpen || headerMenuOpen;
+  const menuOpen = moreOpen;
   const path = normalizePath(useRouterState({ select: (s) => s.location.pathname }));
   const active = activeTab({ searchOpen, menuOpen, navOpen }, path);
 
   const openTab = (tab: Tab) =>
-    closeOverlays(tab, onCloseNav, () => onAccountOpenChange?.(false), onCloseSecondSheet);
+    closeOverlays(tab, closeSearch, onCloseNav, () => onAccountOpenChange?.(false), onCloseSecondSheet);
   const handleCategories = () => {
     openTab('categories');
     onOpenNav();

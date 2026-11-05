@@ -1,7 +1,7 @@
 import { type ComponentRef, type RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { SallaSlider } from '@salla.sa/twilight-components-react/slider';
 import { SallaSocialShare } from '@salla.sa/twilight-components-react/social-share';
-import { useTwilight } from '@salla.sa/twilight-theme-engine/providers';
+import { useNavigate, useTwilight } from '@salla.sa/twilight-theme-engine/providers';
 import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { useWishlist } from '@salla.sa/twilight-theme-engine/hooks/useWishlist';
 import { Image } from '@salla.sa/twilight-theme-engine/common';
@@ -75,6 +75,7 @@ function sliderObjectFit(raw: unknown): ObjectFit {
  */
 export function ProductGallery({ product }: ProductGalleryProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const wishlist = useWishlist();
   const { theme } = useTwilight();
   const sliderId = `details-slider-${product.id}`;
@@ -156,7 +157,7 @@ export function ProductGallery({ product }: ProductGalleryProps) {
           className="product-gallery__bar-btn"
           onClick={() => {
             if (window.history.length > 1) window.history.back();
-            else window.location.assign('/');
+            else navigate('/');
           }}
           aria-label={t('blocks.header.back', 'Back')}
         >
