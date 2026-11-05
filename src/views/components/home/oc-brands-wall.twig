@@ -1,9 +1,0 @@
-{# Blisk · Brands wall (6–12 logos). Without logos, it shows the brands actually found in the store's products. #}
-{% set list = component.brands ?: [] %}{% set have = list|length %}
-<section component-id="{{ componentId }}" class="s-block oc-brands container" data-oc-sec="brands" data-testid="oc-brands-wall">
-  <header class="oc-head" data-k="BRANDS"><h2 class="oc-metal">{{ component.title ?: trans('oc.brands_title') }}</h2>{% if component.subtitle %}<p>{{ component.subtitle }}</p>{% endif %}</header>
-  <div class="oc-brands__grid">
-    {% for b in list %}<a class="oc-brand-tile" href="{{ b.url ?: '#' }}" data-oc-reveal>{% if b.logo %}<img src="{{ b.logo }}" alt="{{ b.name }}" loading="lazy">{% endif %}<b>{{ b.name }}</b></a>{% endfor %}
-    {% if have < 6 %}{% for i in have..5 %}<a class="oc-brand-tile" href="#" data-oc-demo="brand" data-oc-reveal><b></b><small></small></a>{% endfor %}{% endif %}
-  </div>
-</section>
