@@ -7,6 +7,7 @@ import {
   DefaultHomeComponents,
 } from '@salla.sa/twilight-theme-engine/routes/home';
 import { SliderSkeleton } from '@salla.sa/twilight-components-react';
+import { BahaaStarterHome } from './components/home/BahaaStarterHome';
 import { routeTree } from './routeTree.gen';
 import {
   Brands,
@@ -15,7 +16,6 @@ import {
   FeaturedProducts,
   featuredProductsConfig,
   FixedProducts,
-  LatestProducts,
   MainLinks,
   PhotosSlider,
   ProductsSlider,
@@ -75,8 +75,9 @@ registerHomeComponents({
   'featured-products-special-product': FeaturedProductsWithSpecialProduct,
   // Fork of the engine block so its grid renders the theme's ProductCard wrapper.
   'fixed-products': FixedProducts,
-  // Fork of the engine's no-blocks fallback, for the same reason.
-  'latest-products': LatestProducts,
+  // The engine's no-blocks fallback: the theme's hero over the newest products
+  // (BahaaStarterHome), so a store with no blocks yet still looks like the theme.
+  'latest-products': BahaaStarterHome,
   'slider-products-with-header': SliderProductsWithHeader,
   'enhanced-square-banners': EnhancedSquareBanners,
   blog: Blog,
@@ -90,6 +91,8 @@ registerHomeComponents({
 // the literal `styleN` values; this covers the semantic `view_style`s too.
 // `custom-testimonials` gets `s-block--full-bg` so the gray band runs edge-to-edge.
 registerHomeComponentConfig({
+  // The fallback's two parts carry their own classes; the wrapper stays plain.
+  'latest-products': { className: 's-block--bahaa-starter' },
   'featured-products': featuredProductsConfig,
   'featured-products-special-offer': featuredProductsConfig,
   'featured-products-special-product': featuredProductsConfig,
