@@ -411,3 +411,25 @@ body.theme-blisk.blisk-grain::before {
     transition: none;
   }
 }
+
+/* ---------- Touch targets and overflow (Salla review: 44px, no sideways scroll) ---------- */
+
+// Every control is at least 44px, the size Salla's review asks for.
+body :is(button, [role='button'], .btn, a.btn, input[type='submit'], select) {
+  min-height: 44px;
+}
+body :is(button, [role='button']):not(:has(> span:not(.sr-only), > b, > p)) {
+  min-width: 44px;
+}
+
+// A long run of text with no spaces (a size chart pasted on one line) wraps
+// instead of widening the page.
+body :is(#main-content, .main-content) :is(p, li, td, th, span, div) {
+  overflow-wrap: anywhere;
+}
+
+// No sideways scroll on phones; `clip` keeps sticky bars working.
+html,
+body {
+  overflow-x: clip;
+}
