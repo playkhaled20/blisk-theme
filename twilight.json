@@ -3038,6 +3038,811 @@
           "maxLength": 10
         }
       ]
+    },
+    {
+      "key": "fb6a509c-9cb5-5fca-9475-bcce864d72a2",
+      "title": {
+        "ar": "منتجات هولوغرام",
+        "en": "Hologram products"
+      },
+      "icon": "sicon-box",
+      "path": "home.oc-products",
+      "fields": [
+        {
+          "type": "string",
+          "id": "title",
+          "label": "العنوان",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "string",
+          "id": "subtitle",
+          "label": "الوصف",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "items",
+          "id": "products",
+          "label": "منتجات محددة (فارغ = تلقائي)",
+          "format": "dropdown-list",
+          "source": "products",
+          "searchable": true,
+          "multichoice": true,
+          "selected": [],
+          "options": [],
+          "value": [],
+          "required": false,
+          "maxLength": 12
+        },
+        {
+          "type": "items",
+          "id": "category",
+          "label": "تصنيفات (فارغ = تصنيفات متجرك تلقائياً)",
+          "format": "dropdown-list",
+          "source": "categories",
+          "searchable": true,
+          "multichoice": true,
+          "selected": [],
+          "options": [],
+          "value": [],
+          "required": false,
+          "maxLength": 16
+        },
+        {
+          "type": "number",
+          "id": "limit",
+          "label": "العدد",
+          "format": "integer",
+          "value": 8,
+          "required": false,
+          "minimum": 1,
+          "maximum": 24
+        }
+      ]
+    },
+    {
+      "key": "ac015b9d-f04a-5cf1-82a3-010d4ecf99db",
+      "title": {
+        "ar": "مختارات الفئة",
+        "en": "Vertical featured"
+      },
+      "icon": "sicon-star",
+      "path": "home.oc-v-featured",
+      "fields": [
+        {
+          "type": "string",
+          "id": "title",
+          "label": "العنوان",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "string",
+          "id": "subtitle",
+          "label": "الوصف",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "items",
+          "id": "vertical",
+          "label": "الفئة",
+          "format": "dropdown-list",
+          "selected": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            }
+          ],
+          "options": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            },
+            {
+              "label": "التجميل والعناية (عام)",
+              "value": "beauty",
+              "key": "v-beauty"
+            },
+            {
+              "label": "العناية بالبشرة",
+              "value": "skincare",
+              "key": "v-skincare"
+            },
+            {
+              "label": "العطور",
+              "value": "perfume",
+              "key": "v-perfume"
+            },
+            {
+              "label": "المكياج",
+              "value": "makeup",
+              "key": "v-makeup"
+            },
+            {
+              "label": "العناية بالشعر",
+              "value": "haircare",
+              "key": "v-haircare"
+            },
+            {
+              "label": "العناية بالجسم",
+              "value": "bodycare",
+              "key": "v-bodycare"
+            },
+            {
+              "label": "هدايا ومجموعات",
+              "value": "gifts",
+              "key": "v-gifts"
+            },
+            {
+              "label": "أجهزة التجميل",
+              "value": "devices",
+              "key": "v-devices"
+            },
+            {
+              "label": "الأظافر",
+              "value": "nails",
+              "key": "v-nails"
+            },
+            {
+              "label": "الجمال الكوري",
+              "value": "kbeauty",
+              "key": "v-kbeauty"
+            },
+            {
+              "label": "العناية الرجالية",
+              "value": "mens",
+              "key": "v-mens"
+            }
+          ],
+          "value": "auto",
+          "required": false
+        },
+        {
+          "type": "items",
+          "id": "category",
+          "label": "تصنيفات (فارغ = تصنيفات متجرك تلقائياً)",
+          "format": "dropdown-list",
+          "source": "categories",
+          "searchable": true,
+          "multichoice": true,
+          "selected": [],
+          "options": [],
+          "value": [],
+          "required": false,
+          "maxLength": 16
+        },
+        {
+          "type": "number",
+          "id": "limit",
+          "label": "العدد",
+          "format": "integer",
+          "value": 12,
+          "required": false,
+          "minimum": 1,
+          "maximum": 24
+        }
+      ]
+    },
+    {
+      "key": "bf81855f-7522-5489-a69e-84ba87526b46",
+      "title": {
+        "ar": "الأكثر مبيعاً في الفئة",
+        "en": "Vertical bestsellers"
+      },
+      "icon": "sicon-fire",
+      "path": "home.oc-v-bestsellers",
+      "fields": [
+        {
+          "type": "string",
+          "id": "title",
+          "label": "العنوان",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "string",
+          "id": "subtitle",
+          "label": "الوصف",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "items",
+          "id": "vertical",
+          "label": "الفئة",
+          "format": "dropdown-list",
+          "selected": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            }
+          ],
+          "options": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            },
+            {
+              "label": "التجميل والعناية (عام)",
+              "value": "beauty",
+              "key": "v-beauty"
+            },
+            {
+              "label": "العناية بالبشرة",
+              "value": "skincare",
+              "key": "v-skincare"
+            },
+            {
+              "label": "العطور",
+              "value": "perfume",
+              "key": "v-perfume"
+            },
+            {
+              "label": "المكياج",
+              "value": "makeup",
+              "key": "v-makeup"
+            },
+            {
+              "label": "العناية بالشعر",
+              "value": "haircare",
+              "key": "v-haircare"
+            },
+            {
+              "label": "العناية بالجسم",
+              "value": "bodycare",
+              "key": "v-bodycare"
+            },
+            {
+              "label": "هدايا ومجموعات",
+              "value": "gifts",
+              "key": "v-gifts"
+            },
+            {
+              "label": "أجهزة التجميل",
+              "value": "devices",
+              "key": "v-devices"
+            },
+            {
+              "label": "الأظافر",
+              "value": "nails",
+              "key": "v-nails"
+            },
+            {
+              "label": "الجمال الكوري",
+              "value": "kbeauty",
+              "key": "v-kbeauty"
+            },
+            {
+              "label": "العناية الرجالية",
+              "value": "mens",
+              "key": "v-mens"
+            }
+          ],
+          "value": "auto",
+          "required": false
+        },
+        {
+          "type": "items",
+          "id": "category",
+          "label": "تصنيفات (فارغ = تصنيفات متجرك تلقائياً)",
+          "format": "dropdown-list",
+          "source": "categories",
+          "searchable": true,
+          "multichoice": true,
+          "selected": [],
+          "options": [],
+          "value": [],
+          "required": false,
+          "maxLength": 16
+        },
+        {
+          "type": "number",
+          "id": "limit",
+          "label": "العدد",
+          "format": "integer",
+          "value": 12,
+          "required": false,
+          "minimum": 1,
+          "maximum": 24
+        }
+      ]
+    },
+    {
+      "key": "4c63fac5-5d3e-524a-9246-f694373e44ab",
+      "title": {
+        "ar": "وصل حديثاً في الفئة",
+        "en": "Vertical new arrivals"
+      },
+      "icon": "sicon-sparkles",
+      "path": "home.oc-v-new",
+      "fields": [
+        {
+          "type": "string",
+          "id": "title",
+          "label": "العنوان",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "string",
+          "id": "subtitle",
+          "label": "الوصف",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "items",
+          "id": "vertical",
+          "label": "الفئة",
+          "format": "dropdown-list",
+          "selected": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            }
+          ],
+          "options": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            },
+            {
+              "label": "التجميل والعناية (عام)",
+              "value": "beauty",
+              "key": "v-beauty"
+            },
+            {
+              "label": "العناية بالبشرة",
+              "value": "skincare",
+              "key": "v-skincare"
+            },
+            {
+              "label": "العطور",
+              "value": "perfume",
+              "key": "v-perfume"
+            },
+            {
+              "label": "المكياج",
+              "value": "makeup",
+              "key": "v-makeup"
+            },
+            {
+              "label": "العناية بالشعر",
+              "value": "haircare",
+              "key": "v-haircare"
+            },
+            {
+              "label": "العناية بالجسم",
+              "value": "bodycare",
+              "key": "v-bodycare"
+            },
+            {
+              "label": "هدايا ومجموعات",
+              "value": "gifts",
+              "key": "v-gifts"
+            },
+            {
+              "label": "أجهزة التجميل",
+              "value": "devices",
+              "key": "v-devices"
+            },
+            {
+              "label": "الأظافر",
+              "value": "nails",
+              "key": "v-nails"
+            },
+            {
+              "label": "الجمال الكوري",
+              "value": "kbeauty",
+              "key": "v-kbeauty"
+            },
+            {
+              "label": "العناية الرجالية",
+              "value": "mens",
+              "key": "v-mens"
+            }
+          ],
+          "value": "auto",
+          "required": false
+        },
+        {
+          "type": "items",
+          "id": "category",
+          "label": "تصنيفات (فارغ = تصنيفات متجرك تلقائياً)",
+          "format": "dropdown-list",
+          "source": "categories",
+          "searchable": true,
+          "multichoice": true,
+          "selected": [],
+          "options": [],
+          "value": [],
+          "required": false,
+          "maxLength": 16
+        },
+        {
+          "type": "number",
+          "id": "limit",
+          "label": "العدد",
+          "format": "integer",
+          "value": 12,
+          "required": false,
+          "minimum": 1,
+          "maximum": 24
+        }
+      ]
+    },
+    {
+      "key": "8e3296e8-1f0b-5b13-ad46-544a72c04433",
+      "title": {
+        "ar": "عروض الفئة",
+        "en": "Vertical deals"
+      },
+      "icon": "sicon-discount-calculator",
+      "path": "home.oc-v-deals",
+      "fields": [
+        {
+          "type": "string",
+          "id": "title",
+          "label": "العنوان",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "string",
+          "id": "subtitle",
+          "label": "الوصف",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "items",
+          "id": "vertical",
+          "label": "الفئة",
+          "format": "dropdown-list",
+          "selected": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            }
+          ],
+          "options": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            },
+            {
+              "label": "التجميل والعناية (عام)",
+              "value": "beauty",
+              "key": "v-beauty"
+            },
+            {
+              "label": "العناية بالبشرة",
+              "value": "skincare",
+              "key": "v-skincare"
+            },
+            {
+              "label": "العطور",
+              "value": "perfume",
+              "key": "v-perfume"
+            },
+            {
+              "label": "المكياج",
+              "value": "makeup",
+              "key": "v-makeup"
+            },
+            {
+              "label": "العناية بالشعر",
+              "value": "haircare",
+              "key": "v-haircare"
+            },
+            {
+              "label": "العناية بالجسم",
+              "value": "bodycare",
+              "key": "v-bodycare"
+            },
+            {
+              "label": "هدايا ومجموعات",
+              "value": "gifts",
+              "key": "v-gifts"
+            },
+            {
+              "label": "أجهزة التجميل",
+              "value": "devices",
+              "key": "v-devices"
+            },
+            {
+              "label": "الأظافر",
+              "value": "nails",
+              "key": "v-nails"
+            },
+            {
+              "label": "الجمال الكوري",
+              "value": "kbeauty",
+              "key": "v-kbeauty"
+            },
+            {
+              "label": "العناية الرجالية",
+              "value": "mens",
+              "key": "v-mens"
+            }
+          ],
+          "value": "auto",
+          "required": false
+        },
+        {
+          "type": "items",
+          "id": "category",
+          "label": "تصنيفات (فارغ = تصنيفات متجرك تلقائياً)",
+          "format": "dropdown-list",
+          "source": "categories",
+          "searchable": true,
+          "multichoice": true,
+          "selected": [],
+          "options": [],
+          "value": [],
+          "required": false,
+          "maxLength": 16
+        },
+        {
+          "type": "number",
+          "id": "limit",
+          "label": "العدد",
+          "format": "integer",
+          "value": 12,
+          "required": false,
+          "minimum": 1,
+          "maximum": 24
+        }
+      ]
+    },
+    {
+      "key": "302cddb4-b0bd-5a2b-a84a-98d9979db03c",
+      "title": {
+        "ar": "طقم الفئة (حزمة)",
+        "en": "Vertical bundle"
+      },
+      "icon": "sicon-box-bankers",
+      "path": "home.oc-v-bundle",
+      "fields": [
+        {
+          "type": "string",
+          "id": "title",
+          "label": "العنوان",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "string",
+          "id": "subtitle",
+          "label": "الوصف",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "items",
+          "id": "vertical",
+          "label": "الفئة",
+          "format": "dropdown-list",
+          "selected": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            }
+          ],
+          "options": [
+            {
+              "label": "تلقائي (من منتجات وقوائم المتجر)",
+              "value": "auto",
+              "key": "v-auto"
+            },
+            {
+              "label": "التجميل والعناية (عام)",
+              "value": "beauty",
+              "key": "v-beauty"
+            },
+            {
+              "label": "العناية بالبشرة",
+              "value": "skincare",
+              "key": "v-skincare"
+            },
+            {
+              "label": "العطور",
+              "value": "perfume",
+              "key": "v-perfume"
+            },
+            {
+              "label": "المكياج",
+              "value": "makeup",
+              "key": "v-makeup"
+            },
+            {
+              "label": "العناية بالشعر",
+              "value": "haircare",
+              "key": "v-haircare"
+            },
+            {
+              "label": "العناية بالجسم",
+              "value": "bodycare",
+              "key": "v-bodycare"
+            },
+            {
+              "label": "هدايا ومجموعات",
+              "value": "gifts",
+              "key": "v-gifts"
+            },
+            {
+              "label": "أجهزة التجميل",
+              "value": "devices",
+              "key": "v-devices"
+            },
+            {
+              "label": "الأظافر",
+              "value": "nails",
+              "key": "v-nails"
+            },
+            {
+              "label": "الجمال الكوري",
+              "value": "kbeauty",
+              "key": "v-kbeauty"
+            },
+            {
+              "label": "العناية الرجالية",
+              "value": "mens",
+              "key": "v-mens"
+            }
+          ],
+          "value": "auto",
+          "required": false
+        },
+        {
+          "type": "items",
+          "id": "category",
+          "label": "تصنيفات (فارغ = تصنيفات متجرك تلقائياً)",
+          "format": "dropdown-list",
+          "source": "categories",
+          "searchable": true,
+          "multichoice": true,
+          "selected": [],
+          "options": [],
+          "value": [],
+          "required": false,
+          "maxLength": 16
+        },
+        {
+          "type": "number",
+          "id": "limit",
+          "label": "العدد",
+          "format": "integer",
+          "value": 12,
+          "required": false,
+          "minimum": 1,
+          "maximum": 24
+        }
+      ]
+    },
+    {
+      "key": "b104fbf9-2532-50bc-9016-199a7f7f9616",
+      "title": {
+        "ar": "فئات حية",
+        "en": "Live categories"
+      },
+      "icon": "sicon-layout-grid",
+      "path": "home.oc-categories",
+      "fields": [
+        {
+          "type": "string",
+          "id": "title",
+          "label": "العنوان",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "string",
+          "id": "subtitle",
+          "label": "الوصف",
+          "format": "text",
+          "value": null,
+          "required": false,
+          "multilanguage": true
+        },
+        {
+          "type": "items",
+          "id": "categories",
+          "label": "تصنيفات (فارغ = تصنيفات متجرك تلقائياً)",
+          "format": "dropdown-list",
+          "source": "categories",
+          "searchable": true,
+          "multichoice": true,
+          "selected": [],
+          "options": [],
+          "value": [],
+          "required": false,
+          "maxLength": 16
+        },
+        {
+          "type": "number",
+          "id": "limit",
+          "label": "العدد",
+          "format": "integer",
+          "value": 8,
+          "required": false,
+          "minimum": 1,
+          "maximum": 24
+        }
+      ],
+      "is_default": true
+    },
+    {
+      "key": "c6abf8a9-b663-5a7b-a01c-ba3608ee8fc3",
+      "title": {
+        "ar": "أقسام ذكية من تصنيفات متجرك",
+        "en": "Smart sections from your store"
+      },
+      "icon": "sicon-layout-grid",
+      "path": "home.oc-smart",
+      "fields": [
+        {
+          "type": "number",
+          "id": "max",
+          "label": "أقصى عدد أقسام",
+          "format": "integer",
+          "value": 15,
+          "minimum": 1,
+          "maximum": 30,
+          "required": false,
+          "icon": "sicon-list"
+        },
+        {
+          "type": "number",
+          "id": "limit",
+          "label": "منتجات لكل قسم",
+          "format": "integer",
+          "value": 8,
+          "minimum": 2,
+          "maximum": 16,
+          "required": false,
+          "icon": "sicon-box"
+        }
+      ],
+      "is_default": true
     }
   ],
   "support_url": "https://salla.com/",

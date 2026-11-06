@@ -31,6 +31,7 @@ import { PhotosSliderWithText } from './components/home/PhotosSliderWithText';
 import { registerThemeHooks } from './hooks';
 import { BliskHero } from './components/home/BliskHero';
 import { BliskBanner } from './components/home/BliskBanner';
+import { OC_SECTIONS } from './addons/home/sections';
 import { BliskTrust } from './components/home/BliskTrust';
 import { ProductListSkeleton } from './components/product/ProductListSkeleton';
 
@@ -85,6 +86,8 @@ registerHomeComponents({
   'oc-hero': BliskHero,
   'oc-banner': BliskBanner,
   'oc-trust': BliskTrust,
+  // Smart sections (app/addons/home): product rows, categories, cinema, infographics.
+  ...OC_SECTIONS,
 });
 
 // Wrapper `<section>` classes for `featured-products` — the engine only styles

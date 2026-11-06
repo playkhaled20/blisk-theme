@@ -28,3 +28,14 @@ describe('smart ratings', () => {
     expect(intel({ quantity: 3, canShowQuantity: false }).stock).toBe(100);
   });
 });
+
+import type { Product } from '@salla.sa/twilight-theme-engine/types';
+import { idsOf, ofVertical } from '../../app/addons/home/common';
+
+describe('smart sections', () => {
+  it('reads ids and keeps the store type products', () => {
+    expect(idsOf([{ id: 5 }, '7', { value: 9 }, 'x'])).toEqual([5, 7, 9]);
+    const P = (id: number, name: string) => ({ id, name }) as unknown as Product;
+    expect(ofVertical([P(1, 'عطر فاخر'), P(2, 'سيروم')], 'perfume').map((p) => p.id)).toEqual([1]);
+  });
+});
