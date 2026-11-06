@@ -82,6 +82,12 @@ body.theme-blisk {
     color: var(--oc-bg);
     border-color: transparent;
   }
+  // Salla's own solid-button colour wins over the line above on the card
+  // add-to-cart (light grey on gold), so pin the label colour explicitly.
+  .s-button-solid.s-button-primary,
+  .s-button-solid.s-button-primary .s-button-text {
+    color: var(--oc-bg);
+  }
 
   // Product cards: one surface, a fine line, and the same height in a row.
   .s-product-card-entry,

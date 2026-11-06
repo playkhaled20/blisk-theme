@@ -210,8 +210,9 @@ export function SmartPanel() {
 
   return (
     <div className={`oc-ai${open ? ' is-open' : ''}`} dir={ar ? 'rtl' : 'ltr'}>
-      <button type="button" className="oc-ai__fab" aria-expanded={open} onClick={() => setOpen(!open)}>
-        ✦ {ar ? 'إضافاتي الذكية' : 'Smart add-ons'}
+      <button type="button" className="oc-ai__fab" aria-expanded={open} aria-label={ar ? 'إضافاتي الذكية' : 'Smart add-ons'} onClick={() => setOpen(!open)}>
+        <span aria-hidden="true">✦</span>
+        <span className="oc-ai__label">{ar ? 'إضافاتي الذكية' : 'Smart add-ons'}</span>
       </button>
       {open && (
         <div className="oc-ai__p" role="dialog" aria-label={ar ? 'الإضافات الذكية' : 'Smart add-ons'}>
