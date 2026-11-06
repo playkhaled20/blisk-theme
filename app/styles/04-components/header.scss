@@ -1125,3 +1125,18 @@ body.topnav-is-dark .site-header--lite .site-header__bar {
 .site-header__mainmenu {
   @apply hidden;
 }
+
+/* The cart icon's link was a 24px tap target inside its 40px box; the whole
+   44px box is now the link (Salla review: every control 44px). */
+salla-cart-summary.header-action {
+  min-width: 44px;
+  min-height: 44px;
+
+  .s-cart-summary-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
