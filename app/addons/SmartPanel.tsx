@@ -6,7 +6,8 @@ import { useTranslation } from '@salla.sa/twilight-theme-engine/i18n';
 import { product as productApi } from '@salla.sa/twilight-theme-engine/api/product';
 import type { Product } from '@salla.sa/twilight-theme-engine/types';
 import { VERTICALS, resolveVertical, settingOn } from '../lib/blisk';
-import { ADDON_IDS, NAMES, adaptFor, FAQ, shadeWords, type AddonId, type Bi } from './panel';
+import { ADDON_IDS, adaptFor, shadeWords, type AddonId, type Bi } from './panel';
+import { panelCopy } from './copy';
 
 /**
  * «إضافاتي الذكية»: a floating ✦ button that opens twelve small helpers for the
@@ -71,22 +72,20 @@ export function SmartPanel() {
   const W = shadeWords(v);
   const ids = ADDON_IDS.filter((k) => settingOn(settings?.[`oc_addon_${k}`], true) && !D.skip.includes(k));
   if (!ids.length) return null;
-  const name = (k: AddonId) => {
-    const n = NAMES(g, W)[k];
-    return ar ? n[0] : n[1];
-  };
+  const C = panelCopy(ar, g, W);
+  const name = (k: AddonId) => C.names[k];
 
   const run = (k: AddonId) => {
     setCur(k);
     if (k === 'stylist') return setView({ kind: 'ask' });
     if (k === 'quiz') return setView({ kind: 'quiz', step: 0, ans: [] });
     if (k === 'tryon' && D.mm) return setView({ kind: 'ruler', w: D.mm[0], h: D.mm[1], label: L(D.sizeLabel) });
-    if (k === 'recolour') return setView({ kind: 'chips', title: ar ? `${g('اختاري', 'اختر')} ${W[0]}` : `Pick a ${W[2]}`, items: D.finish.map((f) => ({ label: L(f), kw: `${L(f)} ${ar ? V.ar : V.en}`, hex: f.hex })) });
-    if (k === 'colorbook') return setView({ kind: 'chips', title: ar ? `دليل ${W[1]} المتوفرة` : `${W[2]} guide`, items: D.finish.map((f) => ({ label: L(f), kw: L(f), hex: f.hex })) });
-    if (k === 'photocoach') return setView({ kind: 'text', title: ar ? g('استخدميه صح واحفظيه صح', 'استخدمه صح واحفظه صح') : 'Use it right, store it right', lines: D.photo.map(L) });
-    if (k === 'look') return setView({ kind: 'chips', title: ar ? g('أكملي روتينك', 'أكمل روتينك') : 'Complete your routine', items: D.kit.map((x) => ({ label: `+ ${L(x)}`, kw: x.kw })) });
-    if (k === 'presets') return setView({ kind: 'chips', title: ar ? 'روتينات جاهزة' : 'Ready routines', items: D.bundle.map((b) => ({ label: L(b), kw: b.kw[0] })) });
-    if (k === 'undertone') return setView({ kind: 'chips', title: ar ? 'وش نوع بشرتك؟' : 'Your skin type?', items: D.compat.map((c) => ({ label: L(c), kw: `${c.kw} ${ar ? V.ar : V.en}` })) });
+    if (k === 'recolour') return setView({ kind: 'chips', title: C.recolour, items: D.finish.map((f) => ({ label: L(f), kw: `${L(f)} ${ar ? V.ar : V.en}`, hex: f.hex })) });
+    if (k === 'colorbook') return setView({ kind: 'chips', title: C.colorbook, items: D.finish.map((f) => ({ label: L(f), kw: L(f), hex: f.hex })) });
+    if (k === 'photocoach') return setView({ kind: 'text', title: C.photocoach, lines: D.photo.map(L) });
+    if (k === 'look') return setView({ kind: 'chips', title: C.look, items: D.kit.map((x) => ({ label: `+ ${L(x)}`, kw: x.kw })) });
+    if (k === 'presets') return setView({ kind: 'chips', title: C.presets, items: D.bundle.map((b) => ({ label: L(b), kw: b.kw[0] })) });
+    if (k === 'undertone') return setView({ kind: 'chips', title: C.undertone, items: D.compat.map((c) => ({ label: L(c), kw: `${c.kw} ${ar ? V.ar : V.en}` })) });
     if (k === 'giftfinder') return setView({ kind: 'chips', title: ar ? 'ميزانية الهدية' : 'Gift budget', items: D.gift.map((n) => ({ label: `≤ ${n} ${ar ? 'ر.س' : 'SAR'}`, kw: ar ? V.ar : V.en, n })) });
     if (k === 'voice') {
       const w = window as unknown as { SpeechRecognition?: new () => SpeechLike; webkitSpeechRecognition?: new () => SpeechLike };
@@ -94,9 +93,9 @@ export function SmartPanel() {
       if (!R) return setView({ kind: 'text', lines: [ar ? 'المتصفح لا يدعم البحث الصوتي' : 'Voice search is not supported in this browser'] });
       const r = new R();
       r.lang = ar ? 'ar-SA' : 'en-US';
-      setView({ kind: 'text', lines: [ar ? g('تكلّمي الحين…', 'تكلّم الحين…') : 'Speak now…'] });
+      setView({ kind: 'text', lines: [C.speak] });
       r.onresult = (e) => setView({ kind: 'search', kw: e.results[0][0].transcript });
-      r.onerror = () => setView({ kind: 'text', lines: [ar ? g('ما قدرنا نسمعك — جرّبي الكتابة', 'ما قدرنا نسمعك — جرّب الكتابة') : 'Could not hear you — try typing'] });
+      r.onerror = () => setView({ kind: 'text', lines: [C.unheard] });
       try {
         r.start();
       } catch {
@@ -114,7 +113,7 @@ export function SmartPanel() {
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(u);
       setSpeaking(true);
-      return setView({ kind: 'text', title: ar ? D.listen : 'How to use', lines });
+      return setView({ kind: 'text', title: ar ? D.listen : C.listenTitle, lines });
     }
   };
 
@@ -123,7 +122,7 @@ export function SmartPanel() {
       case 'idle':
         return (
           <p>
-            {ar ? g('اختاري أداة — المحتوى مخصص لقسم', 'اختر أداة — المحتوى مخصص لقسم') : 'Pick a tool — tailored to'} {ar ? V.ar : V.en}
+            {C.idle} {ar ? V.ar : V.en}
           </p>
         );
       case 'text':
@@ -165,7 +164,7 @@ export function SmartPanel() {
           <>
             <b>{view.label}</b>
             <div className="oc-ai__ruler" style={{ width: `${view.w}mm`, height: `${view.h}mm` }} aria-hidden="true" />
-            <small>{ar ? `حجم العبوة التقريبي ≈ ${view.w}×${view.h} ملم. قارنها بيدك — تقريبي ويختلف حسب الشاشة.` : `About ${view.w}×${view.h} mm. Compare with your hand — approximate, varies by screen.`}</small>
+            <small>{C.ruler(view.w, view.h)}</small>
           </>
         );
       case 'quiz': {
@@ -188,7 +187,7 @@ export function SmartPanel() {
       case 'ask':
         return (
           <>
-            <b>{ar ? g('اسألي عن منتج أو نوع بشرة أو ميزانية أو سياسة', 'اسأل عن منتج أو نوع بشرة أو ميزانية أو سياسة') : 'Ask about a product, skin type, budget or policy'}</b>
+            <b>{C.ask}</b>
             <form
               className="oc-ai__ask"
               onSubmit={(e) => {
@@ -196,12 +195,12 @@ export function SmartPanel() {
                 if (q.trim()) setView({ kind: 'search', kw: q.trim() });
               }}
             >
-              <input type="search" className="oc-ai__q" maxLength={80} placeholder={ar ? 'مثال: سيروم للبشرة الجافة' : 'e.g. serum for dry skin'} aria-label={ar ? g('اسألي المستشارة', 'اسأل المستشار') : 'Ask the advisor'} value={q} onChange={(e) => setQ(e.target.value)} />
+              <input type="search" className="oc-ai__q" maxLength={80} placeholder={C.askHint} aria-label={C.askLabel} value={q} onChange={(e) => setQ(e.target.value)} />
               <button type="submit">{ar ? 'ابحث' : 'Search'}</button>
             </form>
-            {FAQ.map((f, i) => (
-              <button key={i} type="button" onClick={() => setView({ kind: 'text', title: ar ? f[0] : f[1], lines: [ar ? f[2] : f[3]] })}>
-                {ar ? f[0] : f[1]}
+            {C.faq.map(([q, a], i) => (
+              <button key={i} type="button" onClick={() => setView({ kind: 'text', title: q, lines: [a] })}>
+                {q}
               </button>
             ))}
           </>

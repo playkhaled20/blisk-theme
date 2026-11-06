@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { ADDON_IDS, NAMES, adaptFor, shadeWords } from '../../app/addons/panel';
+import { ADDON_IDS, adaptFor, shadeWords } from '../../app/addons/panel';
+import { panelCopy } from '../../app/addons/copy';
 import data from '../../app/addons/data.json';
 
 describe('smart panel', () => {
@@ -11,9 +12,9 @@ describe('smart panel', () => {
     }
   });
   it('names all twelve helpers, by gender and type', () => {
-    const n = NAMES((f, m) => m, shadeWords('perfume'));
+    const n = panelCopy(true, (f, m) => m, shadeWords('perfume')).names;
     expect(Object.keys(n)).toEqual([...ADDON_IDS]);
-    expect(n.recolour[0]).toBe('اختر الرائحة');
+    expect(n.recolour).toBe('اختر الرائحة');
     expect(shadeWords('makeup')[0]).toBe('الدرجة');
   });
 });
