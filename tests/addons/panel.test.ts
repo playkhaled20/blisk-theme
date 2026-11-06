@@ -39,3 +39,23 @@ describe('smart sections', () => {
     expect(ofVertical([P(1, 'عطر فاخر'), P(2, 'سيروم')], 'perfume').map((p) => p.id)).toEqual([1]);
   });
 });
+
+import { realRows } from '../../app/addons/home/OcCompare';
+import { left, parseLaunch } from '../../app/addons/home/OcLaunch';
+import { storeFacts } from '../../app/addons/home/OcBoard';
+
+describe('visual sections', () => {
+  const P = (o: Partial<Product>) => ({ id: 1, name: 'x', price: 100, ...o }) as unknown as Product;
+  it('compares on real data', () => {
+    expect(realRows(P({ price: 80, regular_price: 100, rating: { stars: 4.5, count: 12 } } as Partial<Product>))).toEqual([80, 4.5, 12, 1, 20]);
+  });
+  it('counts down to the launch', () => {
+    expect(parseLaunch('2026-12-01')).toBe(new Date(2026, 11, 1).getTime());
+    expect(parseLaunch('soon')).toBeNull();
+    expect(left(90_061_000)).toEqual([1, 1, 1, 1]);
+  });
+  it('measures the store', () => {
+    const f = storeFacts([P({ price: 50 }), P({ price: 200, is_out_of_stock: true } as Partial<Product>)], 4);
+    expect(f).toMatchObject({ cats: 4, min: 50, inStock: 50 });
+  });
+});
