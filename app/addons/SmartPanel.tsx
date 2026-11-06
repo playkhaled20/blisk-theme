@@ -57,8 +57,8 @@ export function SmartPanel() {
   const settings = theme?.settings as Record<string, unknown> | undefined;
   const v = resolveVertical(settings, `${store?.name ?? ''} ${store?.description ?? ''}`);
   const D = useMemo(() => adaptFor(v), [v]);
-  const V = VERTICALS[v] ?? VERTICALS.beauty;
-  const male = v === 'mens';
+  const V = VERTICALS[v] ?? Object.values(VERTICALS)[0];
+  const male = (v as string) === 'mens';
   const g = (f: string, m: string) => (male ? m : f);
   const L = (o: Bi) => (ar ? o.ar : o.en);
   const [open, setOpen] = useState(false);
