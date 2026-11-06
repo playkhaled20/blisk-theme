@@ -124,3 +124,173 @@
   color: var(--oc-txt);
   font-size: 0.85rem;
 }
+
+/* «التقييم الذكي» product gauges (app/addons/SmartRatings.tsx) */
+.oc-intel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0.75rem 0 1rem;
+  padding: 1rem;
+  border: 1px solid var(--oc-line, rgb(0 0 0 / 0.1));
+  border-radius: 1rem;
+  background: var(--oc-glass, rgb(0 0 0 / 0.03));
+}
+.oc-gauge {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.1rem;
+  min-width: 5.5rem;
+  text-align: center;
+  svg {
+    width: 4.2rem;
+    height: 4.2rem;
+    transform: rotate(-90deg);
+  }
+  circle {
+    fill: none;
+    stroke-width: 3;
+  }
+  .t {
+    stroke: rgb(127 127 127 / 0.18);
+  }
+  .v {
+    stroke: var(--oc-acc, var(--color-primary));
+    stroke-linecap: round;
+    stroke-dasharray: calc(var(--v) * 1) 100;
+    animation: oc-fill 1.4s ease-out;
+  }
+  b {
+    position: absolute;
+    top: 1.25rem;
+    font-size: 0.95rem;
+    color: var(--oc-acc2, var(--oc-acc, var(--color-primary)));
+  }
+  span {
+    font-size: 0.8rem;
+  }
+  small {
+    font-size: 0.72rem;
+    color: var(--oc-mut, #777);
+  }
+}
+@keyframes oc-fill {
+  from {
+    stroke-dasharray: 0 100;
+  }
+}
+.oc-bars {
+  flex: 1;
+  min-width: 200px;
+  display: grid;
+  gap: 0.55rem;
+}
+.oc-bar {
+  display: grid;
+  grid-template-columns: 7rem 1fr auto;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  i {
+    position: relative;
+    height: 5px;
+    overflow: hidden;
+    border-radius: 9px;
+    background: rgb(127 127 127 / 0.18);
+    &::after {
+      content: '';
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: 0;
+      width: var(--w);
+      background: linear-gradient(90deg, #8a6a3a, var(--oc-acc, var(--color-primary)));
+    }
+  }
+  em {
+    font-style: normal;
+    color: var(--oc-acc2, var(--oc-acc, var(--color-primary)));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oc-gauge .v {
+    animation: none;
+  }
+}
+
+/* customer page colour (app/addons/ColourPicker.tsx) */
+.oc-cc {
+  position: fixed;
+  z-index: 9998;
+  inset-block-end: calc(1.2rem + env(safe-area-inset-bottom));
+  inset-inline-end: 1.2rem;
+}
+.oc-cc__fab {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 50%;
+  background: var(--oc-bg2);
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.4);
+  i {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background: conic-gradient(#0b0b0d, #fbf8f1, #16325a, #3a1d4f, #0b0b0d);
+  }
+}
+.oc-cc__pop {
+  position: absolute;
+  inset-block-end: 3.6rem;
+  inset-inline-end: 0;
+  display: grid;
+  gap: 0.3rem;
+  width: 260px;
+  padding: 1rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 1rem;
+  background: var(--oc-bg2);
+  color: var(--oc-txt);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  small {
+    color: var(--oc-mut);
+    font-size: 0.75rem;
+  }
+}
+.oc-cc__g {
+  display: block;
+  margin: 0.5rem 0 0.3rem;
+  font-style: normal;
+  font-size: 0.72rem;
+  color: var(--oc-mut);
+}
+.oc-cc__row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.4rem;
+  button {
+    aspect-ratio: 1;
+    min-width: 36px;
+    border: 2px solid rgb(255 255 255 / 0.15);
+    border-radius: 50%;
+    &.is-on {
+      border-color: var(--oc-acc);
+      box-shadow: 0 0 0 2px var(--oc-acc);
+    }
+  }
+}
+.oc-cc__reset {
+  width: 100%;
+  margin-top: 0.7rem;
+  padding: 0.45rem;
+  border: 1px solid var(--oc-line);
+  border-radius: 0.6rem;
+  color: var(--oc-txt);
+}
+/* The page-colour button sits above the smart panel's. */
+body:has(.oc-cc) .oc-ai {
+  inset-block-end: calc(5rem + env(safe-area-inset-bottom));
+}

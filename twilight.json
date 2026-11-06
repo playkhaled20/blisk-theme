@@ -804,6 +804,39 @@
       "value": "<div class='rounded-lg' style='background:#8A6A3B;display:flex;justify-content:center;align-items:center;padding:14px;margin-bottom:20px!important'><h6 style='color:#fff;font-size:15px;font-weight:bold'>الإضافات الذكية · Smart add-ons</h6></div>"
     },
     {
+      "id": "oc_smart_ratings",
+      "type": "boolean",
+      "format": "switch",
+      "label": "التقييم الذكي · Smart ratings",
+      "description": "حلقات ثقة ومؤشرات مخزون بدل النجوم والعدد الخام",
+      "icon": "sicon-chart",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_customer_color",
+      "type": "boolean",
+      "format": "switch",
+      "label": "السماح للعميل بتغيير لون الصفحة · Let customers pick page colour",
+      "description": "طبقة على الصفحة فقط، تحفظ في متصفح العميل ولا تغيّر إعداداتك",
+      "icon": "sicon-user",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_smart_sections",
+      "type": "boolean",
+      "format": "switch",
+      "label": "أقسام ذكية حسب تصنيفات متجرك · Smart sections from your categories",
+      "description": "قسم لكل تصنيف حقيقي (2→2، 5→5، 15→15)",
+      "icon": "sicon-layout-grid",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
       "id": "oc_addons",
       "type": "boolean",
       "format": "switch",

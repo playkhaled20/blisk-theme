@@ -8,6 +8,9 @@ import { CurrencySymbol, Link, Image } from '@salla.sa/twilight-theme-engine/com
 import { formatSallaPlural } from '@salla.sa/twilight-theme-engine/utils';
 import type { Product } from '@salla.sa/twilight-theme-engine/types';
 import { SallaRatingStars } from '@salla.sa/twilight-components-react/rating-stars';
+import { useTwilight } from '@salla.sa/twilight-theme-engine/providers';
+import { SmartRatings } from '../../addons/SmartRatings';
+import { settingOn } from '../../lib/blisk';
 import { SallaSocialShare } from '@salla.sa/twilight-components-react/social-share';
 import { SallaInstallment } from '@salla.sa/twilight-components-react/installment';
 import { useHydrated } from '../../hooks/useHydrated';
@@ -48,6 +51,9 @@ export function ProductDetails({
 
   // Context for all product hooks - contains product data
   const productHookContext = { product };
+  // «التقييم الذكي» gauges in place of the stars (merchant switch, on by default).
+  const { theme } = useTwilight();
+  const smartRatings = settingOn((theme?.settings as Record<string, unknown> | undefined)?.oc_smart_ratings, true);
 
   return (
     <>
@@ -88,10 +94,14 @@ export function ProductDetails({
         </div>
       </div>
 
-      {product.rating && (
-        <div className="product-details__rating">
-          <SallaRatingStars value={product.rating.stars} reviews={product.rating.count} />
-        </div>
+      {smartRatings ? (
+        <SmartRatings product={product} />
+      ) : (
+        product.rating && (
+          <div className="product-details__rating">
+            <SallaRatingStars value={product.rating.stars} reviews={product.rating.count} />
+          </div>
+        )
       )}
 
       {product.is_taxable && (

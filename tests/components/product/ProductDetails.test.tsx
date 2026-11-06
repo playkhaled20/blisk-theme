@@ -5,6 +5,10 @@ import { resetWishlistStore } from '@salla.sa/twilight-theme-engine/hooks/useWis
 import type { Product } from '@salla.sa/twilight-theme-engine/types';
 import { ProductDetails } from '../../../app/components/product/ProductDetails';
 
+vi.mock('@salla.sa/twilight-theme-engine/providers', () => ({
+  // Smart ratings off: these tests read the stock stars row.
+  useTwilight: () => ({ theme: { settings: { oc_smart_ratings: false } }, store: {} }),
+}));
 vi.mock('@salla.sa/twilight-theme-engine/i18n', () => ({
   useTranslation: () => ({
     locale: 'ar',

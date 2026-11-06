@@ -16,7 +16,7 @@ import {
   type VerticalId,
 } from './data';
 
-export { VERTICALS, VERTICAL_IDS, type VerticalId };
+export { VERTICALS, VERTICAL_IDS, BACKGROUNDS, LIGHT_BACKGROUNDS, type VerticalId };
 
 type Settings = Record<string, unknown> | undefined | null;
 

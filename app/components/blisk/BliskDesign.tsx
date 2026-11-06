@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useTwilight } from '@salla.sa/twilight-theme-engine/providers';
 import { useDocumentClass } from '@salla.sa/twilight-theme-engine/hooks/useDocumentClass';
-import { resolveDesign, settingOn } from '../../lib/blisk';
+import { BACKGROUNDS, resolveDesign, settingOn } from '../../lib/blisk';
+import { useCustomerBg } from '../../addons/customerColour';
 
 /**
  * Puts the Blisk design on the page: the background palette, the accent and
@@ -12,7 +13,12 @@ export function BliskDesign() {
   const { theme, store } = useTwilight();
   const settings = theme?.settings as Record<string, unknown> | undefined;
   const storeText = `${store?.name ?? ''} ${store?.description ?? ''}`;
-  const design = useMemo(() => resolveDesign(settings, storeText), [settings, storeText]);
+  // The customer's own page colour, when the merchant allows it (oc_customer_color).
+  const ubg = useCustomerBg(settingOn(settings?.oc_customer_color, false));
+  const design = useMemo(
+    () => resolveDesign(ubg && BACKGROUNDS[ubg] ? { ...settings, oc_bg: ubg, oc_skin_on: false } : settings, storeText),
+    [settings, storeText, ubg]
+  );
 
   useDocumentClass({
     body: {
