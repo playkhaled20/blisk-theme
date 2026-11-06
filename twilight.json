@@ -795,6 +795,156 @@
       "required": false,
       "value": false,
       "selected": false
+    },
+    {
+      "type": "static",
+      "format": "title",
+      "id": "aneeq_title_addons",
+      "variant": "h6",
+      "value": "<div class='rounded-lg' style='background:#8A6A3B;display:flex;justify-content:center;align-items:center;padding:14px;margin-bottom:20px!important'><h6 style='color:#fff;font-size:15px;font-weight:bold'>الإضافات الذكية · Smart add-ons</h6></div>"
+    },
+    {
+      "id": "oc_addons",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافاتي الذكية · Smart add-ons (12)",
+      "description": "تشغيل/إيقاف لوحة الإضافات الذكية بالكامل (12 أداة لمتاجر التجميل، تعمل داخل متصفح العميلة بدون خدمات خارجية).",
+      "icon": "sicon-magic-wand",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_stylist",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: مستشار الإعداد · stylist",
+      "description": "يجاوب العميل ويبحث في منتجات متجرك ويشرح الضمان والشحن والدفع حسب صفحات المتجر.",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_voice",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: البحث الصوتي · voice",
+      "description": "بحث صوتي بالميكروفون (يعتمد على دعم المتصفح).",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_listen",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: اسمعي طريقة الاستخدام · listen",
+      "description": "يقرأ وصف المنتج وطريقة استخدامه بصوت عالٍ.",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_tryon",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: الحجم الحقيقي · tryon",
+      "description": "الحجم الحقيقي التقريبي للعبوة (مل) بحسب نوع المتجر لتتخيّلها العميلة قبل الشراء.",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_recolour",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: معاينة الألوان · recolour",
+      "description": "يختار العميل التشطيب/اللون ويعرض له المنتجات المطابقة.",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_photocoach",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: مدرب التوثيق والتصوير · photocoach",
+      "description": "نصائح الاستخدام والحفظ: اختبار الحساسية، ودرجة الحرارة، وتاريخ الصلاحية بعد الفتح.",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_colorbook",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: دليل التشطيبات · colorbook (finishes)",
+      "description": "دليل بكل التشطيبات المتوفرة في أنواع منتجاتك.",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_look",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: أكمل الطقم · look",
+      "description": "يقترح منتجات تكمّل الروتين (منظّف، سيروم، مرطّب، واقي...).",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_quiz",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: اختبار احتياجك · quiz",
+      "description": "أسئلة قصيرة تحدد احتياج العميل وتعرض منتجات مناسبة.",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_undertone",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: فاحص التوافق · undertone (compat)",
+      "description": "يقترح المنتجات المناسبة لنوع بشرة العميلة (جافة، دهنية، مختلطة، حساسة).",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_giftfinder",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: مكتشف الهدايا · giftfinder",
+      "description": "يقترح هدايا جمال حسب الميزانية بالعملة الفعلية للمتجر.",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
+    },
+    {
+      "id": "oc_addon_presets",
+      "type": "boolean",
+      "format": "switch",
+      "label": "إضافة: باقات جاهزة · presets",
+      "description": "روتينات وباقات جاهزة حسب نوع المتجر.",
+      "icon": "sicon-toggle-on",
+      "value": true,
+      "selected": true,
+      "required": false
     }
   ],
   "components": [
