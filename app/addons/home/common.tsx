@@ -45,13 +45,13 @@ export const idsOf = (v: unknown): number[] =>
         .map((x) => Number(typeof x === 'object' && x ? ((x as { id?: unknown }).id ?? (x as { value?: unknown }).value) : x))
         .filter((n) => Number.isFinite(n) && n > 0)
     : [];
-export const pathOf = (url: string) => {
-  try {
-    return new URL(url, 'https://x').pathname;
-  } catch {
-    return url;
-  }
-};
+/**
+ * The link target for a store URL. The engine's `Link` takes the full URL the
+ * API gives (as the built-in blocks pass it) and keeps the store's own path
+ * prefix right; cutting it to a pathname kept the prefix too and doubled it
+ * in the preview («/dev-…/dev-…/…» → 404).
+ */
+export const pathOf = (url: string) => (url || '').trim() || '/';
 
 export function useProducts(params: Parameters<typeof productApi.queries.list>[0], enabled = true) {
   const { data, isLoading } = useQuery({ ...productApi.queries.list(params), enabled });
